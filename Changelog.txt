@@ -1,0 +1,18 @@
+Changelog
+------------
+This will help us understand what the other person has changed in the repo. :)
+
+Format: Date Time - <author>:<branch name>
+			     <identifer><change that was made>	
+Commit Message Date and Time of commit.
+
+
+Pointers
+--------
+* -> Security Fix
+# -> Bug Fix
+$ -> Language fix or change
++ -> Addition
+^ -> Change
+- -> Removed
+! -> Note
