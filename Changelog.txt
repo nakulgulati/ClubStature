@@ -2,10 +2,17 @@ Changelog
 ------------
 This will help us understand what the other person has changed in the repo. :)
 
-Format: Date Time - <author>:<branch name>
+Format: Date Time(24hr) - <author>:<branch name>
 			     <identifer><change that was made>	
 Commit Message Date and Time of commit.
 
+9 July 2013 2:00 - Nakul:master
+		   + New files signout.php, includes/sessions.php
+		   + Added Sign In and Sign Out functionality
+		   + Webpage also detects cookies for previous login sessions 
+		     and if cookie is found then it doesn't show login and sign
+		     up buttons instead shows username and logout button
+		   ^ Couple of changes in the functions file.
 
 Pointers
 --------
