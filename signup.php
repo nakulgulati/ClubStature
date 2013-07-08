@@ -1,3 +1,4 @@
+<?php require_once("includes/sessions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
@@ -10,43 +11,17 @@
 
 <?php
 //Form processing
-$errors = array();
+
 if(isset($_POST['submit'])){
     //Form submitted
-    
-    
     
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = sha1($_POST['password']);
     $verifyPassword = sha1($_POST['verifyPassword']);
     
-    if(!ctype_alnum($username)){
-	array_push($errors,"Username cannot contain special characters.");
-    }
-    
-    if(strlen($password)>6){
-	if($password != $verifyPassword){
-	    array_push($errors,"Passwords don't match.");
-	}
-    }
-    else{
-	array_push($errors,"Password should be minimum 6 characters.");
-    }
-    
-    if(count($errors)==0){
-	$query = "INSERT INTO `users`(`username`, `email`, `hashedPass`) VALUES ('{$username}','{$email}','{$password}');";
-	
-	if(mysql_query($query,$connection)){
-	    $message = "Sign Up success.";
-	}
-	else{
-	    $message = "Sign Up failed.";
-	}
-    }
-}	
-else{
-    //Form not submitted
+    $errors = signUpValidation($username,$password,$verifyPassword);   
+    $message = addUser($errors);
 }
 ?>
 
@@ -98,6 +73,8 @@ else{
 					</div>
 				</form>
 				<?php
+				global $errors;
+				global $message;
 				
 				if(count($errors)){
 				    print_r($errors);
