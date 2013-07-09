@@ -8,16 +8,26 @@
   $nav = printNav(true);
   echo $nav;
 ?>
+<?php
+  $clubDetails = getClubInfo($_GET['clubID']);
 
+?>
 <div class="wrapper">
   <div class="container">
     <div class="row">
         <div class="span8">
             <div class="well">
-                <h2>Club Name</h2>
+                <h2>
+		<?php
+		  echo $clubDetails['clubName'];
+		?>
+		</h2>
                 <h4>Description</h4>
                 <div class="content">
                 <!--club Description-->
+    		<?php
+		  echo $clubDetails['description'];
+		?>
                 </div>
             </div>
         </div>

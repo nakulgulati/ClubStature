@@ -5,8 +5,8 @@
 
 <?php
 //Prints nav bar
-  //$nav = printNav(false);
-  //echo $nav;
+  $nav = printNav(false);
+  echo $nav;
 ?>
 <?php
 //Login form processing

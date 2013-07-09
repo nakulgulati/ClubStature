@@ -19,3 +19,15 @@ legend > span{
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
+.user{
+	text-decoration: none;
+}
+
+.user:hover, .user:focus{
+	text-decoration: none;
+	cursor: pointer;
+}
+h3.user{
+	line-height: normal;
+}
+

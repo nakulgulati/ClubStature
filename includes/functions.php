@@ -45,10 +45,12 @@
             if(loggedIn()){
                 //Display user welcome message
                 $userDetails = getUserInfo($_SESSION['userId']);
-                $output .= "<div class = \"pull-right\">
-                            <p>{$userDetails['username']}</p>
-                            <a href = \"logout.php\" class = \"btn btn-warning\">Log Out</a>
-                            <div>";
+                $output .= "<div class=\"btn-group pull-right\">
+                            <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
+                            <ul class=\"dropdown-menu\">
+                            <li><a href=\"logout.php\">Log Out</a></li>
+                            </ul>
+                            </div>";
             }
             else{
                 $output .= "<div class = \"pull-right\">
@@ -119,5 +121,30 @@
             return $userDetails = mysql_fetch_array($userSet);
         }
     }
+    
+    function getClubList(){
+        global $connection;
+        
+        $query = "SELECT * FROM `clubs`";
+        $clubSet = mysql_query($query,$connection);
+        
+        confirmQuery($clubSet);
+        
+        while($clubList = mysql_fetch_array($clubSet)){
+            echo "<a href=\"clubpage.php?clubID={$clubList['id']}\">".$clubList['clubName']."</a><br>";
+        }
+    }
+    
+    function getClubInfo($clubID){
+        global $connection;
+        
+        $query = "SELECT * FROM  `clubs` WHERE  `id` =  '{$clubID}' LIMIT 1;";
+        $clubSet = mysql_query($query,$connection);
+        
+        if($clubSet){
+            return $clubDetails = mysql_fetch_array($clubSet);
+        }
+    }
+    
     
 ?>
