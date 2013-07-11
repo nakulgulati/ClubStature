@@ -27,7 +27,30 @@ legend > span{
 	text-decoration: none;
 	cursor: pointer;
 }
+
 h3.user{
 	line-height: normal;
 }
 
+#clubInfo{
+	list-style: none;
+}
+
+#rating{
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+	float: right;
+	background-color: white;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100px;
+}
+
+.score{
+	font-size: 48px;
+}
+
+#info{
+	display: inline-block;
+}
