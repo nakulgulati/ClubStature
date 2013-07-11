@@ -131,7 +131,7 @@
         confirmQuery($clubSet);
         
         while($clubList = mysql_fetch_array($clubSet)){
-            echo "<a href=\"clubpage.php?clubID={$clubList['id']}\">".$clubList['clubName']."</a><br>";
+            echo "<a href=\"club.php?clubID={$clubList['id']}\">".$clubList['clubName']."</a><br>";
         }
     }
     

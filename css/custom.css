@@ -54,3 +54,24 @@ h3.user{
 #info{
 	display: inline-block;
 }
+
+#description{
+	width: 550px;
+	height: 100px;
+	background-color: white;
+	margin-left: 25px;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+#club{
+	height: 260px;
+}
+
+#clubImg{
+	vertical-align: bottom;
+}
+
+#college,#category{
+	display: inline;	
+}
