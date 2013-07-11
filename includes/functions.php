@@ -40,7 +40,7 @@
               }
               
             $output .= "</ul>
-                        </div>";
+                        </div>"; //end of navbar content
             
             if(loggedIn()){
                 //Display user welcome message
@@ -50,7 +50,7 @@
                             <ul class=\"dropdown-menu\">
                             <li><a href=\"logout.php\">Log Out</a></li>
                             </ul>
-                            </div>";
+                            </div>"; //end of btn group
             }
             else{
                 $output .= "<div class = \"pull-right\">
@@ -59,6 +59,7 @@
                             <div>";
             }            
             $output .= "</div>
+                        </div>
                         </div>
                         </div>
                         </div>";
