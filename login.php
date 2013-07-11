@@ -50,36 +50,6 @@ if(isset($_POST['submit'])){
 		<div class = "row">
 			<div class = "span6">
 			<!--image/text area-->
-			
-			jdbfljsdnfjndsklfn<br>
-            jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>
-jdbfljsdnfjndsklfn<br>jdbfljsdnfjndsklfn<br>jdbfljsdnfjndsklfn<br>jdbfljsdnfjndsklfn<br>jdbfljsdnfjndsklfn<br>jdbfljsdnfjndsklfn<br>jdbfljsdnfjndsklfn<br>jdbfljsdnf
 			</div>
 			<div class = "span6">
 			<!--form area-->
