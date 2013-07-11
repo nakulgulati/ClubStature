@@ -31,7 +31,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Creators</th>
+      <th>Designers</th>
       <th>Facebook Page</th>
     </tr>
   </thead>

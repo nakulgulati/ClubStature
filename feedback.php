@@ -35,7 +35,7 @@
           </div>
         </form>
 	
-	// doing the emailing stuff here
+	// doing the emailing stuff here, dawgs.
 	<?php
 	
 		$to = "link1994_amit@hotmail.com";
