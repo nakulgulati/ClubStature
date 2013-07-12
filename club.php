@@ -29,7 +29,7 @@ if(isset($_POST['submit'])){
     $result = mysql_query($commentQuery,$connection);
     }
     else{
-        redirect_to("login.php");
+        //redirect to login
     }
 }
 

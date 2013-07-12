@@ -29,15 +29,14 @@ if(isset($_POST['submit'])){
 	    //Only one result found
 	    //User authenticated
 	    
-	    echo "<br><br><br><br><br><br><br><br>login success";
-	    
 	    $userDetails = mysql_fetch_array($resultSet);
 	    
-	    print_r($userDetails);
 	    $_SESSION['userId'] = $userDetails['id'];
 	    $_SESSION['username'] = $userDetails['username'];
 	    
-	    redirect_to("index.php");
+	    //Redirect to appropriate page
+	    
+	    
 	}
 	else{
 	    echo "login failed";
