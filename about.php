@@ -8,7 +8,7 @@
   $nav = printNav(true);
   echo $nav;
 ?>
-
+<div class="wrapper">
 <div class="container">
   <div class="hero-unit">
     <h1>Rate My Clubs</h1>
@@ -67,4 +67,6 @@
   </tbody>
 </table>
 <span class="label"> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </span>
-<span class="label pull-right"> <a href="feedback.php">Got any suggestions or feedback? </a> </span> 
+<span class="label pull-right"> <a href="feedback.php">Got any suggestions or feedback? </a> </span>
+</div>
+<?php include("includes/footer.php"); ?>
