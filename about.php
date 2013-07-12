@@ -64,4 +64,4 @@
   </tbody>
 </table>
 <span class="label"> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </span>
-<span class="label pull-right"> <a href="feedback.html">Got any suggestions or feedback? </a> </span> 
+<span class="label pull-right"> <a href="feedback.php">Got any suggestions or feedback? </a> </span> 
