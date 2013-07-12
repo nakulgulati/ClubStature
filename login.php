@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
 	    redirect_to("index.php");
 	}
 	else{
-	    echo "<br><br><br><br><br><br><br><br>login failed";
+	    echo "login failed";
 	}
 }
 ?>

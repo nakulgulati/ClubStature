@@ -75,3 +75,12 @@ h3.user{
 #college,#category{
 	display: inline;	
 }
+
+#commentArea{
+	width: 886px;
+}
+
+.review{
+	word-break: break-all;
+	word-wrap: break-word;
+}

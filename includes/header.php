@@ -1,4 +1,6 @@
-<?php ob_start(); ?>
+<?php ob_start();
+date_default_timezone_set("Asia/Calcutta");
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
