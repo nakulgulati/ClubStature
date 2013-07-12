@@ -1,10 +1,13 @@
-/* <title>aboutpage</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-<link rel="stylesheet" href="https://app.divshot.com/css/bootstrap.css">
-<link rel="stylesheet" href="https://app.divshot.com/css/bootstrap-responsive.css">
-<link rel="stylesheet" href="https://djyhxgczejc94.cloudfront.net/builds/80037b02082b29f5f9cea127cab2a4ba4365ec67.css">
-*/
+<?php require_once("includes/sessions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
+<?php include("includes/header.php"); ?>
+
+<?php
+//Prints nav bar
+  $nav = printNav(true);
+  echo $nav;
+?>
 
 <div class="container">
   <div class="hero-unit">
