@@ -1,9 +1,11 @@
-<title>aboutpage</title>
+/* <title>aboutpage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <link rel="stylesheet" href="https://app.divshot.com/css/bootstrap.css">
 <link rel="stylesheet" href="https://app.divshot.com/css/bootstrap-responsive.css">
 <link rel="stylesheet" href="https://djyhxgczejc94.cloudfront.net/builds/80037b02082b29f5f9cea127cab2a4ba4365ec67.css">
+*/
+
 <div class="container">
   <div class="hero-unit">
     <h1>Rate My Clubs</h1>
