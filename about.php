@@ -13,7 +13,7 @@
     <p>Want to get involved on campus? &nbsp;Or maybe you are already, and you
       simply want to branch out. Perhaps you have an idea of what you’d like
       to try, but don’t know where to look for opinions...</p>
-	  
+    
     <p>Enter RateMyClub: a website designed to help you navigate your college/school’s
       extracurricular opportunities. &nbsp;Here, you can read and write reviews
       about the activities on campus to help you find the organization that is
