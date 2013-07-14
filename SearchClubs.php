@@ -1,9 +1,13 @@
-<title>BrowseClubs</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-<link rel="stylesheet" href="https://app.divshot.com/css/bootstrap.css">
-<link rel="stylesheet" href="https://app.divshot.com/css/bootstrap-responsive.css">
-<div class="container">
+<?php require_once("includes/sessions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
+<?php include("includes/header.php"); ?>
+
+<?php
+//Prints nav bar
+  $nav = printNav(true);
+  echo $nav;
+?>
   <h1>Browse Clubs...</h1>
 </div>
 <div class="container">
@@ -40,17 +44,17 @@
         <label class="checkbox" for="checkbox">
           <input type="checkbox" value="true" id="checkbox" name="sports"> Sports and Recreation</label>
         <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="checkbox"> Art, Music and Culture</label>
+          <input type="checkbox" value="true" id="checkbox" name="arts"> Art, Music and Culture</label>
         <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="checkbox"> Academic/Professional</label>
+          <input type="checkbox" value="true" id="checkbox" name="academia"> Academic/Professional</label>
         <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="checkbox"> Community Service/Volunteering</label>
+          <input type="checkbox" value="true" id="checkbox" name="commservice"> Community Service/Volunteering</label>
         <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="checkbox"> Governance</label>
+          <input type="checkbox" value="true" id="checkbox" name="governance"> Governance</label>
         <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="checkbox"> Greek Life</label>
+          <input type="checkbox" value="true" id="checkbox" name="greek"> Greek Life</label>
         <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="checkbox"> Science and Technology</label>
+          <input type="checkbox" value="true" id="checkbox" name="science"> Science and Technology</label>
         <label class="checkbox" for="checkbox">
           <input type="checkbox" value="true" id="checkbox" name="lifestyle"> Life Style</label>
       </div>
@@ -58,3 +62,5 @@
   </div>
   <div class="control-group"></div>
 </div>
+
+<?php include("includes/footer.php"); ?>
