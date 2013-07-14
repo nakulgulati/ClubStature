@@ -23,3 +23,8 @@ $ -> Language fix or change
 ^ -> Change
 - -> Removed
 ! -> Note
+
+
+Fuck the format
+-------------------------------------
+7/14 : Sudip made the searchclubs page.  I modified it a little.  There IS something else we did, I think.  Just figure out a way to merge w/o losing our changes.
