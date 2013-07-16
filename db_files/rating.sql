@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2013 at 05:29 PM
+-- Generation Time: Jul 16, 2013 at 03:26 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -23,19 +23,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `rating`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `rating` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(40) CHARACTER SET utf8 NOT NULL,
-  `hashedPass` varchar(40) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `hashedPass` (`hashedPass`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `clubId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `rigor` int(2) NOT NULL,
+  `cohesiveness` int(2) NOT NULL,
+  `timeCommitment` int(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
