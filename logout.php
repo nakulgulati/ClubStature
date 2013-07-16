@@ -1,3 +1,4 @@
+<?php require_once("includes/functions.php") ?>
 <?php
     // Four steps to closing a session
     
@@ -12,5 +13,8 @@
     }
 
     session_destroy(); //Destroy the session
+    
+    redirect_to("{$_SERVER['HTTP_REFERER']}");    
+    
     
 ?>

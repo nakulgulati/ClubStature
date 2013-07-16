@@ -9,7 +9,16 @@
   echo $nav;
 ?>
 <?php
+if(!isset($_POST['submit'])){
+    $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+}
+//echo $_SESSION['url'];
+?>
+
+<?php
 //Login form processing
+
+$status=-1;
 
 if(isset($_POST['submit'])){
 	$username = $_POST['username'];
@@ -23,8 +32,6 @@ if(isset($_POST['submit'])){
 	
 	$resultSet = mysql_query($query);
 	    
-	    print_r($userDetails);
-	    
 	if(mysql_num_rows($resultSet)==1){
 	    //Only one result found
 	    //User authenticated
@@ -34,12 +41,12 @@ if(isset($_POST['submit'])){
 	    $_SESSION['userId'] = $userDetails['id'];
 	    $_SESSION['username'] = $userDetails['username'];
 	    
-	    //Redirect to appropriate page
-	    
-	    
+	    $status = 1;
 	}
 	else{
-	    echo "login failed";
+	    $username="";
+	    $password="";
+	    $status = 0;
 	}
 }
 ?>
@@ -75,6 +82,26 @@ if(isset($_POST['submit'])){
 						</div>
 					</div>
 				</form>
+				<?php
+					if($status==1){
+					    $output="<div class=\"alert alert-success\">
+						    Login successful.
+						    </div>";
+					    $url = $_SESSION['url'];
+					    $output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL={$url}\">";
+					    echo $output;
+						
+					}
+					else if($status==0){
+					    $output="<div class=\"alert alert-error\">
+						    Login failed, check details and try again.
+						    </div>";
+					    echo $output;
+					}
+					else{
+					    echo "";
+					}
+				?>
 			</div>
 		</div>
 	</div>
