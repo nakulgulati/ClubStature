@@ -69,15 +69,11 @@ if(isset($_POST['submit'])){
             <!--Reviews-->
             <h2>Reviews</h2>
             <hr>
-            <div class="review">
-                <b class="pull-right">Username</b><br>
-                <p><small class="pull-right">-Timestamp</small></p><br>
-                <p>
-                <!--user review-->
-                bdsfbjsdbfjkdsbfjkd
-                </p>
-                <hr>
-            </div>
+            <?php
+            //comment
+            getComments($_GET['clubID']);
+            ?>
+            
         </div>
     </div>
 </div>

@@ -147,5 +147,25 @@
         }
     }
     
+    function getComments($clubID){
+        global $connection;
+        
+        $query = "SELECT * FROM `comments` WHERE `clubID` = '{$clubID}';";
+        $commentSet = mysql_query($query,$connection);
+        
+        confirmQuery($commentSet);
+        while($comment = mysql_fetch_array($commentSet)){
+            $output="<div class=\"review\">
+                    <b class=\"pull-right\">{$comment['username']}</b><br>
+                    <p><small class=\"pull-right\">-{$comment['timeStamp']}</small></p><br>
+                    <p>
+                    {$comment['comment']}                   
+                    </p>
+                    <hr>
+                    </div>";
+            echo $output;
+        }
+    }
+    
     
 ?>
