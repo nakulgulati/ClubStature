@@ -14,53 +14,72 @@
   <br>
   <br>
   <br>
-  <p>
-    <b></b> 
-  </p>
   <h1>
-    <b>Look for clubs by category and other criteria... </b> 
+    <b>Look for groups by institute and organization type. </b> 
   </h1>
   <br>
-  <br>
-  <form class="form-inline">
-    <p>Or Search for a club using keyword</p>
-    <input type="btn" value="Search">
-    <input type="btn" class="btn input-mini" name="searchText" value="Search"> 
-  </form>
+  <br> 
   <div class="container">
-    <div class="row">
-      <div class="span4">
-        <h3>College or School</h3>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="Umich"> University of Michigan</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="NIIT"> NIIT Neemrana</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="Berkeley"> UC-Berkeley</label>
-      </div>
+  
+  <?php
+		if(isset($_GET['submitFilter']) and ($collegeName != "None" or $category != "None")){
+			echo "you've submitted something, bitches! ";
+		}
+	
+		else{
+			echo "Ya gotta submit something, bitches!";
+		}
+?>
+  
+  
+  <form method = "get" action = "browse.php">
+  
+  
+  <h3>College or School</h3>
+		  
+		  <?php
+		  
+		  $query = "SELECT * FROM colleges" ;
+		  global $connection; //getting it in the right scope
+		  $resultset=mysql_query($query, $connection);
+		  $output = "<select name =\"collegeName\">";
+		  $output.= "<option> None </option> ";
+		  $output.="<option> All </option> ";
+		  while($row = mysql_fetch_array($resultset)){
+			
+			$output .= "<option>{$row['name']}</option>";
+			
+			}
+			$output .= " </select>";
+			echo $output;
+		/*	echo "The club you chose was: ";
+			echo $collegeName;  */
+		  ?>
+      
       <div class="pull-right span4">
         <h3>Category</h3>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="sports"> Sports and Recreation</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="arts"> Art, Music and Culture</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="academia"> Academic/Professional</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="commservice"> Community Service/Volunteering</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="governance"> Governance</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="greek"> Greek Life</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="science"> Science and Technology</label>
-        <label class="checkbox" for="checkbox">
-          <input type="checkbox" value="true" id="checkbox" name="lifestyle"> Life Style</label>
+			<select name="category">
+			<option> None </option>
+			<option> All </option>
+			<option> Sports and Recreation </option>
+			<option> Art, Music and Culture </option>
+			<option> Academic/Professional </option>
+			<option> Community Service/Volunteering </option>
+			<option> Governance </option>
+			<option> Greek Life </option>
+			<option> Science and Technology </option>
+			<option> Lifestyle </option>
+			</select>
+			
+			<input type="submit" value="Submit" name = "submitFilter">
+			</form>
       </div>
     </div>
   </div>
+  
+ 
   <div class="control-group"></div>
 </div>
 </div>
-
+</div>
 <?php include("includes/footer.php"); ?>
