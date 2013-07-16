@@ -8,9 +8,9 @@
   $nav = printNav(true);
   echo $nav;
 ?>
-  <h1>Browse Clubs...</h1>
-</div>
+<div class="wrapper">
 <div class="container">
+<h1>Browse Clubs...</h1>
   <br>
   <br>
   <br>
@@ -20,7 +20,6 @@
   <h1>
     <b>Look for clubs by category and other criteria... </b> 
   </h1>
-  <p></p>
   <br>
   <br>
   <form class="form-inline">
@@ -61,6 +60,7 @@
     </div>
   </div>
   <div class="control-group"></div>
+</div>
 </div>
 
 <?php include("includes/footer.php"); ?>
