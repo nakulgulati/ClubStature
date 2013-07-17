@@ -44,7 +44,7 @@
 				echo "Thanks for asking for something actually legit. <br>";
 				
 				if ($collegeName == "All"){  //when the user asks for all clubs of one type across different colleges. clubtype cannot be all.
-					$query = "SELECT * FROM clubs WHERE category=".$clubtype;
+					$query = "SELECT * FROM clubs WHERE category='{$clubtype}'";
 					global $connection;
 					$displayResults = "";
 					$resultset=mysql_query($query, $connection);
@@ -56,7 +56,7 @@
 				} 
 				
 				elseif ($clubtype == "All"){  //when the user asks for all clubs from one college/institute. collegeName cannot be all.
-					$query = "SELECT * FROM clubs WHERE college=".$collegeName;
+					$query = "SELECT * FROM clubs WHERE college='{$collegeName}'";
 					global $connection;
 					$displayResults = ""; 
 					$resultset=mysql_query($query, $connection);
@@ -69,7 +69,7 @@
 				
 				else {
 					echo "Finally! We're getting to the specifics now, aren't we? <br>";
-					$query = "SELECT * FROM clubs WHERE college=".$collegeName." AND category=".$clubtype;
+					$query = "SELECT * FROM clubs WHERE college='{$collegeName}' AND category='{$clubtype}'";
 					global $connection;
 					$displayResults = "";
 					$resultset=mysql_query($query, $connection);
