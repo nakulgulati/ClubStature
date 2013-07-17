@@ -50,6 +50,7 @@
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
 						$displayResults.= "{$row['clubName']}";
+						echo "<br>";
 					}
 				} 
 				
@@ -60,11 +61,20 @@
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
 						$displayResults.= "{$row['clubName']}";
+						echo "<br>";
 					}
 				}
 				
 				else {
 					echo "Finally! We're getting to the specifics now, aren't we? <br>";
+					$query = "SELECT * FROM clubs WHERE college=".$collegeName." AND category=".$clubtype;
+					global $connection;
+					$displayResults = "";
+					$resultset=mysql_query($query, $connection);
+					while ($row = mysql_fetch_array($resultset)){
+						$displayResults.= "{$row['clubName']}";
+						echo "<br>";
+					}
 				}
 				
 				//now, I think the only case left is where you ask for a specific college and a specific club...  Right?
@@ -78,7 +88,6 @@
 		}
 
 	?>
-  
   
   <form method = "get">
   
