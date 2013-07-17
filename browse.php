@@ -52,6 +52,18 @@
 						$displayResults.= "{$row['clubName']}";
 					}
 				} 
+				
+				elseif ($clubtype == "All"){  //when the user asks for all clubs from one college/institute. collegeName cannot be all.
+					$query = "SELECT * FROM clubs WHERE college=".$collegeName;
+					global $connection;
+					$displayResults = "";
+					$resultset=mysql_query($query, $connection);
+					while ($row = mysql_fetch_array($resultset)){
+						$displayResults.= "{$row['clubName']}";
+					}
+				}
+				
+				//now, I think the only case left is where you ask for a specific college and a specific club...  Right?
 			
 			
 			}
