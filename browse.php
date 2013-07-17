@@ -38,19 +38,25 @@
 			elseif( ($collegeName == "All") and ($clubtype == "All") ){  //when they're looking for EVERYTHING
 				echo "Do us both a favor and narrow down your search criteria, will you?";
 			}
-			
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			//I need help with these lines...
 			else {
 				echo "Thanks for asking for something actually legit. <br>";
 				
-				if ($collegeName == "All"){
+				if ($collegeName == "All"){  //when the user asks for all clubs of one type across different colleges. clubtype cannot be all.
 					$query = "SELECT * FROM clubs WHERE category=".$clubtype;
-					//global $connection;
+					global $connection;
+					$displayResults = "";
 					$resultset=mysql_query($query, $connection);
-					echo $query;
-				}
+					while ($row = mysql_fetch_array($resultset)){
+						$displayResults.= "{$row['clubName']}";
+					}
+				} 
 			
 			
-			}  
+			}
+
+///////////////////////////////////////////////////////////////////////////////////////////			
 		
 		
 		}
@@ -63,9 +69,9 @@
   
   <h3>College or School</h3>
 		  
-		  <?php
+		  <?php //getting the list of college names into the dropdown here
 		  
-		  $query = "SELECT clubName FROM clubs" ;
+		  $query = "SELECT * FROM colleges" ;
 		  global $connection; //getting it in the right scope
 		  $resultset=mysql_query($query, $connection);
 		  $output = "<select name =\"collegeName\">";
