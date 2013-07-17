@@ -49,9 +49,10 @@
 					$displayResults = "";
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
-						$displayResults.= "{$row['clubName']}";
-						$displayResults."<br>";
-						echo $displayResults;
+						$displayResults= $row['clubName'];//AMIT, THIS IS WHERE YOU SCREWED UP...
+						echo $displayResults;//YOU CONCATTED WITHOUT RESETING THE STRING...
+						echo "<br/>";
+						//SO YOUR RESULT WAS RECURSIVE IE 1,2,3 BECAME 1,12,123
 					}
 				} 
 				
@@ -61,9 +62,9 @@
 					$displayResults = ""; 
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
-						$displayResults.= "{$row['clubName']}";
-						$displayResults."<br>";
+						$displayResults= $row['clubName'];
 						echo $displayResults;
+						echo "<br/>";
 					}
 				}
 				
@@ -74,9 +75,9 @@
 					$displayResults = "";
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
-						$displayResults.= "{$row['clubName']}";
-						$displayResults."<br>";
+						$displayResults= $row['clubName'];
 						echo $displayResults;
+						echo "<br/>";
 					}
 				}
 				
