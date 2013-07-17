@@ -40,7 +40,7 @@
 			}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//I need help with these lines...
-			else {
+			else {  //when you're not asking for all or nothing
 				echo "Thanks for asking for something actually legit. <br>";
 				
 				if ($collegeName == "All"){  //when the user asks for all clubs of one type across different colleges. clubtype cannot be all.
@@ -50,18 +50,20 @@
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
 						$displayResults.= "{$row['clubName']}";
-						echo "<br>";
+						$displayResults."<br>";
+						echo $displayResults;
 					}
 				} 
 				
 				elseif ($clubtype == "All"){  //when the user asks for all clubs from one college/institute. collegeName cannot be all.
 					$query = "SELECT * FROM clubs WHERE college=".$collegeName;
 					global $connection;
-					$displayResults = "";
+					$displayResults = ""; 
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
 						$displayResults.= "{$row['clubName']}";
-						echo "<br>";
+						$displayResults."<br>";
+						echo $displayResults;
 					}
 				}
 				
@@ -73,7 +75,8 @@
 					$resultset=mysql_query($query, $connection);
 					while ($row = mysql_fetch_array($resultset)){
 						$displayResults.= "{$row['clubName']}";
-						echo "<br>";
+						$displayResults."<br>";
+						echo $displayResults;
 					}
 				}
 				
