@@ -26,7 +26,7 @@
               <label>Name of the Club</label>
               <input type="text" class="input-medium">
               <label>Category</label>
-              <p></p>
+              <br>
               <input type="text" class="input-medium">
               <label>College</label>
               <input type="text" class="input-medium">
