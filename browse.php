@@ -32,14 +32,14 @@
 			
 			
 			if ( ($collegeName == "None") or ($clubtype == "None") ){ //when they're not looking for anything
-				echo "Please search for <i>something!</i> in <i>both</i> fields.";
+				echo "Please search for <i>something</i> in <i>both</i> fields!";
 			}
 			
 			elseif( ($collegeName == "All") and ($clubtype == "All") ){  //when they're looking for EVERYTHING
 				echo "Do us both a favor and narrow down your search criteria, will you?";
 			}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			//I need help with these lines...
+			
+			
 			else {  //when you're not asking for all or nothing
 				echo "Thanks for asking for something actually legit. <br>";
 				
@@ -81,12 +81,9 @@
 					}
 				}
 				
-				//now, I think the only case left is where you ask for a specific college and a specific club...  Right?
 			
 			
-			}
-
-///////////////////////////////////////////////////////////////////////////////////////////			
+			}			
 		
 		
 		}
@@ -100,7 +97,7 @@
 		  
 		  <?php //getting the list of college names into the dropdown here
 		  
-		  $query = "SELECT * FROM colleges" ;
+		  $query = "SELECT * FROM colleges ORDER BY name ASC" ;
 		  global $connection; //getting it in the right scope
 		  $resultset=mysql_query($query, $connection);
 		  $output = "<select name =\"collegeName\">";
