@@ -63,6 +63,10 @@
 					}
 				}
 				
+				else {
+					echo "Finally! We're getting to the specifics now, aren't we? <br>";
+				}
+				
 				//now, I think the only case left is where you ask for a specific college and a specific club...  Right?
 			
 			
