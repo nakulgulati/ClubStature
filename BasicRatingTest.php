@@ -1,31 +1,24 @@
+<?php require_once("includes/sessions.php"); ?>
+<?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
+<?php include("includes/header.php"); ?>
+
 <?php
-
-//Database Constants
-define("DB_SERVER","localhost");
-define("DB_USER","root");
-define("DB_PASS","");
-define("DB_NAME","ratemyclub");
-
+//Prints nav bar
+  $nav = printNav(true);
+  echo $nav;
 ?>
-<?php
-//Create database connection
-$connection = mysql_connect(DB_SERVER,DB_USER,DB_PASS);
-if(!$connection){
-    die("Database connection failed: " . mysql_error());
-}
 
-//Select database
-$db_select = mysql_select_db(DB_NAME);
-if(!$db_select){
-    die("Database selection failed: " . mysql_error());
-}
+<?php
+//Prints nav bar
+  $nav = printNav(true);
+  echo $nav;
 ?>
 
 <div class="wrapper">
   <div class="container">
-    <div>
+    <div class="hero-unit hidden-phone">
       <!--body conent here-->
-      
       <form name="ratingInput" action="BasicRatingTest.php" method="GET">
         <input type="text" name="Rigor" value="0-10" size="4" maxlength="2" required/>
         <input type="text" name="Cohesiveness" value="0-10" size="4" maxlength="2" required/>
@@ -34,10 +27,8 @@ if(!$db_select){
         <input class="btn-primary" name="submit" type="submit">Submit</button>
         <input name="reset" type="reset">Reset</button>
       </form>
-
-      <!--Body Content ends here-->
-    </div>
-    <?php
+      
+      <?php
       if(isset($_GET['submit']))
       {
         $ID=1;//TO REFLECT CURRENT CLUB id
@@ -107,6 +98,10 @@ if(!$db_select){
           "failed";
         }
       }
-    ?>
+    ?>      
+      <!--Body Content ends here-->
+    </div>
   </div>
 </div>
+            
+<?php include("includes/footer.php"); ?>
