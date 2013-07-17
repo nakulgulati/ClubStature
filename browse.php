@@ -18,28 +18,54 @@
     <b>Look for groups by institute and organization type. </b> 
   </h1>
   <br>
+  <h4> Please enter something other than "None" in <i>both</i> search fields</h4>
   <br> 
   <div class="container">
   
   <?php
-		if(isset($_GET['submitFilter']) and ($collegeName != "None" or $category != "None")){
+		if( isset($_GET['submitFilter']) ){
 			echo "you've submitted something, bitches! ";
+			echo "<br>";
+			
+			$collegeName = $_GET["collegeName"];
+			$clubtype = $_GET["clubtype"];
+			
+			
+			if ( ($collegeName == "None") or ($clubtype == "None") ){ //when they're not looking for anything
+				echo "Please search for <i>something!</i> in <i>both</i> fields.";
+			}
+			
+			elseif( ($collegeName == "All") and ($clubtype == "All") ){  //when they're looking for EVERYTHING
+				echo "Do us both a favor and narrow down your search criteria, will you?";
+			}
+			
+			else {
+				echo "Thanks for asking for something actually legit. <br>";
+				
+				if ($collegeName == "All"){
+					$query = "SELECT * FROM clubs WHERE category=".$clubtype;
+					//global $connection;
+					$resultset=mysql_query($query, $connection);
+					echo $query;
+				}
+			
+			
+			}  
+		
+		
 		}
-	
-		else{
-			echo "Ya gotta submit something, bitches!";
-		}
-?>
+
+	?>
   
   
-  <form method = "get" action = "browse.php">
+  <form method = "get">
   
   
   <h3>College or School</h3>
 		  
 		  <?php
 		  
-		  $query = "SELECT * FROM colleges" ;
+		  $query = "SELECT clubName FROM clubs" ;
 		  global $connection; //getting it in the right scope
 		  $resultset=mysql_query($query, $connection);
 		  $output = "<select name =\"collegeName\">";
@@ -58,7 +84,7 @@
       
       <div class="pull-right span4">
         <h3>Category</h3>
-			<select name="category">
+			<select name="clubtype">
 			<option> None </option>
 			<option> All </option>
 			<option> Sports and Recreation </option>
