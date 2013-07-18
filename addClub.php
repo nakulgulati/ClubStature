@@ -16,18 +16,18 @@
         <div class="row">
           <div class="span5">
             <p>This page will help you to set up your club page.</p>
-            <p>Please fill all the fields. Those marked by * are necessary.</p>
+            <p>Please fill all the fields. Those marked with a * are necessary.</p>
           </div>
           <div class="span8">
             <div class="container-fluid">
               <p>
                 <br> 
               </p>
-              <form action="clubcreated.php" name="clubdetails" method="post">
+              <form method="get">
                   <label>Name of the Club</label>
-                  <input name="clubName" type="text" class="input-medium">
+                  <input name="clubName" type="text" class="input-medium" required>
                   <label>Category</label>
-                  <p></p>
+                  <br>
                   <select name="category">
 			<option> Sports and Recreation </option>
 			<option> Art, Music and Culture </option>
@@ -57,16 +57,16 @@
 			echo $output;
 		  ?>
                   
-                  <label>Link to the Club Page</label>
-                  <input name="url" type="text" class="input-medium">
-                  <label>Insert your club icon/picture </label>
+                  <label>Link to the Club's Page</label>
+                  <input name="url" type="text" class="input-medium" required>
+                  <label>Insert your club logo </label>
                   <input type="hidden" name="MAX_FILE_SIZE" value="500" />
                   <input type="file" name = "picture">
                   <p>Please give a brief description of your club...</p>
                   <div class="row"></div>
                   <div class="drag-mask" data-ds-form="textarea" style="width: 904px; height: 114px;">
-                    <textarea name="description" style="margin: 0px -322px 10px 0px; width: 904px; height: 114px;"
-                    class="input-block-level"></textarea>
+                    <textarea name="description" name="suggestion" style="margin: 0px -322px 10px 0px; width: 904px; height: 114px;"
+                    class="input-block-level" required></textarea>
               
               </div>
             </div>
