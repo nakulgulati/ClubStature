@@ -8,6 +8,7 @@
   $nav = printNav(true);
   echo $nav;
 ?>
+<title> addClub.php </title>
 <div class="wrapper">
       <div class="container">
         <div class="well">
@@ -28,7 +29,7 @@
               <label>Category</label>
               <br>
               <input type="text" class="input-medium">
-              <label>College</label>
+              <label> College </label>
               <input type="text" class="input-medium">
               <label>Link to the Club Page</label>
               <input type="text" class="input-medium">
