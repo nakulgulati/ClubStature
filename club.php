@@ -55,7 +55,7 @@ if(isset($_POST['submit'])){
             </div>
         </div>
         <div id="rating">
-           <p class="score"><?php echo $clubDetails['rating']; ?></p>
+           <p class="score"><?php echo $clubDetails['overallRating']; ?></p>
         </div>
         </div>
         <div class="well">
