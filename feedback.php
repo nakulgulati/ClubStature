@@ -12,20 +12,14 @@
 <?php
 	// doing the emailing stuff here, dawgs.
     if(isset($_POST['submit'])){
-	$to = "link1994_amit@hotmail.com";
-	$from = $_POST["useremail"];
-	$subject = $_POST["usersubject"];
-	$message = $_POST["feedback"];
-	$headers = "From:" . $from;
-	
-	if(mail($to,$subject,$message,$headers)){
-	    echo "Mail Sent. Thank you for your suggestions.";    
+		$to = "link1994_amit@hotmail.com";
+		$from = $_POST["useremail"];
+		$subject = $_POST["usersubject"];
+		$message = $_POST["feedback"];
+		$headers = "From:" . $from;
+		mail($to,$subject,$message,$headers))
+		echo "Mail Sent. Thank you for your suggestions.";
 	}
-	else_{
-	    echo "Mail not sent.";
-	}
-	
-    }
 ?>
 
 <div class="wrapper">

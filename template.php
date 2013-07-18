@@ -18,7 +18,7 @@
 <div class="wrapper">
   <div class="container">
     <div class="hero-unit hidden-phone">
-      <!--body conent here-->
+      <!--body content here-->
     </div>
   </div>
 </div>
