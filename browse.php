@@ -11,16 +11,10 @@
 <div class="wrapper">
 <div class="container">
 <h1>Browse Clubs...</h1>
-  <br>
-  <br>
-  <br>
   <h1>
     <b>Look for groups by institute and organization type. </b> 
   </h1>
-  <br>
-  <h4> Please enter something other than "None" in <i>both</i> search fields</h4>
-  <br> 
-  <div class="container">
+  <h4> Please enter something other than "None" in <i>both</i> search fields</h4> 
   
   <?php
 		if( isset($_GET['submitFilter']) ){
@@ -132,7 +126,6 @@
 			<input type="submit" value="Submit" name = "submitFilter">
 			</form>
       </div>
-    </div>
   </div>
   
  

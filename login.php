@@ -12,7 +12,6 @@
 if(!isset($_POST['submit'])){
     $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
 }
-//echo $_SESSION['url'];
 ?>
 
 <?php
