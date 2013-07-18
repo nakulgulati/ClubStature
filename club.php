@@ -13,7 +13,7 @@
 
 ?>
 <?php
-//Login form processing
+//comment processing
 
 if(isset($_POST['submit'])){
     if(loggedIn()){
@@ -47,11 +47,24 @@ if(isset($_POST['submit'])){
                 <li><h4 id="college">College: </h4><?php echo $clubDetails['college']; ?></li>
                 <li><h4 id="category">Category: </h4><?php echo $clubDetails['category']; ?></li>
             </ul>
+              <div id="other">
+                <!--rigor-->
+           <p class="scoreOther"><?php echo $clubDetails['rigor']; ?></p>
+        </div>
+              <div id="other">
+                <!--cohesiveness-->
+           <p class="scoreOther"><?php echo $clubDetails['cohesiveness']; ?></p>
+        </div>
+              <div id="other">
+                <!--schedule friendliness-->
+           <p class="scoreOther"><?php echo $clubDetails['scheduleFriendliness']; ?></p>
+        </div>
             <div id="description">
                 <p
                 <!--description-->
                 <?php echo $clubDetails['description']; ?>
                 </p>
+              
             </div>
         </div>
         <div id="rating">
@@ -69,7 +82,7 @@ if(isset($_POST['submit'])){
             <!--Reviews-->
             <h2>Reviews</h2>
             <hr>
-            <?php
+            <?php 
             //comment
             getComments($_GET['clubID']);
             ?>

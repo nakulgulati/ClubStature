@@ -34,6 +34,7 @@ h3.user{
 
 #clubInfo{
 	list-style: none;
+	display: inline-block;
 }
 
 #rating{
@@ -49,6 +50,9 @@ h3.user{
 
 .score{
 	font-size: 48px;
+}
+.scoreOther{
+	font-size: 40px;
 }
 
 #info{
@@ -83,4 +87,15 @@ h3.user{
 .review{
 	word-break: break-all;
 	word-wrap: break-word;
+}
+#other{
+	width: 75px;
+	height: 75px;
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 75px;
+	float: right;
+	margin-right: 5px;
 }
