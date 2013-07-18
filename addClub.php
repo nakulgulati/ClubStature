@@ -20,9 +20,22 @@
           </div>
           <div class="span8">
             <div class="container-fluid">
-              <p>
-                <br> 
-              </p>
+              <br>
+              <br>
+
+<?php
+	// doing the request club emailing stuff here, dawgs.
+    if(isset($_GET['clubRequested'])){
+		$to = "link1994_amit@hotmail.com";
+		$subject = "Club Request from Rate My Club";
+	//gotta think of a message format right here.	$message = $_GET["feedback"];
+		$headers = "From:" . $from;
+	
+	mail($to,$subject,$message,$headers)
+	echo "Mail sent, bitches. Your request is being processed.";
+	
+    }
+?>			  
               <form method="get">
                   <label>Name of the Club</label>
                   <input name="clubName" type="text" class="input-medium" required>
@@ -65,7 +78,7 @@
                   <p>Please give a brief description of your club...</p>
                   <div class="row"></div>
                   <div class="drag-mask" data-ds-form="textarea" style="width: 904px; height: 114px;">
-                    <textarea name="description" name="suggestion" style="margin: 0px -322px 10px 0px; width: 904px; height: 114px;"
+                    <textarea name="description" style="margin: 0px -322px 10px 0px; width: 904px; height: 114px;"
                     class="input-block-level" required></textarea>
               
               </div>
@@ -74,11 +87,13 @@
         </div>
       </div>
       <div class="form-actions">
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="btn btn-primary" value="Create Club" name="clubSubmitted">
         <input type="reset" class="btn" value="Reset">
+		<input type="submit" class="btn btn-primary" value="Request Club" name="clubRequested">
             
       </div>
     </div>
       </form>
+	  
 </div>
 <?php include("includes/footer.php"); ?>
