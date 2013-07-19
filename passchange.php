@@ -17,20 +17,31 @@
 			<!--form area-->
 				<form class="form-horizontal" method="post" action="signup.php">
 					<legend>
-						Sign Up
-						<span class="pull-right">(or <a href="login.php">Sign in</a>)</span>
+						Change your password
+					<!--	<span class="pull-right">(or <a href="login.php">Original Password</a>)</span>  -->
 					</legend>
 					<div class="control-group">
-						<label class="control-label" for="username">Username</label>
+						<label class="control-label" for="username">Original Password</label>
 						<div class="controls">
-							<input type="text" id="username" name="username" placeholder="Select a username" required>
+							<input type="password" name="originpass" placeholder="Your original password" required>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="email">Email</label>
+						<label class="control-label" for="newpass">New Password</label>
 						<div class="controls">
-							<input type="email" id="email" name="email" placeholder="johndoe@example.com" required>
+							<input type="password" id="newpass" name="newpass" placeholder="Your new password" required>
 						</div>
 					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="verifynewpass">Verify New Password</label>
+						<div class="controls">
+							<input type="password" id="verifynewpass" name="verifynewpass" placeholder="^The thing up there" required>
+						</div>
+					</div> 
+				</form>
+				
+				<input type = "submit" name="submitpasses">
+					
 
 <?php include("includes/footer.php"); ?>
