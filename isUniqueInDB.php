@@ -1,5 +1,3 @@
-
-
 <?php require_once("includes/sessions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php"); ?>
@@ -45,16 +43,33 @@
         function isUniqueInDB($tableName,$field,$value)
         {
             global $connection;
-            $query="SELECT * FROM {$tableName} WHERE {$field} = '{$value}'";
-            $result=mysql_query($query,$connection);
-            $var= mysql_num_rows($result);
-            if($var>=1)
+            if($tableName!="clubs")
             {
-                return false;
+                $query="SELECT * FROM {$tableName} WHERE {$field} = '{$value}'";
+                $result=mysql_query($query,$connection);
+                $var= mysql_num_rows($result);
+                if($var>=1)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
             else
             {
-                return true;
+                $query="SELECT * FROM clubs WHERE clubname = '{$clubname}' and college = '{$college}'";
+                $result=mysql_query($query,$connection);
+                $var= mysql_num_rows($result);
+                if($var>=1)
+                {
+                   return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
         
