@@ -17,9 +17,9 @@
 		$subject = $_POST["usersubject"];
 		$message = $_POST["feedback"];
 		$headers = "From:" . $from;
-		mail($to,$subject,$message,$headers))
-		echo "Mail Sent. Thank you for your suggestions.";
-	}
+		mail($to,$subject,$message,$headers)
+		// echo "Mail Sent. Thank you for your suggestions.";
+	}  //why is there an error with this?
 ?>
 
 <div class="wrapper">

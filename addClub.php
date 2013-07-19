@@ -23,21 +23,22 @@
               <br>
               <br>
 
+	
+<!--	
 <?php
 	// doing the request club emailing stuff here, dawgs.
-    if(isset($_GET['clubRequested'])){
+    if(isset($_GET['clubRequested'])) {
+		echo "Mail sent, bitches. Your request is being processed.";
 		$to = "link1994_amit@hotmail.com";
 		$subject = "Club Request from Rate My Club";
 		
 		//gotta think of a message format right here.  Need to get the username through cookies, too.	
-		$message = "Name of the club: ".$_GET["clubName"].".     Category: ".$_GET["category"]".   Club Link:  ".$_GET["url"]". 
+		$message="Name of the club: ".$_GET["clubName"].".     Category: ".$_GET["category"]."   Club Link:  ".$_GET["url"]." 
 		Club Description:  ".$_GET["description"];
 	
-	mail($to,$subject,$message,$headers)
-	echo "Mail sent, bitches. Your request is being processed.";
-	
-    }
-?>			  
+		mail($to,$subject,$message) 
+		}
+?>	-->		  
               <form method="get">
                   <label>Name of the Club</label>
                   <input name="clubName" type="text" class="input-medium" required>
@@ -91,7 +92,7 @@
       <div class="form-actions">
         <input type="submit" class="btn btn-primary" value="Create Club" name="clubSubmitted">
         <input type="reset" class="btn" value="Reset">
-		<input type="submit" class="btn btn-primary" value="Request Club" name="clubRequested">
+	<!--	<input type="submit" class="btn btn-primary" value="Request Club" name="clubRequested">  -->
             
       </div>
     </div>
