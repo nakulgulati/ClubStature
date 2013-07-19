@@ -48,6 +48,7 @@
                 $output .= "<div class=\"btn-group pull-right\">
                             <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
                             <ul class=\"dropdown-menu\">
+							<li><a href=\"passchange.php\">Change Password</a></li>
                             <li><a href=\"logout.php\">Log Out</a></li>
                             </ul>
                             </div>"; //end of btn group
