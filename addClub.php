@@ -28,8 +28,10 @@
     if(isset($_GET['clubRequested'])){
 		$to = "link1994_amit@hotmail.com";
 		$subject = "Club Request from Rate My Club";
-	//gotta think of a message format right here.	$message = $_GET["feedback"];
-		$headers = "From:" . $from;
+		
+		//gotta think of a message format right here.  Need to get the username through cookies, too.	
+		$message = "Name of the club: ".$_GET["clubName"].".     Category: ".$_GET["category"]".   Club Link:  ".$_GET["url"]". 
+		Club Description:  ".$_GET["description"];
 	
 	mail($to,$subject,$message,$headers)
 	echo "Mail sent, bitches. Your request is being processed.";
