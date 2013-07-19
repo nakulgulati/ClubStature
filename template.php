@@ -20,6 +20,14 @@
     <div class="hero-unit hidden-phone">
       <!--body content here-->
     </div>
+    <!--Dropdown Stuff-->
+                            <div class="btn-group pull-right">
+                            <h3 class="user dopdown-toggle" data-toggle="dropdown">Username</h3>
+                            <ul class="dropdown-menu">
+                            <li><a>Reset Password</a> </li>
+                            <li><a href="logout.php">Log Out</a></li>
+                            </ul>
+                            </div>
   </div>
 </div>
             
