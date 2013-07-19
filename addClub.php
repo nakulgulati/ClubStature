@@ -46,13 +46,13 @@
                   <br>
                   <select name="category">
 			<option> Sports and Recreation </option>
-			<option> Art, Music and Culture </option>
+			<option> Art, Dance and Music </option>
 			<option> Academic/Professional </option>
 			<option> Community Service/Volunteering </option>
 			<option> Governance </option>
 			<option> Greek Life </option>
 			<option> Science and Technology </option>
-			<option> Lifestyle </option>
+			<option> Lifestyle and Culture </option>
 			</select>
                   <label>College</label>
                   
