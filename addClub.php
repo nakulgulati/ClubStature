@@ -16,7 +16,6 @@
         <div class="row">
           <div class="span5">
             <p>This page will help you to set up your club page.</p>
-            <p>Please fill all the fields. Those marked with a * are necessary.</p>
           </div>
           <div class="span8">
             <div class="container-fluid">
@@ -24,22 +23,22 @@
               <br>
 
 	
-<!--	
-<?php
-	// doing the request club emailing stuff here, dawgs.
-    if(isset($_GET['clubRequested'])) {
-		echo "Mail sent, bitches. Your request is being processed.";
-		$to = "link1994_amit@hotmail.com";
-		$subject = "Club Request from Rate My Club";
-		
-		//gotta think of a message format right here.  Need to get the username through cookies, too.	
-		$message="Name of the club: ".$_GET["clubName"].".     Category: ".$_GET["category"]."   Club Link:  ".$_GET["url"]." 
-		Club Description:  ".$_GET["description"];
 	
-		mail($to,$subject,$message) 
-		}
-?>	-->		  
-              <form method="get">
+<?php
+//	// doing the request club emailing stuff here, dawgs.
+//    if(isset($_GET['clubRequested'])) {
+//		echo "Mail sent, bitches. Your request is being processed.";
+//		$to = "link1994_amit@hotmail.com";
+//		$subject = "Club Request from Rate My Club";
+//		
+//		//gotta think of a message format right here.  Need to get the username through cookies, too.	
+//		$message="Name of the club: ".$_GET["clubName"].".     Category: ".$_GET["category"]."   Club Link:  ".$_GET["url"]." 
+//		Club Description:  ".$_GET["description"];
+//	
+//		mail($to,$subject,$message);
+//		}
+?>
+              <form method="post" action="clubcreated.php">
                   <label>Name of the Club</label>
                   <input name="clubName" type="text" class="input-medium" required>
                   <label>Category</label>
@@ -92,7 +91,7 @@
       <div class="form-actions">
         <input type="submit" class="btn btn-primary" value="Create Club" name="clubSubmitted">
         <input type="reset" class="btn" value="Reset">
-	<!--	<input type="submit" class="btn btn-primary" value="Request Club" name="clubRequested">  -->
+      	<!--<input type="submit" class="btn btn-primary" value="Request Club" name="clubRequested">--> 
             
       </div>
     </div>
