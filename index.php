@@ -54,17 +54,20 @@
 <?php
   //search processing
   if(isset($_GET['submit'])){
-    if(isset($_GET['searchClub'])){
+    if($_GET['searchClub']!=""){
       $clubSet = getData("clubs","*","clubName",$_GET['searchClub']);
     }
-    elseif(isset($_GET['searchCollege'])){
-      $clubSet = getData("clubs","*","college",$_GET['searchCollege']);
-    }
-    elseif(isset($_GET['category']) && isset($_GET['searchCollege'])){
+    if(($_GET['category']!="") && ($_GET['searchCollege']!="")){
       $q = "SELECT * FROM clubs WHERE category = '{$_GET['category']}' && college = '{$_GET['searchCollege']}';";
+      echo $q;
       $clubSet = mysql_query($q,$connection);
       confirmQuery($clubSet);
     }
+    elseif($_GET['searchCollege']!=""){
+      echo "reaches here";
+      $clubSet = getData("clubs","*","college",$_GET['searchCollege']);
+    }
+    
   }
 ?>
 <div class="wrapper">
