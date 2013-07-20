@@ -8,6 +8,11 @@
   $nav = printNav(false);
   echo $nav;
 ?>
+<?php
+if (!loggedIn()){
+
+redirect_to("login.php");}
+ ?>
 
 <div class="wrapper">
 	<div class="container">
@@ -22,7 +27,7 @@
 					<!--	<span class="pull-right">(or <a href="login.php">Original Password</a>)</span>  -->
 					</legend>
 					<div class="control-group">
-						<label class="control-label" for="username">Original Password</label>
+						<label class="control-label" >Original Password</label>
 						<div class="controls">
 							<input type="password" name="originpass" placeholder="Your original password" required>
 						</div>
@@ -43,6 +48,11 @@
 				</form>
 				
 				<input type = "submit" name="submitpasses">
+				<?php 
+					if(loggedIn()){
+					echo $_SESSION['username'];
+					}
+				?>
 					
 
 <?php include("includes/footer.php"); ?>
