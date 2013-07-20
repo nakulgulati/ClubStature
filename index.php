@@ -64,7 +64,6 @@
       confirmQuery($clubSet);
     }
     elseif($_GET['searchCollege']!=""){
-      echo "reaches here";
       $clubSet = getData("clubs","*","college",$_GET['searchCollege']);
     }
     
