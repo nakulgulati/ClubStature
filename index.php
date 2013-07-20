@@ -2,13 +2,71 @@
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
+<script>
+    function prepForm() {
+    var select = document.getElementById('searchBy');
+    select.onchange = function(){
+      if (select.value == "colleges") {
+        document.getElementById('searchCollege').style.display = 'inline';
+        document.getElementById('category').style.display = 'inline';
+        document.getElementById('searchClub').style.display = 'none';
+      }else if (select.value == "clubs") {
+        document.getElementById('searchCollege').style.display = 'none';
+        document.getElementById('category').style.display = 'none';
+        document.getElementById('searchClub').style.display = 'inline';
+      }
+    }
+  }
+  window.onload = function(){
+    prepForm();
+    document.getElementById('category').style.display = 'none'; //category dropdown hidden
+        document.getElementById('searchCollege').style.display = 'none'; //searchCollege filed hidden
+  }
+</script>
+<?php
+  //generating suggestions for typeahead
+  
+  //list of college names
+  $collegeList = "var collegeList = [";
+  $resultSet = getData("colleges","name");
+  
+  while($row = mysql_fetch_array($resultSet)){
+    $collegeList .="'{$row['name']}',";
+  }
+  $collegeList .="];";
+  
+  //list of club names
+  $clubList = "var clubList = [";
+  $resultSet = getData("clubs","clubName");
+  
+  while($row = mysql_fetch_array($resultSet)){
+  $clubList .="'{$row['clubName']}',";
+  }
+  $clubList .="];";
+?>
+
 
 <?php
 //Prints nav bar
   $nav = printNav(true);
   echo $nav;
 ?>
-
+<?php
+  //search processing
+  if(isset($_GET['submit'])){
+    if(isset($_GET['searchClub'])){
+      $clubSet = getData("clubs","*","clubName",$_GET['searchClub']);
+    }
+    elseif(isset($_GET['searchCollege'])){
+      $clubSet = getData("clubs","*","college",$_GET['searchCollege']);
+    }
+    elseif(isset($_GET['category']) && isset($_GET['searchCollege'])){
+      $q = "SELECT * FROM clubs WHERE category = '{$_GET['category']}' && college = '{$_GET['searchCollege']}';";
+      $clubSet = mysql_query($q,$connection);
+      confirmQuery($clubSet);
+    }
+  }
+?>
 <div class="wrapper">
   <div class="container">
     <div class="hero-unit hidden-phone">
@@ -16,40 +74,46 @@
       <p>Here you can rate and review your favorite clubs.&nbsp;</p>
     </div>
     
-    <div class="well">
-<input type="text" class="span3" id="search" data-provide="typeahead" data-items="4" />
-</div>
-  </div>
-  
-</div>
-
-<!--requires a solution to prevent loading jQuery twice-->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
-
-<!--requires the jQuerys to load first-->
-<script>
-   <?php
-   
-   //needs refactoring
-    global $connection;
-      $testQ = "SELECT  `name` FROM  `colleges`;";
-      $rs = mysql_query($testQ,$connection);
-      $out = "var subjects = [";
-      while($r = mysql_fetch_array($rs)){
-        $out .= "'{$r['name']}',";
-      }
-      $testQ = "SELECT  `clubName` FROM  `clubs`;";
-      $rs = mysql_query($testQ,$connection);
-  
-      while($r = mysql_fetch_array($rs)){
-        $out .= "'{$r['clubName']}',";
+    <form method="get" action="index.php">
+      <input type="text" class="span3" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+      <input type="text" class="span3" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
+      <select id="searchBy" name="searchBy">
+        <option value="clubs">Club</option>
+        <option value="colleges">College</option>
+      </select>
+    <div id="category">
+    (Optional)
+    <?php
+      $output = "<select name =\"category\">";
+      $output.= "<option></option> ";
+      //geting the list of categories
+      $resultSet = getData("categoryname","category");
+      while($row = mysql_fetch_array($resultSet)){
+        $output .= "<option>{$row['category']}</option>";
       }
       
-      $out .= "];";
-      echo $out;
+      $output .= " </select>";
+      echo $output;
     ?>
-     $('#search').typeahead({source: subjects})
-    
-</script>
+    </div>
+    <button type="submit" class="btn" name="submit" value="submit">Search</button>
+    </form>
+    <?php
+    if(isset($_GET['submit'])){
+      while($club = mysql_fetch_array($clubSet)){
+        echo "<a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a><br>";
+      }
+    }  
+    ?>
+  </div>
+</div>
+
 <?php include("includes/footer.php"); ?>
+
+<script>
+  <?php echo $clubList; ?>
+  <?php echo $collegeList; ?>
+
+  $('#searchClub').typeahead({source: clubList});
+  $('#searchCollege').typeahead({source: collegeList});
+</script>

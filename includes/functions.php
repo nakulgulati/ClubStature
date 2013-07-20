@@ -168,5 +168,22 @@
         }
     }
     
+    function getData($tableName,$fieldName = "*",$conditionField = NULL,$conditionValue = NULL){
+      //doesnt work for searching by ID
+      //returns resultset
+      global $connection;
+      
+      if(($conditionValue!=NULL)&&($conditionField!=NULL)){
+        $query = "SELECT {$fieldName} FROM {$tableName} WHERE {$conditionField} = '{$conditionValue}';";
+      }
+      else{
+        $query = "SELECT {$fieldName} FROM {$tableName};";
+      }
+      $resultSet = mysql_query($query,$connection);
+      confirmQuery($resultSet);
+      
+      return $resultSet;
+   }
+    
     
 ?>
