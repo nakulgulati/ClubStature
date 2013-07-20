@@ -8,23 +8,22 @@
   $nav = printNav(false);
   echo $nav;
 ?>
+
 <?php
 if (!loggedIn()){
-
 redirect_to("login.php");}
  ?>
 
 <div class="wrapper">
 	<div class="container">
 		<div class = "row">
-			<div class = "span6">
+			<div class = "span7">
 			</div>
-			<div class = "span6">
+			<div class = "span7">
 			<!--form area-->
-				<form class="form-horizontal" method="post" action="signup.php">
+				<form class="form-horizontal" method="get" action="passchange.php">
 					<legend>
-						Change your password
-					<!--	<span class="pull-right">(or <a href="login.php">Original Password</a>)</span>  -->
+						So you wanna change your password, <?php echo $_SESSION['username']; ?> ?
 					</legend>
 					<div class="control-group">
 						<label class="control-label" >Original Password</label>
@@ -45,14 +44,43 @@ redirect_to("login.php");}
 							<input type="password" id="verifynewpass" name="verifynewpass" placeholder="^The thing up there" required>
 						</div>
 					</div> 
+					<input type="submit" name="submitpasses">
 				</form>
-				
-				<input type = "submit" name="submitpasses">
-				<?php 
-					if(loggedIn()){
-					echo $_SESSION['username'];
-					}
-				?>
-					
 
+<?php 
+
+if(isset($_GET['submitpasses'])){
+	global $connection;
+	$user = $_SESSION['username'];
+	$originalpassword = $_GET["originpass"];
+	$searcheshwar = "SELECT hashedPass FROM users WHERE username = '{$user}'";
+	$result = mysql_query($searcheshwar, $connection);
+	$row = mysql_fetch_array($result);
+	$hashedOriginalPassword = $row['hashedPass'];
+	The original password was: <?php echo $hashedOriginalPassword; ?>
+	$newpassword = $_GET["newpass"];
+	$verifynewpassword = $_GET["verifynewpass"];
+	if ($newpassword != $verifynewpassword){
+		echo "You gotta be <i> sure </i> about your new password, dawg.";
+	}
+	
+	else { 
+		if($hashedOriginalPassword == sha1($originalpassword)){
+			echo "you are one step closer to changing your password!";
+			$enteredpassword = sha1($newpassword);
+			$updatequery = "UPDATE users SET hashedPass = '{$enteredpassword}' WHERE username = '{$user}'";
+			mysql_query($updatequery, $connection);
+		} 
+	}
+	
+	}
+	
+	
+?>
+				
+<?php 
+	if(loggedIn()){
+		echo $_SESSION['username'];
+		}
+?> 
 <?php include("includes/footer.php"); ?>
