@@ -34,7 +34,7 @@ redirect_to("login.php");}
 					<div class="control-group">
 						<label class="control-label" for="newpass">New Password</label>
 						<div class="controls">
-							<input type="password" id="newpass" name="newpass" placeholder="Your new password" required>
+							<input type="password" id="newpass" name="newpass" placeholder="Your new password (atleast 6 characters)" required>
 						</div>
 					</div>
 					
@@ -56,20 +56,24 @@ if(isset($_GET['submitpasses'])){
 	$searcheshwar = "SELECT hashedPass FROM users WHERE username = '{$user}'";
 	$result = mysql_query($searcheshwar, $connection);
 	$row = mysql_fetch_array($result);
-	$hashedOriginalPassword = $row['hashedPass'];
-	The original password was: <?php echo $hashedOriginalPassword; ?>
+	$hashedOriginalPassword = $row['hashedPass']; 
+	echo "The original password was: '{$hashedOriginalPassword}'";
+	echo "<br>";
 	$newpassword = $_GET["newpass"];
 	$verifynewpassword = $_GET["verifynewpass"];
-	if ($newpassword != $verifynewpassword){
-		echo "You gotta be <i> sure </i> about your new password, dawg.";
+	if (($newpassword != $verifynewpassword) or (strlen($newpassword) < 6)){
+		echo "You gotta be <i> sure </i> about your new password, dawg, and your new password <i> has </i> to be greater than 6 characters.";
 	}
 	
 	else { 
 		if($hashedOriginalPassword == sha1($originalpassword)){
 			echo "you are one step closer to changing your password!";
+			echo "<br>";
 			$enteredpassword = sha1($newpassword);
 			$updatequery = "UPDATE users SET hashedPass = '{$enteredpassword}' WHERE username = '{$user}'";
 			mysql_query($updatequery, $connection);
+			echo "Your new password is: '{$enteredpassword}'";
+			echo "<br>";
 		} 
 	}
 	
@@ -77,10 +81,12 @@ if(isset($_GET['submitpasses'])){
 	
 	
 ?>
-				
-<?php 
+<!--				
+/*<?php 
 	if(loggedIn()){
 		echo $_SESSION['username'];
 		}
-?> 
+?> */ 
+-->
+
 <?php include("includes/footer.php"); ?>
