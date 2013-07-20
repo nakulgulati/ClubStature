@@ -36,6 +36,12 @@
                 if(mysql_query($query,$connection))
                 {
                     echo "password reset to {$pass}";
+                    //mail stuff
+                    //$to=$emailId;
+                    //$subject="password reset for your account";
+                    //$message="Dear {$username}, \n As requested, your account password has been reset to {$pass} please go ";
+                    //mail($to,$subject,$message);
+                    
                 }
                 else{
                     echo "failed";
@@ -58,9 +64,14 @@
   <div class="container">
     <div class="hero-unit hidden-phone">
         
-        <form name="resetInp" action="resetPassword.php" method="GET" enctype="">
+        <form name="resetInp" action="forgotPassword.php" method="GET" enctype="">
+            <label class="control-label" for="name">Username</label>
             <input type="text" name="name" size="15" required/>
+            <br/>
+            <label class="control-label" for="email">Email-ID</label>
             <input type="text" name="email" size="15" required/>
+            <br/>
+            <hr>
             <input type="submit" name="submit"/>
         </form>
         
