@@ -36,7 +36,7 @@
         $C = $_GET['Cohesiveness'];
         $S = $_GET['Schedule-Friendliness'];
         $query="INSERT INTO
-                RATING(rigor,cohesiveness,timeCommitment,clubId)
+                RATING(rigor,cohesiveness,scheduleFriendliness,clubId)
                 VALUES({$R},{$C},{$S},{$ID})
                 ";
                 //LATER WE NEED TO INSERT CLUB ID AND USER ID
@@ -66,7 +66,7 @@
             
             echo "cohesiveness avg = ".$C;
             
-            $query="SELECT AVG(timeCommitment)
+            $query="SELECT AVG(scheduleFriendliness)
                     AS ravg
                     FROM RATING
                     WHERE CLUBID={$ID}
@@ -81,7 +81,7 @@
             $OR=($R*4+$S*2+$C*4)/10;
             
             $query="UPDATE CLUBS
-                    SET OVERALLRATING={$OR},RIGOR={$R},cohesiveness={$C},timeCommitment={$S}
+                    SET OVERALLRATING={$OR},RIGOR={$R},cohesiveness={$C},scheduleFriendliness={$S}
                     WHERE ID={$ID}";
             if(mysql_query($query,$connection))
             {
