@@ -184,5 +184,31 @@
       
       return $resultSet;
    }
-    
+   
+   function calculateRating($clubId,$userId,$username,$rigor,$cohesiveness,$scheduleFriendliness){
+        global $connection;
+        $query="INSERT INTO `rating`(`clubId`, `userId`, `username`, `rigor`, `cohesiveness`, `scheduleFriendliness`) VALUES ({$clubId},{$userId},'{$username}',{$rigor},{$cohesiveness},{$scheduleFriendliness});";
+        if(mysql_query($query,$connection))
+        {
+            $query="SELECT AVG(rigor) AS ravg FROM rating WHERE clubId={$clubId}";
+            $resultSet = mysql_query($query,$connection);
+            $rAvg=mysql_fetch_array($resultSet);
+            $rigor=$rAvg['ravg'];
+            
+            $query="SELECT AVG(cohesiveness) AS cavg FROM rating WHERE clubId={$clubId}";
+            $resultSet = mysql_query($query,$connection);
+            $cAvg=mysql_fetch_array($resultSet);
+            $cohesiveness=$cAvg['cavg'];
+            
+            $query="SELECT AVG(scheduleFriendliness) AS sFavg FROM rating WHERE clubId={$clubId}";
+            $resultSet = mysql_query($query,$connection);
+            $sFAvg=mysql_fetch_array($resultSet);
+            $scheduleFriendliness=$sFAvg['sFavg'];
+            
+            $or=($rigor*4+$scheduleFriendliness*2+$cohesiveness*4)/10;
+            
+            $query="UPDATE clubs SET `overallRating`={$or},`rigor`={$rigor},`cohesiveness`={$cohesiveness},`scheduleFriendliness`={$scheduleFriendliness} WHERE id={$clubId};";
+            mysql_query($query,$connection);
+        }
+    }    
 ?>

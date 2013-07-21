@@ -10,7 +10,20 @@
 ?>
 <?php
   $clubDetails = getClubInfo($_GET['clubID']);
+?>
 
+<?php
+//rate
+if(isset($_POST['ratingSubmit'])){
+    if(loggedIn()){
+        //rate processing
+        calculateRating($_GET['clubID'],$_SESSION['userId'],$_SESSION['username'],$_POST['rigor'],$_POST['cohesiveness'],$_POST['scheduleFriendliness']);
+        redirect_to("{$_SERVER['REQUEST_URI']}");
+    }
+    else{
+        redirect_to("login.php");
+    }
+}
 ?>
 <?php
 //comment processing
@@ -69,6 +82,42 @@ if(isset($_POST['submit'])){
         </div>
         <div id="rating">
            <p class="score"><?php echo $clubDetails['overallRating']; ?></p>
+        </div>
+
+        <div id="ratingForm">
+        <form class="form-inline" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
+            <button class="btn" type="submit" name="ratingSubmit">Rate this club</button>
+        <?php
+            if((loggedIn())){
+                $rating;
+                $rating =   "<select name=\"rigor\" class=\"pull-right\">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            </select>
+                            <select name=\"cohesiveness\" class=\"pull-right\">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            </select>
+                            <select name=\"scheduleFriendliness\" class=\"pull-right\" class=\"pull-right\">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            </select>";
+                echo $rating;
+            }
+        ?>
+        </form>
         </div>
         </div>
         <div class="well">
