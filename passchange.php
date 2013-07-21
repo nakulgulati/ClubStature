@@ -57,8 +57,6 @@ if(isset($_POST['submitpasses'])){
 	$result = mysql_query($searcheshwar, $connection);
 	$row = mysql_fetch_array($result);
 	$hashedOriginalPassword = $row['hashedPass']; 
-	//echo "The original password was: '{$hashedOriginalPassword}'";
-	//echo "<br>";
 	$newpassword = $_POST["newpass"];
 	$verifynewpassword = $_POST["verifynewpass"];
 	if (($newpassword != $verifynewpassword) or (strlen($newpassword) < 6)){
@@ -72,7 +70,6 @@ if(isset($_POST['submitpasses'])){
 			$enteredpassword = sha1($newpassword);
 			$updatequery = "UPDATE users SET hashedPass = '{$enteredpassword}' WHERE username = '{$user}'";
 			mysql_query($updatequery, $connection);
-			//echo "Your new password is: '{$enteredpassword}'";
 			echo "<br>";
 			echo "You have successfully changed your password!";
 		} 
@@ -83,7 +80,7 @@ if(isset($_POST['submitpasses'])){
 	
 ?>
 <!--				
-/*<?php 
+/*<?php  This was the way to get the username from the session 
 	if(loggedIn()){
 		echo $_SESSION['username'];
 		}
