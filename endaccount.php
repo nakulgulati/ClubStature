@@ -39,7 +39,7 @@
 							$query="DELETE FROM users WHERE username='{$user}'";
 							mysql_query($query, $connection);
 							echo "Your account has now been deleted";
-							session_start(); 
+							//session_start(); 
 							$_SESSION = array();
 							if(isset($_COOKIE[session_name()])) {
 								setcookie(session_name(), '', time()-42000, '/');
