@@ -21,7 +21,7 @@ redirect_to("login.php");}
 			</div>
 			<div class = "span7">
 			<!--form area-->
-				<form class="form-horizontal" method="get" action="passchange.php">
+				<form class="form-horizontal" method="POST" action="passchange.php">
 					<legend>
 						So you wanna change your password, <?php echo $_SESSION['username']; ?> ?
 					</legend>
@@ -49,18 +49,16 @@ redirect_to("login.php");}
 
 <?php 
 
-if(isset($_GET['submitpasses'])){
+if(isset($_POST['submitpasses'])){
 	global $connection;
 	$user = $_SESSION['username'];
-	$originalpassword = $_GET["originpass"];
+	$originalpassword = $_POST["originpass"];
 	$searcheshwar = "SELECT hashedPass FROM users WHERE username = '{$user}'";
 	$result = mysql_query($searcheshwar, $connection);
 	$row = mysql_fetch_array($result);
 	$hashedOriginalPassword = $row['hashedPass']; 
-	echo "The original password was: '{$hashedOriginalPassword}'";
-	echo "<br>";
-	$newpassword = $_GET["newpass"];
-	$verifynewpassword = $_GET["verifynewpass"];
+	$newpassword = $_POST["newpass"];
+	$verifynewpassword = $_POST["verifynewpass"];
 	if (($newpassword != $verifynewpassword) or (strlen($newpassword) < 6)){
 		echo "You gotta be <i> sure </i> about your new password, dawg, and your new password <i> has </i> to be greater than 6 characters.";
 	}
@@ -72,17 +70,17 @@ if(isset($_GET['submitpasses'])){
 			$enteredpassword = sha1($newpassword);
 			$updatequery = "UPDATE users SET hashedPass = '{$enteredpassword}' WHERE username = '{$user}'";
 			mysql_query($updatequery, $connection);
-			echo "Your new password is: '{$enteredpassword}'";
 			echo "<br>";
+			echo "You have successfully changed your password!";
 		} 
 	}
 	
-	}
+}
 	
 	
 ?>
 <!--				
-/*<?php 
+/*<?php  This was the way to get the username from the session 
 	if(loggedIn()){
 		echo $_SESSION['username'];
 		}

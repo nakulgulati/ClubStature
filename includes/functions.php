@@ -50,6 +50,7 @@
                             <ul class=\"dropdown-menu\">
 							<li><a href=\"passchange.php\">Change Password</a></li>
                             <li><a href=\"logout.php\">Log Out</a></li>
+							<li><a href=\"endaccount.php\"> Delete Account </a></li>
                             </ul>
                             </div>"; //end of btn group
             }
