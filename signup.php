@@ -20,8 +20,7 @@ if(isset($_POST['submit'])){
     $password = sha1($_POST['password']);
     $verifyPassword = sha1($_POST['verifyPassword']);
     
-    $errors = signUpValidation($username,$password,$verifyPassword);   
-    $message = addUser($errors);
+    $errors = addUser($username,$password,$verifyPassword,$email);   
 }
 ?>
 
@@ -74,14 +73,25 @@ if(isset($_POST['submit'])){
 				</form>
 				<?php
 				global $errors;
-				global $message;
 				
-				if(count($errors)){
-				    print_r($errors);
-				}
-				
-				if(isset($_POST['submit'])){
-				    echo $message;
+				if(isset($errors['status'])){
+				    if($errors['status']==1){
+					$output="<div class=\"alert alert-success\">
+						{$errors[0]}
+						</div>";
+					$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL=login.php\">";
+					echo $output;
+				    }
+				    elseif(($errors['status']==0) && (count($errors)>1)){
+					$output="<div class=\"alert alert-error\">";
+					foreach($errors as $key => $value){
+					    if($value != '0'){
+						$output .= $value."<br>";
+					    }	
+					}
+					$output	.= "</div>";
+					echo $output;
+				    }
 				}
 				?>
 			</div>

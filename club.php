@@ -17,7 +17,8 @@
 if(isset($_POST['ratingSubmit'])){
     if(loggedIn()){
         //rate processing
-        calculateRating($_GET['clubID'],$_SESSION['userId'],$_SESSION['username'],$_POST['rigor'],$_POST['cohesiveness'],$_POST['scheduleFriendliness']);
+        $st = calculateRating($_GET['clubID'],$clubDetails['clubName'],$_SESSION['userId'],$_SESSION['username'],$_POST['rigor'],$_POST['cohesiveness'],$_POST['scheduleFriendliness']);
+        echo $st;
         redirect_to("{$_SERVER['REQUEST_URI']}");
     }
     else{

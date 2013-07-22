@@ -21,56 +21,37 @@
             <div class="container-fluid">
               <br>
               <br>
-
-	
-	
-<?php
-//	// doing the request club emailing stuff here, dawgs.
-//    if(isset($_GET['clubRequested'])) {
-//		echo "Mail sent, bitches. Your request is being processed.";
-//		$to = "link1994_amit@hotmail.com";
-//		$subject = "Club Request from Rate My Club";
-//		
-//		//gotta think of a message format right here.  Need to get the username through cookies, too.	
-//		$message="Name of the club: ".$_GET["clubName"].".     Category: ".$_GET["category"]."   Club Link:  ".$_GET["url"]." 
-//		Club Description:  ".$_GET["description"];
-//	
-//		mail($to,$subject,$message);
-//		}
-?>
               <form method="post" action="clubcreated.php">
                   <label>Name of the Club</label>
                   <input name="clubName" type="text" class="input-medium" required>
                   <label>Category</label>
                   <br>
-                  <select name="category">
-			<option> Sports and Recreation </option>
-			<option> Art, Dance and Music </option>
-			<option> Academic/Professional </option>
-			<option> Community Service/Volunteering </option>
-			<option> Governance </option>
-			<option> Greek Life </option>
-			<option> Science and Technology </option>
-			<option> Lifestyle and Culture </option>
-			</select>
+		  <?php
+		  $output = "<select name =\"category\">";
+		  $output.= "<option></option> ";
+		  //geting the list of categories
+		  $resultSet = getData("categoryname","category");
+		  while($row = mysql_fetch_array($resultSet)){
+		  	  $output .= "<option>{$row['category']}</option>";
+		  }
+		  
+		  $output .= " </select>";
+		  echo $output;
+		  ?>
                   <label>College</label>
                   
-                  <?php //getting the list of college names into the dropdown here
-		  
-		  $query = "SELECT * FROM colleges ORDER BY name ASC" ;
-		  global $connection; //getting it in the right scope
-		  $resultset=mysql_query($query, $connection);
-		  $output = "<select name =\"college\">";
-		  //$output.= "<option> None </option> ";
-		  //$output.="<option> All </option> ";
-		  while($row = mysql_fetch_array($resultset)){
-			
-			$output .= "<option>{$row['name']}</option>";
-			
-			}
-			$output .= " </select>";
-			echo $output;
-		  ?>
+		<?php
+		$output = "<select name =\"college\">";
+		$output.= "<option></option> ";
+		//geting the list of colleges
+		$resultSet = getData("colleges","name");
+		    while($row = mysql_fetch_array($resultSet)){
+		$output .= "<option>{$row['name']}</option>";
+		}
+		
+		$output .= " </select>";
+		echo $output;
+		?>
                   
                   <label>Link to the Club's Page</label>
                   <input name="url" type="text" class="input-medium" required>

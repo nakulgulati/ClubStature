@@ -15,7 +15,8 @@
     $category=$_POST['category'];
     $url=$_POST['url'];
     $description=$_POST['description'];
-    $query="INSERT INTO CLUBS(clubName,college,category,url,description) VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}')";
+    $query="INSERT INTO clubs(clubName,college,category,url,description) VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}')";
+
     if(mysql_query($query,$connection))
     {
         echo "success";

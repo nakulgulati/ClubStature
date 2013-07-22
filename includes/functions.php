@@ -76,8 +76,19 @@
         
     }
     
-    function signUpValidation($username,$password,$verifyPassword){
-	$errors = array();
+    function addUser($username,$password,$verifyPassword,$email){
+	global $connection;
+        $errors = array("status" => 0);
+        if(!isUnique("users","username",$username)){
+            array_push($errors,"Username already taken.");
+            return $errors;
+        }
+        
+        if(!isUnique("users","email",$email)){
+            array_push($errors,"An account already exists for this email.");
+            return $errors;
+        }
+        
 	if(!ctype_alnum($username)){
 	    array_push($errors,"Username cannot contain special characters.");
 	}
@@ -90,28 +101,19 @@
 	else{
 	    array_push($errors,"Password should be minimum 6 characters.");
 	}
+        
+        if(count($errors)==1){
+            $query = "INSERT INTO `users`(`username`, `email`, `hashedPass`) VALUES ('{$username}','{$email}','{$password}');";
+	
+            if(mysql_query($query,$connection)){
+                $errors['status'] = 1;
+                array_push($errors,"Sign Up successful. Login to continue.");
+                
+            }
+	}
 	return $errors;
     }
     
-    function addUser($errors){
-        global $username;
-        global $email;
-        global $password;
-        global $verifyPassword;
-        global $connection;
-        
-	if(count($errors)==0){
-	$query = "INSERT INTO `users`(`username`, `email`, `hashedPass`) VALUES ('{$username}','{$email}','{$password}');";
-	
-	    if(mysql_query($query,$connection)){
-	        $message = "Sign Up success.";
-	    }
-	    else{
-	        $message = "Sign Up failed.";
-	    }
-	}
-        return $message;
-    }
     
     function getUserInfo($userId){
         global $connection;
@@ -186,11 +188,18 @@
       return $resultSet;
    }
    
-   function calculateRating($clubId,$userId,$username,$rigor,$cohesiveness,$scheduleFriendliness){
+   function calculateRating($clubId,$clubName,$userId,$username,$rigor,$cohesiveness,$scheduleFriendliness){
         global $connection;
-        $query="INSERT INTO `rating`(`clubId`, `userId`, `username`, `rigor`, `cohesiveness`, `scheduleFriendliness`) VALUES ({$clubId},{$userId},'{$username}',{$rigor},{$cohesiveness},{$scheduleFriendliness});";
-        if(mysql_query($query,$connection))
-        {
+        $status = 0;
+        
+        if(!isCombinationUnique("rating","clubId","username",$clubId,$username)){
+            $status = 0;
+            return $status;
+        }
+        
+        $query="INSERT INTO `rating`(`clubId`, `clubName`, `userId`, `username`, `rigor`, `cohesiveness`, `scheduleFriendliness`) VALUES ({$clubId},'{$clubName}',{$userId},'{$username}',{$rigor},{$cohesiveness},{$scheduleFriendliness});";
+        if(mysql_query($query,$connection)){
+            
             $query="SELECT AVG(rigor) AS ravg FROM rating WHERE clubId={$clubId}";
             $resultSet = mysql_query($query,$connection);
             $rAvg=mysql_fetch_array($resultSet);
@@ -209,7 +218,40 @@
             $or=($rigor*4+$scheduleFriendliness*2+$cohesiveness*4)/10;
             
             $query="UPDATE clubs SET `overallRating`={$or},`rigor`={$rigor},`cohesiveness`={$cohesiveness},`scheduleFriendliness`={$scheduleFriendliness} WHERE id={$clubId};";
-            mysql_query($query,$connection);
+            if(mysql_query($query,$connection)){
+                return $status = 1;
+            }
         }
-    }    
+    }
+    
+    function isUnique($tableName,$field,$value){
+        
+        global $connection;
+
+        $query="SELECT * FROM {$tableName} WHERE {$field} = '{$value}'";
+        $result=mysql_query($query,$connection);
+        $var= mysql_num_rows($result);
+        
+        if($var>=1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
+    function isCombinationUnique($table,$field1,$field2,$value1,$value2){
+            global $connection;
+            
+            $query="SELECT * FROM {$table} WHERE {$field1} = {$value1} and {$field2} = '{$value2}'";
+            $result=mysql_query($query,$connection);
+            $var= mysql_num_rows($result);
+            
+            if($var>=1){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
 ?>

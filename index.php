@@ -70,52 +70,52 @@
   }
 ?>
 <div class="wrapper">
-  <div class="container">
-    <div class="hero-unit hidden-phone">
-      <h1>Welcome to Rate My Club...</h1>
-      <p>Here you can rate and review your favorite clubs.&nbsp;</p>
+    <div class="container">
+        <div class="hero-unit hidden-phone">
+        <h1>Welcome to Rate My Club...</h1>
+        <p>Here you can rate and review your favorite clubs.&nbsp;</p>
     </div>
     
     <form method="get" action="index.php">
-      <input type="text" class="span3" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
-      <input type="text" class="span3" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
-      <select id="searchBy" name="searchBy">
-        <option value="clubs">Club</option>
-        <option value="colleges">College</option>
-      </select>
+        <input type="text" class="span3" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+          <input type="text" class="span3" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
+         <select id="searchBy" name="searchBy">
+            <option value="clubs">Club</option>
+         <option value="colleges">College</option>
+          </select>
     <div id="category">
     (Optional)
     <?php
-      $output = "<select name =\"category\">";
-      $output.= "<option></option> ";
-      //geting the list of categories
-      $resultSet = getData("categoryname","category");
-      while($row = mysql_fetch_array($resultSet)){
-        $output .= "<option>{$row['category']}</option>";
-      }
+         $output = "<select name =\"category\">";
+        $output.= "<option></option> ";
+        //geting the list of categories
+         $resultSet = getData("categoryname","category");
+         while($row = mysql_fetch_array($resultSet)){
+           $output .= "<option>{$row['category']}</option>";
+         }
       
-      $output .= " </select>";
-      echo $output;
+        $output .= " </select>";
+         echo $output;
     ?>
     </div>
-    <button type="submit" class="btn" name="submit" value="submit">Search</button>
+        <button type="submit" class="btn" name="submit" value="submit">Search</button>
     </form>
     <?php
     if(isset($_GET['submit'])){
-      while($club = mysql_fetch_array($clubSet)){
-        echo "<a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a><br>";
+        while($club = mysql_fetch_array($clubSet)){
+            echo "<a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a><br>";
       }
     }  
     ?>
-  </div>
+    </div>
 </div>
 
 <?php include("includes/footer.php"); ?>
 
 <script>
-  <?php echo $clubList; ?>
-  <?php echo $collegeList; ?>
-
-  $('#searchClub').typeahead({source: clubList});
-  $('#searchCollege').typeahead({source: collegeList});
+    <?php echo $clubList; ?>
+    <?php echo $collegeList; ?>
+  
+    $('#searchClub').typeahead({source: clubList});
+    $('#searchCollege').typeahead({source: collegeList});
 </script>
