@@ -28,7 +28,7 @@ if(isset($_POST['ratingSubmit'])){
 ?>
 <?php
 //comment processing
-
+$storeComment = false;
 if(isset($_POST['submit'])){
     if(loggedIn()){
     
@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
     }
     else{
         if(!loggedIn()){
-          redirect_to("login.php");
+            redirect_to("login.php");
         }
     }
 }
@@ -128,15 +128,16 @@ if(isset($_POST['submit'])){
                 <button name="submit" type="submit" class="btn btn-info pull-right">Post Comment</button>
             </form>
         </div>
-        <div class="well">
+        <div id="comment">
             <!--Reviews-->
             <h2>Reviews</h2>
-            <hr>
+            <!--<hr>-->
+            <table class="table table-striped">
             <?php 
             //comment
             getComments($_GET['clubID']);
             ?>
-            
+            </table>
         </div>
     </div>
 </div>

@@ -100,13 +100,15 @@
     </div>
         <button type="submit" class="btn" name="submit" value="submit">Search</button>
     </form>
+    <table class="table table-striped">
     <?php
     if(isset($_GET['submit'])){
         while($club = mysql_fetch_array($clubSet)){
-            echo "<a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a><br>";
+            echo "<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td></tr>";
       }
     }  
     ?>
+    </table>
     </div>
 </div>
 

@@ -9,11 +9,6 @@
   echo $nav;
 ?>
 
-<?php
-//Prints nav bar
-  $nav = printNav(true);
-  echo $nav;
-?>
 
 <div class="wrapper">
   <div class="container">
@@ -28,6 +23,8 @@
                             <li><a href="logout.php">Log Out</a></li>
                             </ul>
                             </div>
+              <br><br><br>              
+                            S
   </div>
 </div>
             
