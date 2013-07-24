@@ -3,7 +3,11 @@
 if(isset($_POST['submit'])){
 $allowedExts = array("gif", "jpeg", "jpg", "png", "PNG", "JPEG", "GIF", "JPG");
 $temp = explode(".", $_FILES["file"]["name"]);
-$extension = end($temp);  
+$extension = end($temp);
+
+  $fileName = $_FILES["file"]["name"];
+    
+    echo $fileName;
 
 	if ((($_FILES["file"]["type"] == "image/gif")
 	|| ($_FILES["file"]["type"] == "image/jpeg")
@@ -38,7 +42,7 @@ $extension = end($temp);
 }
 ?>
 <html>
-    <form name="fileload" method="POST"  enctype="multipart/form-data" required>
+    <form method="POST"  enctype="multipart/form-data" required>
         <input type="file" name="file" id="file">
         <input type="submit" name="submit" value="submit"/>
     </form>

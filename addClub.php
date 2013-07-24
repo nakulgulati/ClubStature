@@ -21,7 +21,7 @@
             <div class="container-fluid">
               <br>
               <br>
-              <form method="post" action="clubcreated.php">
+              <form method="post" action="clubcreated.php" enctype="multipart/form-data">
                   <label>Name of the Club</label>
                   <input name="clubName" type="text" class="input-medium" required>
                   <label>Category</label>
@@ -56,8 +56,7 @@
                   <label>Link to the Club's Page</label>
                   <input name="url" type="text" class="input-medium" required>
                   <label>Insert your club logo </label>
-                  <input type="hidden" name="MAX_FILE_SIZE" value="500" />
-                  <input type="file" name = "picture">
+                  <input type="file" name="file" id="file">
                   <p>Please give a brief description of your club...</p>
                   <div class="row"></div>
                   <div class="drag-mask" data-ds-form="textarea" style="width: 904px; height: 114px;">
