@@ -15,37 +15,38 @@ redirect_to("login.php");}
  ?>
 
 <div class="wrapper">
-	<div class="container">
-		<div class = "row">
-			<div class = "span7">
+    <div class="container">
+	<div class = "row">
+	    <div class = "span7">
+		<!--form area-->
+		<form class="form-horizontal" method="POST" action="changePassword.php">
+		    <legend>
+			So you wanna change your password, <?php echo $_SESSION['username']; ?> ?
+		    </legend>
+		    <div class="control-group">
+			<label class="control-label" >Original Password</label>
+			<div class="controls">
+			    <input type="password" name="originpass" placeholder="Your original password" required>
 			</div>
-			<div class = "span7">
-			<!--form area-->
-				<form class="form-horizontal" method="POST" action="passchange.php">
-					<legend>
-						So you wanna change your password, <?php echo $_SESSION['username']; ?> ?
-					</legend>
-					<div class="control-group">
-						<label class="control-label" >Original Password</label>
-						<div class="controls">
-							<input type="password" name="originpass" placeholder="Your original password" required>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="newpass">New Password</label>
-						<div class="controls">
-							<input type="password" id="newpass" name="newpass" placeholder="Your new password (atleast 6 characters)" required>
-						</div>
-					</div>
-					
-					<div class="control-group">
-						<label class="control-label" for="verifynewpass">Verify New Password</label>
-						<div class="controls">
-							<input type="password" id="verifynewpass" name="verifynewpass" placeholder="^The thing up there" required>
-						</div>
-					</div> 
-					<input type="submit" name="submitpasses">
-				</form>
+		    </div>
+		    <div class="control-group">
+			<label class="control-label" for="newpass">New Password</label>
+			<div class="controls">
+			    <input type="password" id="newpass" name="newpass" placeholder="Your new password (atleast 6 characters)" required>
+			</div>
+		    </div>
+		    <div class="control-group">
+			<label class="control-label" for="verifynewpass">Verify New Password</label>
+			<div class="controls">
+			    <input type="password" id="verifynewpass" name="verifynewpass" placeholder="^The thing up there" required>
+			</div>
+		    </div> 
+		    <input type="submit" name="submitpasses">
+		</form>
+	    </div>
+	</div>
+    </div>
+</div>
 
 <?php 
 
@@ -79,12 +80,5 @@ if(isset($_POST['submitpasses'])){
 	
 	
 ?>
-<!--				
-/*<?php  This was the way to get the username from the session 
-	if(loggedIn()){
-		echo $_SESSION['username'];
-		}
-?> */ 
--->
 
 <?php include("includes/footer.php"); ?>

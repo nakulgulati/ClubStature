@@ -2,38 +2,9 @@
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
-<script>
-    function prepForm() {
-    var select = document.getElementById('searchBy');
-    select.onchange = function(){
-      if (select.value == "colleges") {
-        document.getElementById('searchCollege').style.display = 'inline';
-        document.getElementById('category').style.display = 'inline';
-        document.getElementById('searchClub').style.display = 'none';
-      }else if (select.value == "clubs") {
-        document.getElementById('searchCollege').style.display = 'none';
-        document.getElementById('category').style.display = 'none';
-        document.getElementById('searchClub').style.display = 'inline';
-      }
-    }
-  }
-  window.onload = function(){
-    prepForm();
-    document.getElementById('category').style.display = 'none'; //category dropdown hidden
-        document.getElementById('searchCollege').style.display = 'none'; //searchCollege filed hidden
-  }
-</script>
+
 <?php
   //generating suggestions for typeahead
-  
-  //list of college names
-  $collegeList = "var collegeList = [";
-  $resultSet = getData("colleges","name");
-  
-  while($row = mysql_fetch_array($resultSet)){
-    $collegeList .="'{$row['name']}',";
-  }
-  $collegeList .="];";
   
   //list of club names
   $clubList = "var clubList = [";
@@ -57,49 +28,40 @@
     if($_GET['searchClub']!=""){
       $clubSet = getData("clubs","*","clubName",$_GET['searchClub']);
     }
-    if(($_GET['category']!="") && ($_GET['searchCollege']!="")){
-      $q = "SELECT * FROM clubs WHERE category = '{$_GET['category']}' && college = '{$_GET['searchCollege']}';";
-      echo $q;
-      $clubSet = mysql_query($q,$connection);
-      confirmQuery($clubSet);
-    }
-    elseif($_GET['searchCollege']!=""){
-      $clubSet = getData("clubs","*","college",$_GET['searchCollege']);
-    }
-    
   }
 ?>
 <div class="wrapper">
     <div class="container">
         <div class="hero-unit hidden-phone">
-        <h1>Welcome to Rate My Club...</h1>
+        <h1>Welcome to <?php echo NAME; ?>...</h1>
         <p>Here you can rate and review your favorite clubs.&nbsp;</p>
     </div>
-    
-    <form method="get" action="index.php">
-        <input type="text" class="span3" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
-          <input type="text" class="span3" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
-         <select id="searchBy" name="searchBy">
-            <option value="clubs">Club</option>
-         <option value="colleges">College</option>
-          </select>
-    <div id="category">
-    (Optional)
-    <?php
-         $output = "<select name =\"category\">";
-        $output.= "<option></option> ";
-        //geting the list of categories
-         $resultSet = getData("categoryname","category");
-         while($row = mysql_fetch_array($resultSet)){
-           $output .= "<option>{$row['category']}</option>";
-         }
-      
-        $output .= " </select>";
-         echo $output;
-    ?>
-    </div>
+    <div class="row-fluid">
+    <div id="searchBox" class="well span8">
+        <h4>Know the club name?</h4> 
+    <form method="get" class="form-inline" action="index.php">
+        <input type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+        
         <button type="submit" class="btn" name="submit" value="submit">Search</button>
     </form>
+    Or for advanced search go to <a href="search.php">Search Clubs</a>
+    </div>
+    <div class="well span4" id="famousClubs">
+        <h4>Most Searched Clubs</h4>
+        <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    </div>
     <table class="table table-striped">
     <?php
     if(isset($_GET['submit'])){
@@ -116,8 +78,6 @@
 
 <script>
     <?php echo $clubList; ?>
-    <?php echo $collegeList; ?>
   
     $('#searchClub').typeahead({source: clubList});
-    $('#searchCollege').typeahead({source: collegeList});
 </script>

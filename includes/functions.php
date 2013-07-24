@@ -17,7 +17,7 @@
     function getNavItems() {
         global $connection;
         
-        $query = "SELECT * FROM menu;";
+        $query = "SELECT * FROM menu ORDER BY position;";
         $menu_set = mysql_query($query, $connection);
         confirmQuery($menu_set);
         return $menu_set;
@@ -28,7 +28,9 @@
         $output .= "<div class=\"navbar navbar-inverse navbar-fixed-top\">
                     <div class=\"navbar-inner\">
                     <div class=\"container\">
-                    <a class=\"brand\" href=\"index.php\">Rate My Club</a>";
+                    <a class=\"brand\" href=\"index.php\">";
+        $output .= NAME;            
+        $output .= "</a>";
         if($public == true){
             $output .= "<div class=\"navbar-content\">
                                 <ul class=\"nav\">";
@@ -48,8 +50,8 @@
                 $output .= "<div class=\"btn-group pull-right\">
                             <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
                             <ul class=\"dropdown-menu\">
-                            <li><a href=\"passchange.php\">Change Password</a></li>
-                            <li><a href=\"endaccount.php\"><i class=\"icon-trash\"></i> Delete Account </a></li>
+                            <li><a href=\"changePassword.php\">Change Password</a></li>
+                            <li><a href=\"deleteAccount.php\"><i class=\"icon-trash\"></i> Delete Account </a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"logout.php\">Log Out</a></li>
 			    

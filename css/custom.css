@@ -21,6 +21,7 @@ legend > span{
 
 .user{
 	text-decoration: none;
+	color: white;
 }
 
 .user:hover, .user:focus{
@@ -102,4 +103,8 @@ h3.user{
 }
 #ratingForm{
 	margin-top: 20px;
+}
+
+.imgHolder{
+	display: inline;
 }
