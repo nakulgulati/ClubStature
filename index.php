@@ -45,6 +45,15 @@
         <button type="submit" class="btn" name="submit" value="submit">Search</button>
     </form>
     Or for advanced search go to <a href="search.php">Search Clubs</a>
+    <table class="table table-striped">
+    <?php
+    if(isset($_GET['submit'])){
+        while($club = mysql_fetch_array($clubSet)){
+            echo "<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td></tr>";
+      }
+    }  
+    ?>
+    </table>
     </div>
     <div class="well span4" id="famousClubs">
         <h4>Most Searched Clubs</h4>
@@ -62,15 +71,6 @@
         </ol>
     </div>
     </div>
-    <table class="table table-striped">
-    <?php
-    if(isset($_GET['submit'])){
-        while($club = mysql_fetch_array($clubSet)){
-            echo "<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td></tr>";
-      }
-    }  
-    ?>
-    </table>
     </div>
 </div>
 
