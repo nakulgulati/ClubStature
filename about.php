@@ -13,14 +13,13 @@
   <div class="hero-unit">
     <h1><?php echo NAME; ?></h1>
     <br>
-    <p>Want to get involved on campus? &nbsp;Or maybe you are already, and you
-      simply want to branch out. Perhaps you have an idea of what you’d like
-      to try, but don’t know where to look for opinions...</p>
+    <p>Ever thought about getting more involved in college, but did not know where to start? 
+	   Well, we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
+	   We try to help you make the best of your college experience by helping you choose the organization that is the right fit for you. 
+	   Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they are about.
+	</p>
     
-    <p>Enter <?php echo NAME; ?>: a website designed to help you navigate your college/school’s
-      extracurricular opportunities. &nbsp;Here, you can read and write reviews
-      about the activities on campus to help you find the organization that is
-      the right fit for you.</p>
+	
     <p>
       <a class="btn btn-primary btn-large">Learn more</a> 
     </p>
