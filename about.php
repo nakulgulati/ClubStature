@@ -13,10 +13,10 @@
   <div class="hero-unit">
     <h1><?php echo NAME; ?></h1>
     <br>
-    <p>Ever thought about getting more involved in college, but did not know where to start? 
+    <p>Ever thought about getting more involved in college, but didn&#39;t know where to start? 
 	   Well, we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
 	   We try to help you make the best of your college experience by helping you choose the organization that is the right fit for you. 
-	   Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they are about.
+	   Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they&#39;re about.
 	</p>
     
 	
