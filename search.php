@@ -7,20 +7,20 @@
     var select = document.getElementById('searchBy');
     select.onchange = function(){
       if (select.value == "colleges") {
-        document.getElementById('searchCollege').style.display = 'inline';
+        document.getElementById('collegeSearch').style.display = 'inline';
         document.getElementById('category').style.display = 'inline';
-        document.getElementById('searchClub').style.display = 'none';
+        document.getElementById('clubSearch').style.display = 'none';
       }else if (select.value == "clubs") {
-        document.getElementById('searchCollege').style.display = 'none';
+        document.getElementById('collegeSearch').style.display = 'none';
         document.getElementById('category').style.display = 'none';
-        document.getElementById('searchClub').style.display = 'inline';
+        document.getElementById('clubSearch').style.display = 'inline';
       }
     }
   }
   window.onload = function(){
     prepForm();
     document.getElementById('category').style.display = 'none'; //category dropdown hidden
-        document.getElementById('searchCollege').style.display = 'none'; //searchCollege filed hidden
+        document.getElementById('collegeSearch').style.display = 'none'; //searchCollege filed hidden
   }
 </script>
 <?php
@@ -73,17 +73,26 @@
     <div class="container">
     
     <form method="get" class="form form-inline" action="search.php">
-        <input type="text" class="span3" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
-          <input type="text" class="span3" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
-         <select id="searchBy" name="searchBy">
+      <div class="input-append" id="clubSearch">
+        <input type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+        <button type="submit" class="btn" name="submit" value="submit"><i class="icon-search"></i></button>
+      </div>
+      
+      <div class="input-append" id="collegeSearch">
+        <input type="text" class="span3" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
+        <button type="submit" class="btn" name="submit" value="submit"><i class="icon-search"></i></button>
+      </div>
+        
+      <select id="searchBy" name="searchBy">
             <option value="clubs">Club</option>
-         <option value="colleges">College</option>
-          </select>
+            <option value="colleges">College</option>
+        </select>
+      
+         
     <div id="category">
-    (Optional)
     <?php
          $output = "<select name =\"category\">";
-        $output.= "<option></option> ";
+        $output.= "<option>(Optional)</option> ";
         //geting the list of categories
          $resultSet = getData("categoryname","category");
          while($row = mysql_fetch_array($resultSet)){
@@ -94,20 +103,26 @@
          echo $output;
     ?>
     </div>
-        <button type="submit" class="btn" name="submit" value="submit">Search</button>
     </form>
     
     <?php
     $output="";
     if(isset($_GET['submit'])){
-      $output.="<table class=\"table table-striped\">";
-      $output.="<tr><th>Club Name</th><th>College</th><th>Category</th><th>Overall Rating</th></tr>";
-        while($club = mysql_fetch_array($clubSet)){
-          $output.="<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['category']}</td><td>{$club['overallRating']}</td></tr>";
+      if($_GET['searchClub']!=NULL || $_GET['searchCollege']!=NULL ){
+        $output.="<table class=\"table table-striped\">";
+        $output.="<tr><th>Club Name</th><th>College</th><th>Category</th><th>Overall Rating</th></tr>";
+          while($club = mysql_fetch_array($clubSet)){
+            $output.="<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['category']}</td><td>{$club['overallRating']}</td></tr>";
+        }
+        
+        $output.="</table>";
+        echo $output;
       }
-      
-      $output.="</table>";
-      echo $output;
+      elseif($_GET['searchClub']==NULL && $_GET['searchCollege']==NULL){
+            echo "<div class=\"alert alert-warning\">
+                Dawg you got to enter something to search!!!
+                </div>";
+        }
     }  
     ?>
     

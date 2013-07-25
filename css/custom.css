@@ -108,3 +108,31 @@ h3.user{
 .imgHolder{
 	display: inline;
 }
+
+#rigor,#cohesiveness,#scheduleFriendliness{
+	width: 50px;
+}
+
+#rigor,#cohesiveness{
+	margin-right: 10px;
+}
+
+#selects{
+	float: right;
+}
+
+.help:hover{
+	text-decoration: none;
+}
+
+#clubSearch,#collegeSearch{
+	margin-right: 10px;
+}
+
+#searchBy{
+	position: fixed;
+}
+
+#category{
+	margin-left: 230px;
+}

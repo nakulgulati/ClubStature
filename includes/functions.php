@@ -53,7 +53,7 @@
                             <li><a href=\"changePassword.php\">Change Password</a></li>
                             <li><a href=\"deleteAccount.php\"><i class=\"icon-trash\"></i> Delete Account </a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"logout.php\">Log Out</a></li>
+                            <li><a href=\"logout.php\"><i class=\"icon-off\"></i> Log Out</a></li>
 			    
                             </ul>
                             </div>"; //end of btn group
