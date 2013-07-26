@@ -92,7 +92,7 @@ if(isset($_POST['submit'])){
             if((loggedIn())){
                 $rating;
                 $rating =   "<div id=\"selects\">
-                            <label><a class=\"help\" data-original-title=\"How rigor is the club?\">Rigor</a></label>
+                            <label><a class=\"help\" data-original-title=\"How challenging is this activity?\">Rigor</a></label>
                             <select id=\"rigor\" name=\"rigor\">
                             <option>0</option>
                             <option>1</option>
@@ -101,7 +101,7 @@ if(isset($_POST['submit'])){
                             <option>4</option>
                             <option>5</option>
                             </select>
-                            <label><a class=\"help\" data-original-title=\"Does it promote group work?\">Cohesiveness</a></label>
+                            <label><a class=\"help\" data-original-title=\"Do you feel like you're working together?\">Cohesiveness</a></label>
                             <select id=\"cohesiveness\" name=\"cohesiveness\">
                             <option>0</option>
                             <option>1</option>
@@ -110,7 +110,7 @@ if(isset($_POST['submit'])){
                             <option>4</option>
                             <option>5</option>
                             </select>
-                            <label><a class=\"help\" data-original-title=\"Is it schedule friendly?\">Schedule Friendliness</a></label>
+                            <label><a class=\"help\" data-original-title=\"How heavy is yor time commitment? Is the group flexible?\">Schedule Friendliness</a></label>
                             <select id=\"scheduleFriendliness\" name=\"scheduleFriendliness\">
                             <option>0</option>
                             <option>1</option>

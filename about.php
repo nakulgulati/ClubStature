@@ -20,9 +20,6 @@
 	</p>
     
 	
-    <p>
-      <a class="btn btn-primary btn-large">Learn more</a> 
-    </p>
   </div>
 </div>
 
@@ -32,12 +29,13 @@
 
 <br>
 
-<table class="table">
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th>#</th>
-      <th>Designers</th>
+      <th>Contributors</th>
       <th>Facebook Page</th>
+	  <th> Email </th>
     </tr>
   </thead>
   <tbody>
@@ -46,26 +44,28 @@
       <td>Amit Kalay</td>
       <td>
         <a href="https://www.facebook.com/amit.kalay.9?fref=ts">Amit's page</a>
-        <br> 
       </td>
+	  <td> amitkal@umich.edu </td>
     </tr>
-    <tr>
+    
+	<tr>
       <td>2</td>
       <td>Nakul Gulati</td>
-      <td>
-        <a href="https://www.facebook.com/nakul.gulati?fref=ts"> Nakul's page</a> 
-      </td>
+      <td> <a href="https://www.facebook.com/nakul.gulati?fref=ts"> Nakul's page</a> </td>
+	  <td> nakul.behindthestrokes@gmail.com </td>
+	  
     </tr>
+	
     <tr>
       <td>3</td>
       <td>Sudip Guha</td>
-      <td>
-        <a href="https://www.facebook.com/sudip.guha.524?fref=ts"> Sudip's page </a> 
-      </td>
+      <td> <a href="https://www.facebook.com/sudip.guha.524?fref=ts"> Sudip's page </a> </td>
+	  <td> sudip.guha29@gmail.com </td>
     </tr>
   </tbody>
 </table>
-<span class="label"> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </span>
-<span class="label pull-right"> <a href="feedback.php">Got any suggestions or feedback? </a> </span>
+<p> Got any suggestions? Shoot us an email at clubstature@gmail.com </p>
+<span class="label pull-right"> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </span>
+
 </div>
 <?php include("includes/footer.php"); ?>
