@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 18, 2013 at 02:26 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: 127.0.0.1
+-- Generation Time: Jul 26, 2013 at 06:40 AM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `ratemyclub`
 --
+CREATE DATABASE IF NOT EXISTS `ratemyclub` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ratemyclub`;
 
 -- --------------------------------------------------------
 
@@ -46,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `clubs` (
 --
 
 INSERT INTO `clubs` (`id`, `clubName`, `description`, `category`, `college`, `overallRating`, `rigor`, `cohesiveness`, `timeCommitment`, `url`, `image`) VALUES
-(1, 'Michigan Hackers', 'We hack and not yack.', 'Sci Tech', 'Michigan', 0.0, 0.0, 0.0, 0.0, '', '');
+(1, 'Michigan Hackers', 'We hack and not yack.', 'Sci Tech', 'Michigan', '0.0', '0.0', '0.0', '0.0', '', '');
 
 -- --------------------------------------------------------
 
@@ -58,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `colleges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `colleges`
@@ -66,10 +68,45 @@ CREATE TABLE IF NOT EXISTS `colleges` (
 
 INSERT INTO `colleges` (`id`, `name`) VALUES
 (1, 'NIIT University, Neemrana'),
-(2, 'UC Berkeley'),
-(3, 'Barefoot COllege'),
+(2, 'UC-Berkeley'),
+(3, 'Barefoot College'),
 (4, 'University of Michigan'),
-(5, 'UCLA');
+(5, 'University of California at Los Angeles (UCLA)'),
+(6, 'Massachusetts Institute of Technology (MIT)'),
+(7, 'Harvard University'),
+(8, 'Shri Ram School - Aravali'),
+(9, 'California Institute of Technology (CalTech)'),
+(10, 'Princeton University'),
+(11, 'Yale University'),
+(12, 'Cornell University'),
+(13, 'Brown University'),
+(14, 'University of Pennsylvania'),
+(15, 'Columbia University'),
+(16, 'Stanford University'),
+(17, 'Georgia Tech'),
+(18, 'Williams College'),
+(19, 'Swarthmore College'),
+(20, 'University of Chicago'),
+(21, 'Duke University'),
+(22, 'Dartmouth College'),
+(23, 'Northwestern University'),
+(24, 'John Hopkins University'),
+(25, 'WUSTL'),
+(26, 'Rice University'),
+(27, 'University of Notre Dame'),
+(28, 'Vanderbilt University'),
+(29, 'Emory University'),
+(30, 'Georgetown University'),
+(31, 'Carnegie Mellon University'),
+(32, 'University of South California'),
+(33, 'University of Virgina'),
+(34, 'Wake Forest University'),
+(35, 'Tufts University'),
+(36, 'IIT-Delhi'),
+(37, 'IIT-Kanpur'),
+(38, 'BITS-Pilani'),
+(39, 'IIT-Bombay'),
+(44, 'St. Stephen''s College');
 
 -- --------------------------------------------------------
 
@@ -106,7 +143,6 @@ CREATE TABLE IF NOT EXISTS `menu` (
 
 INSERT INTO `menu` (`id`, `menu_name`, `slug`, `position`) VALUES
 (1, 'About', 'about.php', 1),
-(2, 'Browse Clubs', 'browse.php', 2),
 (3, 'Top Lists', 'lists.php', 3);
 
 -- --------------------------------------------------------
