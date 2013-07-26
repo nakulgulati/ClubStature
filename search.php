@@ -57,9 +57,8 @@
     if($_GET['searchClub']!=""){
       $clubSet = getData("clubs","*","clubName",$_GET['searchClub']);
     }
-    if(($_GET['category']!="") && ($_GET['searchCollege']!="")){
+    if(($_GET['category']!="(Optional)") && ($_GET['searchCollege']!="")){
       $q = "SELECT * FROM clubs WHERE category = '{$_GET['category']}' && college = '{$_GET['searchCollege']}';";
-      echo $q;
       $clubSet = mysql_query($q,$connection);
       confirmQuery($clubSet);
     }
