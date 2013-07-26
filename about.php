@@ -86,7 +86,6 @@
     </tr>
   </tbody>
 </table>
-<p> Got any suggestions? Shoot us an email at clubstature@gmail.com </p>
 <span class="label pull-right"> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </span>
 
 </div>
