@@ -89,7 +89,7 @@
         </select>
       
          
-    <div id="category">
+    <div id="categorySelect">
     <?php
          $output = "<select name =\"category\">";
         $output.= "<option>(Optional)</option> ";

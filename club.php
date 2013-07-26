@@ -125,6 +125,7 @@ if(isset($_POST['submit'])){
         ?>
         </form>
         </div>
+
         </div>
         <div class="well">
             <!--Post a comment-->
