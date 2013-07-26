@@ -8,18 +8,18 @@
     select.onchange = function(){
       if (select.value == "colleges") {
         document.getElementById('collegeSearch').style.display = 'inline';
-        document.getElementById('category').style.display = 'inline';
+        document.getElementById('categorySelect').style.display = 'inline';
         document.getElementById('clubSearch').style.display = 'none';
       }else if (select.value == "clubs") {
         document.getElementById('collegeSearch').style.display = 'none';
-        document.getElementById('category').style.display = 'none';
+        document.getElementById('categorySelect').style.display = 'none';
         document.getElementById('clubSearch').style.display = 'inline';
       }
     }
   }
   window.onload = function(){
     prepForm();
-    document.getElementById('category').style.display = 'none'; //category dropdown hidden
+    document.getElementById('categorySelect').style.display = 'none'; //category dropdown hidden
         document.getElementById('collegeSearch').style.display = 'none'; //searchCollege filed hidden
   }
 </script>
