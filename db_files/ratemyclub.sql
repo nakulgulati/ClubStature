@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2013 at 06:40 AM
+-- Generation Time: Jul 26, 2013 at 07:18 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.16
 
@@ -25,6 +25,34 @@ USE `ratemyclub`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `categoryname`
+--
+
+CREATE TABLE IF NOT EXISTS `categoryname` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `categoryname`
+--
+
+INSERT INTO `categoryname` (`id`, `category`) VALUES
+(1, 'Athletic and Recreational'),
+(2, 'Academic and Professional'),
+(3, 'Visual and Performing Arts'),
+(4, 'Community Service/Volunteering'),
+(5, 'Governance'),
+(6, 'Greek Life'),
+(7, 'Science and Technology'),
+(8, 'Entrepreneurship'),
+(9, 'Minority and Ethnic'),
+(10, 'Other');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `clubs`
 --
 
@@ -37,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `clubs` (
   `overallRating` decimal(2,1) NOT NULL DEFAULT '0.0',
   `rigor` decimal(2,1) NOT NULL DEFAULT '0.0',
   `cohesiveness` decimal(2,1) NOT NULL DEFAULT '0.0',
-  `timeCommitment` decimal(2,1) NOT NULL DEFAULT '0.0',
+  `scheduleFriendliness` decimal(2,1) NOT NULL DEFAULT '0.0',
   `url` varchar(50) NOT NULL,
   `image` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
@@ -47,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `clubs` (
 -- Dumping data for table `clubs`
 --
 
-INSERT INTO `clubs` (`id`, `clubName`, `description`, `category`, `college`, `overallRating`, `rigor`, `cohesiveness`, `timeCommitment`, `url`, `image`) VALUES
+INSERT INTO `clubs` (`id`, `clubName`, `description`, `category`, `college`, `overallRating`, `rigor`, `cohesiveness`, `scheduleFriendliness`, `url`, `image`) VALUES
 (1, 'Michigan Hackers', 'We hack and not yack.', 'Sci Tech', 'Michigan', '0.0', '0.0', '0.0', '0.0', '', '');
 
 -- --------------------------------------------------------
@@ -143,6 +171,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 
 INSERT INTO `menu` (`id`, `menu_name`, `slug`, `position`) VALUES
 (1, 'About', 'about.php', 1),
+(2, 'Add a Club', 'addClub.php', 2),
 (3, 'Top Lists', 'lists.php', 3);
 
 -- --------------------------------------------------------
@@ -176,7 +205,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `hashedPass` (`hashedPass`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `hashedPass`) VALUES
+(1, 'amitkalay', 'amitkalay@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
