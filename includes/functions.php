@@ -48,7 +48,7 @@
                 //Display user welcome message
                 $userDetails = getUserInfo($_SESSION['userId']);
                 $output .= "<div class=\"btn-group pull-right\">
-                            <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
+                            <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\"> <i class=\"icon-user icon-white\"></i>{$userDetails['username']}</h3>
                             <ul class=\"dropdown-menu\">
                             <li><a href=\"changePassword.php\">Change Password</a></li>
                             <li><a href=\"deleteAccount.php\"><i class=\"icon-trash\"></i> Delete Account </a></li>
