@@ -26,8 +26,30 @@
 <div style="text-align: center;">
 <img src="http://i1.ytimg.com/vi/AgRABgfw42Y/maxresdefault.jpg" height = 150px width= 200px alt="Our logo should be here">
 </div>
-
 <br>
+
+
+<!-- Button to trigger modal -->
+<p class = "text-center">
+<a href="#myModal" role="button" class="btn" data-toggle="modal" align = "center">Got any suggestions?</a>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="myModalLabel"> Contact Info </h3>
+  </div>
+  <div class="modal-body">
+    <p>Just shoot us an email to clubstature@gmail.com!</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <!-- <button class="btn btn-primary">Save changes</button>  -->
+  </div>
+</div>
+
+</p>
+
+<!-- End of button -->
 
 <table class="table table-striped table-hover">
   <thead>
