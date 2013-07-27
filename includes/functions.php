@@ -119,7 +119,6 @@
     function getUserInfo($userId){
         global $connection;
         
-        $userId = $_SESSION['userId'];
         $query = "SELECT * FROM  `users` WHERE  `id` =  '{$userId}' LIMIT 1;";
         $userSet = mysql_query($query,$connection);
         
@@ -326,8 +325,8 @@
             $query="UPDATE `clubs` SET `hits`={$hits} WHERE `id` = {$clubId}";
             mysql_query($query,$connection);
         }
-
-        function sendMail($userId,$status){
+        
+        function sendMail($userId, $status, $bodyContent = ""){
 
         $host     = "ssl://smtp.gmail.com";
         $port     = "465";
@@ -336,17 +335,18 @@
 
         $from     = "<darklord.mario666@gmail.com>";
 
-        echo $userId;
+        //echo $userId;
 
         $userInfo = getUserInfo($userId);
 
         $to = "<" . $userInfo['email'] . ">";
 
+
         $body = file_get_contents('./emailUpperHalf.html');
         if($status == "forgot"){  //if you forgot your password
             
             $body .= "Hello {$userInfo['username']},
-            \n  You've forgotten your password.  We've reset it for you.
+			\n  You've forgotten your password.  We've reset it for you. It is now {$bodyContent}.
             \n  That is all.   
             \n   -ClubStature";
 
@@ -354,8 +354,12 @@
         }
         elseif($status == "change"){ //if you wanna change your password
           
+
             $body .= "Hello {$userInfo['username']},
             \n Your password has successfully been changed according to your arbitrary whims. 
+
+            \n Your password has been changed according to your arbitrary whims. 
+
             \n We would like to send you your new password, but unfortunately, we don't know it ourselves. 
             \n Good day! 
             \n \t    -ClubStature";
@@ -363,8 +367,9 @@
             $subject = "Password Change Successful";
         }
         elseif ($status == "create"){ //if you created an account
-    
+   
             $body .= "Hello {$userInfo['username']},
+
             \n Thank you for creating an account with us!
             \n \t    -ClubStature";
 
@@ -395,5 +400,5 @@
         echo("<p>Message successfully sent!</p>");
         }
 }
-
+        
 ?>

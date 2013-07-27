@@ -54,6 +54,7 @@ h3.user{
 }
 .scoreOther{
 	font-size: 40px;
+	margin-top: 40px;
 }
 
 #info{
@@ -91,17 +92,45 @@ h3.user{
 	word-wrap: break-word;
 }
 
-#other{
+#otherR{
+	background: url('../img/r.png');
 	width: 75px;
 	height: 75px;
 	display: inline-block;
 	background-color: white;
 	text-align: center;
 	vertical-align: middle;
-	line-height: 75px;
+	/*line-height: 75px;*/
 	float: right;
 	margin-right: 5px;
 }
+
+#otherC{
+	background: url('../img/c.png');
+	width: 75px;
+	height: 75px;
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	vertical-align: middle;
+	/*line-height: 75px;*/
+	float: right;
+	margin-right: 5px;
+}
+
+#otherSF{
+	background: url('../img/sf.png');
+	width: 75px;
+	height: 75px;
+	display: inline-block;
+	background-color: white;
+	text-align: center;
+	vertical-align: middle;
+	/*line-height: 75px;*/
+	float: right;
+	margin-right: 5px;
+}
+
 #ratingForm{
 	margin-top: 20px;
 }
@@ -150,3 +179,8 @@ span.inset{
 .row-fluid > table{
 	display: inline-block;
 }
+
+abbr:hover{
+	cursor: pointer;
+}
+

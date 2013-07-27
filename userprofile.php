@@ -13,15 +13,17 @@ if(!loggedIn()) {
 
 <?php
 //Prints nav bar
-  $nav = printNav(true);
+  $nav = printNav(false);
   echo $nav;
 ?>
 <?php
+global $connection;
   $ccheck=false;
-  $query="SELECT * FROM users WHERE username={$_SESSION['username']}";
-  $result=mysql_query();
+  $query="SELECT * FROM users WHERE username='{$_SESSION['username']}'";
+  echo $query;
+  $result=mysql_query($query,$connection);
   $row=mysql_fetch_array($result);
-  if($row['college']=='NULL')
+  if($row['college']==NULL)
   {
     $ccheck=false;
   }
@@ -76,16 +78,26 @@ background-color:#660033;
 	}
 	else
 	{
-	  echo "<form action=\"userprofile.php\" method=\"GET\">";
-	  echo "<input type=\"text\" name=\"college\"/>";
-	  echo "<input type=\"submit\" name=\"submit\"/>";
-	  echo "</form>";
+	  $output="<form action=\"userprofile.php\" method=\"GET\">";
+	  $output.= "<select name =\"college\">";
+	  $output.= "<option></option> ";
+	  //geting the list of colleges
+	  $resultSet = getData("colleges","name");
+	  while($row = mysql_fetch_array($resultSet))
+	  {
+	    $output .= "<option>{$row['name']}</option>";
+	  }
+	  
+	  $output .= " </select>";
+	  $output.="<input type=\"submit\" name=\"submit\"/>";
+	  $output.="</form>";
+	  echo  $output;
 	}
       ?>
 	
       
 
-      <span class="well">
+      <span>
 	<a href="forgotPassword.php"><button type="button" class="btn btn-info">Forgot password</button></a>
   <a href="mailtestPassword.php"><button type="button" class="btn btn-info">Mailing Test password</button></a>
 	<a href="changePassword.php"><button type="button" class="btn btn-info">Change password</button></a>

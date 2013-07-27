@@ -64,18 +64,21 @@ if(isset($_POST['submit'])){
                 <li><h4 id="college">College: </h4><?php echo $clubDetails['college']; ?></li>
                 <li><h4 id="category">Category: </h4><?php echo $clubDetails['category']; ?></li>
             </ul>
-              <div id="other">
-                <!--rigor-->
-           <p class="scoreOther"><?php echo $clubDetails['rigor']; ?></p>
-        </div>
-              <div id="other">
-                <!--cohesiveness-->
-           <p class="scoreOther"><?php echo $clubDetails['cohesiveness']; ?></p>
-        </div>
-              <div id="other">
+
+            <div id="otherSF">
                 <!--schedule friendliness-->
-           <p class="scoreOther"><?php echo $clubDetails['scheduleFriendliness']; ?></p>
-        </div>
+                <abbr title="Schedule Friendliness" class="initialism"><p class="scoreOther"><?php echo $clubDetails['scheduleFriendliness']; ?></p></abbr>
+            </div>
+            
+            <div id="otherC">
+                <!--cohesiveness-->
+                <abbr title="Cohesiveness" class="initialism"><p class="scoreOther"><?php echo $clubDetails['cohesiveness']; ?></p></abbr>
+            </div>
+            
+            <div id="otherR">
+            <!--rigor-->
+                <abbr title="Rigor" class="initialism"><p class="scoreOther"><?php echo $clubDetails['rigor']; ?></p></abbr>
+                </div>
             <div id="description">
                 <p
                 <!--description-->
