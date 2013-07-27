@@ -16,7 +16,27 @@ if(!loggedIn()) {
   $nav = printNav(true);
   echo $nav;
 ?>
-
+<?php
+  $ccheck=false;
+  $query="SELECT * FROM users WHERE username={$_SESSION['username']}";
+  $result=mysql_query();
+  $row=mysql_fetch_array($result);
+  if($row['college']=='NULL')
+  {
+    $ccheck=false;
+  }
+  else
+  {
+    $ccheck=true;
+  }
+  
+  if(isset($_GET['submit']))
+  {
+    $query="UPDATE users SET college='{$_GET['college']}' WHERE username='{$_SESSION['username']}'";
+    mysql_query($query,$connection);
+    redirect_to("userprofile.php");
+  }
+?>
 <head>
   <title>User Profile</title>
 </head>
@@ -41,14 +61,34 @@ background-color:#660033;
       echo "<h3><p class=\"text-info\">  {$username} </p> </h3>";
       echo "<br>";
       echo "<h4> Your email id</h4>";
-      echo "<h3><p class=\"text-info\"> {$email}</h3> </p> </h3>";
+      echo "<h3><p class=\"text-info\"> {$email}</h3> </p>";
+      echo "<a href=\"changemail.php\"><button>Change email ID</button></a>";
       echo "</br>";
       ?>
+      
+      
+      <label for="college">College or School</label>
+      <?php
+	if($ccheck)
+	{
+	  $college=$row['college'];
+	  echo "<p class=\"text-info\"> {$college} </p>";
+	}
+	else
+	{
+	  echo "<form action=\"userprofile.php\" method=\"GET\">";
+	  echo "<input type=\"text\" name=\"college\"/>";
+	  echo "<input type=\"submit\" name=\"submit\"/>";
+	  echo "</form>";
+	}
+      ?>
+	
+      
 
-      <span class="inset">
-      <a href="forgotPassword.php">Forgot password</a> <br> 
-      <a href="changePassword.php">Change password</a> <br>
-      <a href="deleteAccount.php">Delete account</a> <br>
+      <span class="well">
+	<a href="forgotPassword.php"><button type="button" class="btn btn-info">Forgot password</button></a>
+	<a href="changePassword.php"><button type="button" class="btn btn-info">Change password</button></a>
+	<a href="deleteAccount.php"><button type="button" class="btn btn-danger">Delete account</button></a>
       </span>
       <!--end content-->
     </div>

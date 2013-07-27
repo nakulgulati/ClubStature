@@ -32,10 +32,13 @@
     <div class="hero-unit hidden-phone">
       <!--body content here-->
       <form class="form-inline" name="mailchange" action="changemail.php" method="POST">
-	<label for="newmail"></label>
+	<label for="newmail">New Email-ID</label>
 	<input type="text" name="mail" size="20" maxlength="40" placeholder="emailID@example.com" required/>
 	<button typoe="submit" class="btn-primary" name="submit">Submit</button>
       </form>
+      <div class="well">
+	<?php echo $meassage; ?>
+      </div>
     </div>
   </div>
 </div>
