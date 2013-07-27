@@ -4,6 +4,14 @@
 <?php include("includes/header.php"); ?>
 
 <?php
+
+if(!loggedIn()) {
+	redirect_to("{$_SERVER['REQUEST_URI']}");
+}
+
+?>
+
+<?php
 //Prints nav bar
   $nav = printNav(true);
   echo $nav;
@@ -23,20 +31,22 @@ background-color:#d0e4fe;
   <div class="container">
     <div class="hero-unit hidden-phone">
       <!--body content here-->
-      <h1 class="text-center">Account Settings</h1>
+      <h1 class="text-center">Account Admin</h1>
       <?php
       $username=$_SESSION['username'];
       $result=mysql_query("SELECT* FROM users WHERE username='{$username}'");
       $row=mysql_fetch_array($result);
       $email=$row['email'];
-      echo "<h5>Username</h5>";
+      echo "<h3>Username</h4>";
       echo "<p class=\"text-info\"> {$username} </p></br>";
-      echo "<h5>your email id</h5>";
+      echo "<h3> Your email id</h4>";
       echo "<p class=\"text-info\"> {$email} </p></br>";
       ?>
-      <a href="forgotPassword.php">Forgot password</a> <br>
+
+      <span class="inset"><a href="forgotPassword.php">Forgot password</a> <br> 
       <a href="changePassword.php">Change password</a> <br>
       <a href="deleteAccount.php">Delete account</a> <br>
+      </span>
       <!--end content-->
     </div>
   </div>
