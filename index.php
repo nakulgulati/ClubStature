@@ -66,18 +66,7 @@
     </div>
     <div class="well span4" id="famousClubs">
         <h4>Most Searched Clubs</h4>
-        <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ol>
+        <?php printTopList("hits"); ?>
     </div>
     </div>
     </div>

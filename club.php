@@ -9,7 +9,10 @@
   echo $nav;
 ?>
 <?php
-  $clubDetails = getClubInfo($_GET['clubID']);
+  if(isset($_GET['clubID'])){
+    $clubDetails = getClubInfo($_GET['clubID']);
+    hit($_GET['clubID']);
+  }
 ?>
 
 <?php
