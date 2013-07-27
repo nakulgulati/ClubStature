@@ -326,7 +326,7 @@
             mysql_query($query,$connection);
         }
         
-        function sendMail($userId,$status){
+        function sendMail($userId, $status, $bodyContent = ""){
 
         $host     = "ssl://smtp.gmail.com";
         $port     = "465";
@@ -346,7 +346,7 @@
         if($status == "forgot"){  //if you forgot your password
             
             $body .= "Hello {$userInfo['username']},
-			\n  You've forgotten your password.  We've reset it for you.
+			\n  You've forgotten your password.  We've reset it for you. It is now {$bodyContent}.
             \n  That is all.   
             \n   -ClubStature";
 
