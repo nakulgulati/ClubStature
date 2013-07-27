@@ -119,7 +119,6 @@
     function getUserInfo($userId){
         global $connection;
         
-        $userId = $_SESSION['userId'];
         $query = "SELECT * FROM  `users` WHERE  `id` =  '{$userId}' LIMIT 1;";
         $userSet = mysql_query($query,$connection);
         
