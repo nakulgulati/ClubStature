@@ -21,7 +21,11 @@ if(isset($_POST['submit'])){
     $verifyPassword = sha1($_POST['verifyPassword']);
     
     $errors = addUser($username,$password,$verifyPassword,$email);   
+	
+	sendMail($_SESSION['userId'],"create");
 }
+
+
 ?>
 
 
