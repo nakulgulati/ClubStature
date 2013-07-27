@@ -50,8 +50,7 @@
                 $output .= "<div class=\"btn-group pull-right\">
                             <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
                             <ul class=\"dropdown-menu\">
-                            <li><a href=\"changePassword.php\">Change Password</a></li>
-                            <li><a href=\"deleteAccount.php\"><i class=\"icon-trash\"></i> Delete Account </a></li>
+                            <li><a href=\"userprofile.php\"><i class=\"icon-user\"></i>Settings</a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"logout.php\"><i class=\"icon-off\"></i> Log Out</a></li>
 			    
