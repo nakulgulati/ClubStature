@@ -8,6 +8,26 @@
   $nav = printNav(true);
   echo $nav;
 ?>
+
+<?php
+if(isset($_POST['addClub'])){
+    $clubName=$_POST['clubName'];
+    $college=$_POST['college'];
+    $category=$_POST['category'];
+    $url=$_POST['url'];
+    $description=$_POST['description'];
+    $fileName = $_FILES["file"]["name"];
+    
+    
+    $fileName = uploadFile($fileName,$clubName);
+
+    $query="INSERT INTO clubs(clubName,college,category,url,description,image) VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}')";
+
+    mysql_query($query,$connection);
+}
+?>
+
+
 <div class="wrapper">
       <div class="container">
         <div class="well">
@@ -21,7 +41,7 @@
             <div class="container-fluid">
               <br>
               <br>
-              <form method="post" action="clubcreated.php" enctype="multipart/form-data">
+              <form method="post" action="addClub.php" enctype="multipart/form-data">
                   <label>Name of the Club</label>
                   <input name="clubName" type="text" class="input-medium" required>
                   <label>Category</label>
@@ -69,7 +89,7 @@
         </div>
       </div>
       <div class="form-actions">
-        <input type="submit" class="btn btn-primary" value="Create Club" name="clubSubmitted">
+        <input type="submit" class="btn btn-primary" value="Create Club" name="addClub">
         <input type="reset" class="btn" value="Reset">
       	<!--<input type="submit" class="btn btn-primary" value="Request Club" name="clubRequested">--> 
             

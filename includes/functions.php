@@ -346,9 +346,9 @@
         if($status == "forgot"){  //if you forgot your password
             
             $body .= "Hello {$userInfo['username']},
-			\n  You've forgotten your password.  We've reset it for you. It is now {$bodyContent}.
-            \n  That is all.   
-            \n   -ClubStature";
+                    \n  You've forgotten your password.  We've reset it for you. It is now {$bodyContent}.
+                    \n  That is all.   
+                    \n   -ClubStature";
 
             $subject = "Password Reset";
         }
@@ -356,20 +356,17 @@
           
 
             $body .= "Hello {$userInfo['username']},
-            \n Your password has successfully been changed according to your arbitrary whims. 
-
-            \n Your password has been changed according to your arbitrary whims. 
-
-            \n We would like to send you your new password, but unfortunately, we don't know it ourselves. 
-            \n Good day! 
-            \n \t    -ClubStature";
+                \n Your password has successfully been changed according to your arbitrary whims. 
+                \n Your password has been changed according to your arbitrary whims. 
+                \n We would like to send you your new password, but unfortunately, we don't know it ourselves. 
+                \n Good day! 
+                \n \t    -ClubStature";
 
             $subject = "Password Change Successful";
         }
         elseif ($status == "create"){ //if you created an account
    
             $body .= "Hello {$userInfo['username']},
-
             \n Thank you for creating an account with us!
             \n \t    -ClubStature";
 
@@ -399,6 +396,39 @@
         else {
         echo("<p>Message successfully sent!</p>");
         }
-}
-        
+    }
+      
+    function uploadFile($fileName,$clubName){
+	
+	global $connection;
+	
+	$allowedExts = array("gif", "jpeg", "jpg", "png", "PNG", "JPEG", "GIF", "JPG");
+	$temp = explode(".", $fileName);
+	$extension = end($temp);
+	
+	$query = "SELECT COUNT(id) AS total FROM clubs";
+	$resultSet = mysql_query($query,$connection);
+	$row = mysql_fetch_array($resultSet);
+	$id = $row['total'];
+	$id++;
+	
+	$newName = $id."-".str_replace(" ","",$clubName);
+	
+	if ((($_FILES["file"]["type"] == "image/gif")
+	|| ($_FILES["file"]["type"] == "image/jpeg")
+	|| ($_FILES["file"]["type"] == "image/jpg")
+	|| ($_FILES["file"]["type"] == "image/pjpeg")
+	|| ($_FILES["file"]["type"] == "image/x-png")
+	|| ($_FILES["file"]["type"] == "image/png"))
+	&& ($_FILES["file"]["size"] < 1000000) //file size less than 1000 kB or 1 MB
+	&& in_array($extension, $allowedExts)) {
+		if($_FILES["file"]["error"] > 0){
+			echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+		}
+		else {			
+			move_uploaded_file($_FILES["file"]["tmp_name"], "img/clubImages/".$newName);
+			return $newName;
+    		}
+	}
+    }    
 ?>
