@@ -32,7 +32,6 @@
 </div>
 <br>
 
-
 <!-- Button to trigger modal -->
 <p class = "text-center">
 <a href="#myModal" role="button" class="btn" data-toggle="modal" align = "center">Got any suggestions?</a>
