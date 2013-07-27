@@ -49,8 +49,14 @@
     <?php
     if(isset($_GET['submit'])){
         if($_GET['searchClub']!=NULL){
-            while($club = mysql_fetch_array($clubSet)){
-                echo "<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['overallRating']}</td></tr>";
+            if(mysql_num_rows($clubSet)>0){
+                while($club = mysql_fetch_array($clubSet)){
+                    echo "<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['overallRating']}</td></tr>";
+                }
+            }
+            else{
+                echo "No match found :(<br>
+                Hint: Use the suggestions on typing to search. :)";    
             }
         }
         elseif($_GET['searchClub']==NULL){

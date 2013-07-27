@@ -108,15 +108,21 @@
     $output="";
     if(isset($_GET['submit'])){
       if($_GET['searchClub']!=NULL || $_GET['searchCollege']!=NULL ){
-        $output.="<table class=\"table table-striped\">";
-        $output.="<tr><th>Club Name</th><th>College</th><th>Category</th><th>Overall Rating</th></tr>";
-          while($club = mysql_fetch_array($clubSet)){
-            $output.="<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['category']}</td><td>{$club['overallRating']}</td></tr>";
-        }
-        
-        $output.="</table>";
-        echo $output;
+        if(mysql_num_rows($clubSet)>0){
+          $output.="<table class=\"table table-striped\">";
+          $output.="<tr><th>Club Name</th><th>College</th><th>Category</th><th>Overall Rating</th></tr>";
+            while($club = mysql_fetch_array($clubSet)){
+              $output.="<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['category']}</td><td>{$club['overallRating']}</td></tr>";
+          }
+          
+          $output.="</table>";
+          echo $output;
       }
+      else{
+        echo "No match found :(<br>
+              Hint: Use the suggestions on typing to search. :)";    
+      }
+    }
       elseif($_GET['searchClub']==NULL && $_GET['searchCollege']==NULL){
             echo "<div class=\"alert alert-warning\">
                 Dawg you got to enter something to search!!!
