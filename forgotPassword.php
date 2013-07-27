@@ -36,11 +36,7 @@
                 if(mysql_query($query,$connection))
                 {
                     echo "password reset to {$pass}";
-                    //mail stuff
-                    //$to=$emailId;
-                    //$subject="password reset for your account";
-                    //$message="Dear {$username}, \n As requested, your account password has been reset to {$pass} please go ";
-                    //mail($to,$subject,$message);
+                    sendMail($_SESSION['userId'],"forgot", $pass);
                     
                 }
                 else{
