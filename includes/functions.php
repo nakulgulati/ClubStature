@@ -32,8 +32,7 @@
         $output .= NAME;            
         $output .= "</a>";
         if($public == true){
-            $output .= "<div class=\"navbar-content\">
-                                <ul class=\"nav\">";
+            $output .= "<ul class=\"nav\">";
      
             $menuSet = getNavItems();
             
@@ -41,8 +40,7 @@
                 $output .= "<li><a href = \"{$menuItem['slug']}\">{$menuItem['menu_name']}</a></li>";
               }
               
-            $output .= "</ul>
-                        </div>"; //end of navbar content
+            $output .= "</ul>"; //end of navbar content
             
             if(loggedIn()){
                 //Display user welcome message
