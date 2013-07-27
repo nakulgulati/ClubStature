@@ -23,7 +23,7 @@ if(!loggedIn()) {
 <style>
 body
 {
-background-color:#d0e4fe;
+background-color:#660033;
 }
 </style>
 
@@ -37,13 +37,16 @@ background-color:#d0e4fe;
       $result=mysql_query("SELECT* FROM users WHERE username='{$username}'");
       $row=mysql_fetch_array($result);
       $email=$row['email'];
-      echo "<h3>Username</h4>";
-      echo "<p class=\"text-info\"> {$username} </p></br>";
-      echo "<h3> Your email id</h4>";
-      echo "<p class=\"text-info\"> {$email} </p></br>";
+      echo "<h4>Username</h4>";
+      echo "<h3><p class=\"text-info\">  {$username} </p> </h3>";
+      echo "<br>";
+      echo "<h4> Your email id</h4>";
+      echo "<h3><p class=\"text-info\"> {$email}</h3> </p> </h3>";
+      echo "</br>";
       ?>
 
-      <span class="inset"><a href="forgotPassword.php">Forgot password</a> <br> 
+      <span class="inset">
+      <a href="forgotPassword.php">Forgot password</a> <br> 
       <a href="changePassword.php">Change password</a> <br>
       <a href="deleteAccount.php">Delete account</a> <br>
       </span>
