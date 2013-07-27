@@ -342,9 +342,10 @@
 
         $to = "<" . $userInfo['email'] . ">";
 
+        $body = file_get_contents('./emailUpperHalf.html');
         if($status == "forgot"){  //if you forgot your password
             
-            $body = "Hello {$userInfo['username']},
+            $body .= "Hello {$userInfo['username']},
             \n  You've forgotten your password.  We've reset it for you.
             \n  That is all.   
             \n   -ClubStature";
@@ -353,8 +354,8 @@
         }
         elseif($status == "change"){ //if you wanna change your password
           
-            $body = "Hello {$userInfo['username']},
-            \n Your password has been changed according to your arbitrary whims. 
+            $body .= "Hello {$userInfo['username']},
+            \n Your password has successfully been changed according to your arbitrary whims. 
             \n We would like to send you your new password, but unfortunately, we don't know it ourselves. 
             \n Good day! 
             \n \t    -ClubStature";
@@ -363,12 +364,14 @@
         }
         elseif ($status == "create"){ //if you created an account
     
-            $body = "Hello {$userInfo['username']},
+            $body .= "Hello {$userInfo['username']},
             \n Thank you for creating an account with us!
             \n \t    -ClubStature";
 
             $subject = "Account creation ";
         }
+
+        $body .= file_get_contents('./emailLowerHalf.html');
 
         $headers = array(
         'From'    => $from,
@@ -392,7 +395,5 @@
         echo("<p>Message successfully sent!</p>");
         }
 }
-
-
 
 ?>

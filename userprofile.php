@@ -87,13 +87,13 @@ background-color:#660033;
 
       <span class="well">
 	<a href="forgotPassword.php"><button type="button" class="btn btn-info">Forgot password</button></a>
+  <a href="mailtestPassword.php"><button type="button" class="btn btn-info">Mailing Test password</button></a>
 	<a href="changePassword.php"><button type="button" class="btn btn-info">Change password</button></a>
 	<a href="deleteAccount.php"><button type="button" class="btn btn-danger">Delete account</button></a>
       </span>
       <!--end content-->
     </div>
   </div>
-</div>
-            
+</div>         
             
 <?php include("includes/footer.php"); ?>
