@@ -54,7 +54,7 @@ if(isset($_POST['submit'])){
     <div class="container">
        <div id="club" class="well">
         <!--club-->
-        <div class="imgHolder"><img id="clubImg" src="img/no-image.gif"></div>
+        <div class="imgHolder"><img id="clubImg" src="images/<?php echo $clubDetails['image']; ?>"></div>
         <div id="info">
             <ul id="clubInfo">
                 <li><h2><?php echo $clubDetails['clubName']; ?></h2></li>

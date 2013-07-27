@@ -74,7 +74,8 @@ h3.user{
 }
 
 #clubImg{
-	vertical-align: bottom;
+	vertical-align: middle;
+	max-width: 200px;
 }
 
 #college,#category{
