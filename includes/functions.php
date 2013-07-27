@@ -32,8 +32,7 @@
         $output .= NAME;            
         $output .= "</a>";
         if($public == true){
-            $output .= "<div class=\"navbar-content\">
-                                <ul class=\"nav\">";
+            $output .= "<ul class=\"nav\">";
      
             $menuSet = getNavItems();
             
@@ -41,8 +40,7 @@
                 $output .= "<li><a href = \"{$menuItem['slug']}\">{$menuItem['menu_name']}</a></li>";
               }
               
-            $output .= "</ul>
-                        </div>"; //end of navbar content
+            $output .= "</ul>"; //end of navbar content
             
             if(loggedIn()){
                 //Display user welcome message
@@ -293,4 +291,39 @@
 		echo "Invalid file";
 		}
 	}
+        
+        function printTopList($fieldname){
+            global $connection;
+            $output="";
+            $query = "SELECT * FROM clubs ORDER BY {$fieldname} ASC LIMIT 10";
+            $listSet = mysql_query($query,$connection);
+            
+            if($fieldname!="hits"){
+                $output="<table class=\"table-striped\"
+                        <tr><th>Club Name</th><th>Rating</th></tr>";
+                while($listItem = mysql_fetch_array($listSet)){
+                    $output.=   "<tr><td>{$listItem['clubName']}</td><td>{$listItem[$fieldname]}</td></tr>";
+                }
+                $output.="</table>";
+            }
+            elseif($fieldname=="hits"){
+                $output="<ol>";
+                while($listItem = mysql_fetch_array($listSet)){
+                    $output.="<li>{$listItem['clubName']}</li>";
+                }
+                $output.="</ol>";
+            }
+            echo $output;
+        }
+        
+        function hit($clubId){
+            global $connection;
+            $query="SELECT SUM(hits) AS hits FROM clubs;";
+            $resultSet = mysql_query($query,$connection);
+            $result = mysql_fetch_array($resultSet);
+            $hits = $result['hits'];
+            $hits++;
+            $query="UPDATE `clubs` SET `hits`={$hits} WHERE `id` = {$clubId}";
+            mysql_query($query,$connection);
+        }
 ?>
