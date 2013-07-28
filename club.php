@@ -102,13 +102,13 @@ if(isset($_POST['submit'])){
 
         <div id="ratingForm">
         <form class="form-inline" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
-            <button class="btn btn-inverse" type="submit" name="ratingSubmit">Rate this club</button>
+            <button class="btn btn-default" type="submit" name="ratingSubmit">Rate this club</button>
         <?php
             if((loggedIn())){
                 $rating;
                 $rating =   "<div id=\"selects\">
                             <label><a class=\"help\" data-original-title=\"How challenging is this activity?\">Rigor</a></label>
-                            <select id=\"rigor\" name=\"rigor\">
+                            <select class=\"form-control\" id=\"rigor\" name=\"rigor\">
                             <option>0</option>
                             <option>1</option>
                             <option>2</option>
@@ -117,7 +117,7 @@ if(isset($_POST['submit'])){
                             <option>5</option>
                             </select>
                             <label><a class=\"help\" data-original-title=\"Do you feel like you're working together?\">Cohesiveness</a></label>
-                            <select id=\"cohesiveness\" name=\"cohesiveness\">
+                            <select class=\"form-control\" id=\"cohesiveness\" name=\"cohesiveness\">
                             <option>0</option>
                             <option>1</option>
                             <option>2</option>
@@ -126,7 +126,7 @@ if(isset($_POST['submit'])){
                             <option>5</option>
                             </select>
                             <label><a class=\"help\" data-original-title=\"How heavy is yor time commitment? Is the group flexible?\">Schedule Friendliness</a></label>
-                            <select id=\"scheduleFriendliness\" name=\"scheduleFriendliness\">
+                            <select class=\"form-control\" id=\"scheduleFriendliness\" name=\"scheduleFriendliness\">
                             <option>0</option>
                             <option>1</option>
                             <option>2</option>
@@ -136,20 +136,22 @@ if(isset($_POST['submit'])){
                             </select>
                             </div>";
                 echo $rating;
+            }else{
+                echo "<span class=\"help-block\">You must me logged in to rate!!!</span>";
             }
         ?>
         </form>
         </div>
 
         </div>
-        <div class="well">
+        <div class="well" id="comment">
             <!--Post a comment-->
             <form method="post" action="club.php?clubID=<?php echo $_GET['clubID']?>">
                 <textarea rows="4" id="commentArea" placeholder="Write your comment..." name="comment"></textarea><br>
                 <button name="submit" type="submit" class="btn btn-info pull-right"><i class="icon-comment icon-white"></i> Post Comment</button>
             </form>
         </div>
-        <div id="comment">
+        <div id="reviews">
             <!--Reviews-->
             <h2>Reviews</h2>
             <!--<hr>-->

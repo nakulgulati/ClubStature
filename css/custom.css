@@ -19,6 +19,7 @@
 	padding-top: 100px;
 }
 
+
 legend > span{
 	font-size: 14px;
 }
@@ -88,7 +89,15 @@ h3.user{
 }
 
 #club{
-	height: 260px;
+	max-width: 940px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#comment,#reviews{
+	max-width: 940px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 #clubImg{

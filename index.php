@@ -44,15 +44,12 @@
         <form method="get" class="form-inline" action="index.php">
             <legend>Know the club name?</legend>
             <div class="col-lg-6">
-                <div class="input-group">
-                    <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
-                    <span class="input-group-btn">
-                       <button type="submit" class="btn" name="submit" value="submit"><span class="glyphicon glyphicon-search"></button>
-                    </span>
-                </div><!-- /input-group -->
+                <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
+                <span class="help-block">Or for advanced search go to <a href="search.php">Search Clubs</a></span>
             </div>
+            <button type="submit" class="btn btn-primary" name="submit" value="submit">Search <span class="glyphicon glyphicon-search"></span></button>
         </form>
-        Or for advanced search go to <a href="search.php">Search Clubs</a>
+        
         <table class="table table-striped">
         <?php
         if(isset($_GET['submit'])){
