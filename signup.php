@@ -1,7 +1,9 @@
 <?php require_once("includes/sessions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
+<?php require_once "Mail.php"; ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
+
 
 <?php
 //Prints nav bar
@@ -22,7 +24,15 @@ if(isset($_POST['submit'])){
     
     $errors = addUser($username,$password,$verifyPassword,$email);   
 	
-	//sendMail($_SESSION['userId'],"create");
+    
+    	
+    if($errors['status']==1){
+	$userDetails = getData("users","*","username",$username);
+	$user = mysql_fetch_array($userDetails);
+	
+	sendMail($user['id'],"create");
+    }
+    
 }
 
 
