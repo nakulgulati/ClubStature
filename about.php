@@ -9,13 +9,16 @@
   echo $nav;
 ?>
 
+<html>
+<body>
+
 <div class="wrapper">
 <div class="container">
   <div class="hero-unit">
-    <h1><?php echo NAME; ?></h1>
+ <div style = "text-align: center;">   <h1><?php echo NAME; ?></h1>  </div>
     <br>
     <p>Ever thought about getting more involved in college, but didn&#39;t know where to start? 
-	   Well, we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
+	   Well do we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
 	   We try to help you make the best of your college experience by helping you choose the organization that is the right fit for you. 
 	</p>
 	<p>
@@ -28,31 +31,41 @@
 </div>
 
 <div style="text-align: center;">
-<img src="http://i1.ytimg.com/vi/AgRABgfw42Y/maxresdefault.jpg" height = 150px width= 200px alt="Our logo should be here">
+<img src="logo.png" height = 150px width= 200px alt="Club Stature">
 </div>
 <br>
 
 <!-- Button to trigger modal -->
 <p class = "text-center">
-<a href="#myModal" role="button" class="btn" data-toggle="modal" align = "center">Got any suggestions?</a>
- 
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <h3 id="myModalLabel"> Contact Info </h3>
-  </div>
-  <div class="modal-body">
-    <p>Just shoot us an email to clubstature@gmail.com!</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <!-- <button class="btn btn-primary">Save changes</button>  -->
-  </div>
-</div>
+  <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Contact Info</a>
+
+  <!-- Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Got any suggestions or feedback?</h4>
+        </div>
+        <div class="modal-body">
+         Simply shoot us an email to clubstature@gmail.com!
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
 </p>
 
 <!-- End of button -->
+
+<div style = "text-align: center;">   <h1>Terms and Conditions</h1>  </div>
+<br> <hr>
+
+<h3>1.  When posting, I will post accurate, constructive reviews  <br> <br>
+2.  I will refrain from using inappropriate language  <br> <br>
+3.  I will respect the opinions of others on the website  <br> </h3>
+
+<br><br><br> <hr>
 
 <table class="table table-striped table-hover">
   <thead>
