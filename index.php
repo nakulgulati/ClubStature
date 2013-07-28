@@ -7,13 +7,13 @@
   //generating suggestions for typeahead
   
   //list of club names
-  $clubList = "var clubList = [";
+  $clubList = "[";
   $resultSet = getData("clubs","clubName");
   
   while($row = mysql_fetch_array($resultSet)){
   $clubList .="'{$row['clubName']}',";
   }
-  $clubList .="];";
+  $clubList .="]";
 ?>
 
 
@@ -45,7 +45,7 @@
             <legend>Know the club name?</legend>
             <div class="col-lg-6">
                 <div class="input-group">
-                    <input class="form-control" type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+                    <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
                     <span class="input-group-btn">
                        <button type="submit" class="btn" name="submit" value="submit"><span class="glyphicon glyphicon-search"></button>
                     </span>
@@ -99,7 +99,7 @@
 <?php include("includes/footer.php"); ?>
 
 <script>
-    <?php echo $clubList; ?>
-  
-    $('#searchClub').typeahead({source: clubList});
+    $('.club').typeahead({
+        local: <?php echo $clubList; ?>
+    });
 </script>

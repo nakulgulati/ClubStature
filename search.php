@@ -27,22 +27,22 @@
   //generating suggestions for typeahead
   
   //list of college names
-  $collegeList = "var collegeList = [";
+  $collegeList = "[";
   $resultSet = getData("colleges","name");
   
   while($row = mysql_fetch_array($resultSet)){
     $collegeList .="'{$row['name']}',";
   }
-  $collegeList .="];";
+  $collegeList .="]";
   
   //list of club names
-  $clubList = "var clubList = [";
+  $clubList = "[";
   $resultSet = getData("clubs","clubName");
   
   while($row = mysql_fetch_array($resultSet)){
   $clubList .="'{$row['clubName']}',";
   }
-  $clubList .="];";
+  $clubList .="]";
 ?>
 
 
@@ -74,11 +74,11 @@
     <form method="get" class="form-inline" action="search.php">
       
       <div class="col-lg-3" id="clubSearch">
-          <input class="form-control" type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+          <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
       </div>      
       
       <div class="col-lg-3" id="collegeSearch">
-          <input class="form-control col-lg-4" type="text" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
+          <input class="form-control typeahead college" type="text" id="searchCollege" name="searchCollege" placeholder="Enter college name to search"/>
       </div>
       
       <button type="submit" class="btn btn-primary" name="submit" value="submit">Search</button>
@@ -142,9 +142,13 @@
 <?php include("includes/footer.php"); ?>
 
 <script>
-    <?php echo $clubList; ?>
-    <?php echo $collegeList; ?>
-  
-    $('#searchClub').typeahead({source: clubList});
-    $('#searchCollege').typeahead({source: collegeList});
+    $('.club').typeahead({
+        local: <?php echo $clubList; ?>
+    });
+    
+    $('.college').typeahead({
+        local: <?php echo $collegeList; ?>
+    });
+      
+    
 </script>
