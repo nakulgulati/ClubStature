@@ -28,25 +28,29 @@
                   <label>Category</label>
                   <br>
 		  <?php
+      
 		  $output = "<select name =\"category\">";
-		  $output.= "<option></option> ";
-		  //geting the list of categories
+      $output.= "<option></option> ";
+		  //getting the list of categories
 		  $resultSet = getData("categoryname","category");
 		  while($row = mysql_fetch_array($resultSet)){
 		  	  $output .= "<option>{$row['category']}</option>";
 		  }
 		  
-		  $output .= " </select>";
+      $output .= " </select>";
 		  echo $output;
 		  ?>
                   <label>College</label>
                   
 		<?php
-		$output = "<select name =\"college\">";
-		$output.= "<option></option> ";
-		//geting the list of colleges
-		$resultSet = getData("colleges","name");
-		    while($row = mysql_fetch_array($resultSet)){
+        global $connection;
+		    $output = "<select name =\"college\">";
+        $query = "SELECT name FROM colleges ORDER BY name";
+		    $output.= "<option></option> ";
+		    //geting the list of colleges
+        $resultset = mysql_query($query, $connection);
+		    //$resultSet = getData("colleges","name");
+		    while($row = mysql_fetch_array($resultset)){
 		$output .= "<option>{$row['name']}</option>";
 		}
 		
