@@ -5,8 +5,8 @@
 
 <?php
 //Prints nav bar
-  $nav = printNav(true);
-  echo $nav;
+  //$nav = printNav(true);
+  //echo $nav;
 ?>
 
 <?php

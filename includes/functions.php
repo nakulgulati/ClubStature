@@ -245,7 +245,7 @@
     function isCombinationUnique($table,$field1,$field2,$value1,$value2){
             global $connection;
             
-            $query="SELECT * FROM {$table} WHERE {$field1} = {$value1} and {$field2} = '{$value2}'";
+            $query="SELECT * FROM {$table} WHERE {$field1} = '{$value1}' and {$field2} = '{$value2}'";
             $result=mysql_query($query,$connection);
             $var= mysql_num_rows($result);
             

@@ -17,6 +17,7 @@ if(!loggedIn()) {
   echo $nav;
 ?>
 <?php
+  $status=1;
 global $connection;
   $ccheck=false;
   $query="SELECT * FROM users WHERE username='{$_SESSION['username']}'";
@@ -102,8 +103,6 @@ background-color:#660033;
 	<a data-toggle="modal" href="#cp" data-target="#cp">Change password</a>
 	<a href="deleteAccount.php">Delete account</a>
       </span>
-      <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Launch demo modal</a>
-
       <!-- Change email ID -->
       <div class="modal" id="ce">
 	<div class="modal-dialog">
@@ -165,14 +164,33 @@ background-color:#660033;
 	</div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
       <!--end content-->
+      <br/>
+      <?php
+	if($status==1)
+	{
+	  echo "Error! You Must Enter a new Unique Email ID... try again";
+	}
+      ?>
     </div>
   </div>
 </div>         
 <?php
   if(isset($_POST['submitE']))
   {
-    changemail($_POST['mail']);
-    redirect_to("userprofile.php");
+    $mail=$_POST['mail'];
+    if(isUnique("users","email",$mail))
+    {
+      changemail($_POST['mail']);
+      redirect_to("userprofile.php");
+      $status=0;
+    }
+    else
+    {
+      $status=1;
+      echo "Error! You Must Enter a new Unique Email ID... try again";
+      echo "<script>$('#ce').modal('show')</script>";
+    }
+    
   }
   if(isset($_POST['submitP']))
   {
