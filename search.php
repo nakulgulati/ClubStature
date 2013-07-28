@@ -70,27 +70,31 @@
 ?>
 <div class="wrapper">
     <div class="container">
-    
-    <form method="get" class="form form-inline" action="search.php">
-      <div class="input-append" id="clubSearch">
-        <input type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
-        <button type="submit" class="btn" name="submit" value="submit"><i class="icon-search"></i></button>
+      
+    <form method="get" class="form-inline" action="search.php">
+      
+      <div class="col-lg-3" id="clubSearch">
+          <input class="form-control" type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+      </div>      
+      
+      <div class="col-lg-3" id="collegeSearch">
+          <input class="form-control col-lg-4" type="text" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
       </div>
       
-      <div class="input-append" id="collegeSearch">
-        <input type="text" class="span3" id="searchCollege" name="searchCollege" data-provide="typeahead" data-items="4" placeholder="Enter college name to search"/>
-        <button type="submit" class="btn" name="submit" value="submit"><i class="icon-search"></i></button>
-      </div>
-        
-      <select id="searchBy" name="searchBy">
+      <button type="submit" class="btn btn-primary" name="submit" value="submit">Search</button>
+      
+      <div class="col-lg-2">  
+      <select class="form-control" id="searchBy" name="searchBy">
             <option value="clubs">Club</option>
             <option value="colleges">College</option>
         </select>
+      </div>
       
          
     <div id="categorySelect">
     <?php
-         $output = "<select name =\"category\">";
+         $output = "<div class=\"col-lg-3\">  
+                    <select class=\"form-control\" name =\"category\">";
         $output.= "<option>(Optional)</option> ";
         //geting the list of categories
          $resultSet = getData("categoryname","category");
@@ -98,7 +102,8 @@
            $output .= "<option>{$row['category']}</option>";
          }
       
-        $output .= " </select>";
+        $output .= " </select>
+                    </div>";
          echo $output;
     ?>
     </div>

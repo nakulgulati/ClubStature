@@ -319,13 +319,16 @@
         
         function hit($clubId){
             global $connection;
-            $query="SELECT SUM(hits) AS hits FROM clubs;";
+            $query="SELECT hits FROM clubs where id = {$clubId} LIMIT 1;";
             $resultSet = mysql_query($query,$connection);
             $result = mysql_fetch_array($resultSet);
             $hits = $result['hits'];
             $hits++;
-            $query="UPDATE `clubs` SET `hits`={$hits} WHERE `id` = {$clubId}";
-            mysql_query($query,$connection);
+            
+            if(isset($_SERVER['HTTP_REFERER'])){
+                $query="UPDATE `clubs` SET `hits`={$hits} WHERE `id` = {$clubId}";
+                mysql_query($query,$connection);  
+            }
         }
         
         function sendMail($userId, $status, $bodyContent = ""){

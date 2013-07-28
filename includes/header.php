@@ -19,8 +19,6 @@
     }
 ?>
 
-<?php require_once "Mail.php"; ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
