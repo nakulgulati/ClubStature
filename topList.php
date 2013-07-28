@@ -38,7 +38,7 @@
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>Overall Rating</h2>
           <p> <?php 
-              global $collfilter;
+              $collfilter;
               printTopList("overallRating",$collfilter); 
               ?>
           </p>

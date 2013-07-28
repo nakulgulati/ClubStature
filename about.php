@@ -15,7 +15,7 @@
 <div class="wrapper">
 <div class="container">
   <div class="hero-unit">
- <div style = "text-align: center;">   <h1><?php echo NAME; ?></h1>  </div>
+ <div style = "text-align: center;">   <img src="logo.png" width= 400px alt="Club Stature"> </div>
     <br>
     <p>Ever thought about getting more involved in college, but didn&#39;t know where to start? 
 	   Well do we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
@@ -31,7 +31,7 @@
 </div>
 
 <div style="text-align: center;">
-<img src="logo.png" height = 150px width= 200px alt="Club Stature">
+
 </div>
 <br>
 

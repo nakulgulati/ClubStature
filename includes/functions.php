@@ -300,7 +300,7 @@
             }
 
             else{
-                $query = "SELECT * FROM clubs ORDER BY {$fieldname} WHERE college = {$collfilter} ASC LIMIT 10";
+                $query = "SELECT * FROM clubs WHERE college = '{$collfilter}' ORDER BY {$fieldname} ASC LIMIT 10";
             }
             global $connection;
             $output="";  
