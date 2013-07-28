@@ -18,6 +18,10 @@
 	$title = " - Sign Up";
     }
 ?>
+
+<?php require_once "Mail.php"; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
