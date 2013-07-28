@@ -29,8 +29,6 @@ if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $password = sha1($_POST['password']);
     
-		
-    
     $query = "SELECT * 
 	      FROM  `users` 
 	      WHERE  `username` =  '{$username}' &&  `hashedPass` =  '{$password}'";
@@ -59,35 +57,35 @@ if(isset($_POST['submit'])){
 <div class="wrapper">
     <div class="container">
 	<div class = "row">
-	    <div class = "span6">
-	    <!--image/text area-->
+	    <div class = "col-lg-6">
+		<!--image/text area-->
 	    </div>
-	    <div class = "span6">
-	    <!--form area-->
+	    <div class = "col-lg-6">
+		<!--form area-->
 		<form class="form-horizontal" method="post" action="login.php">
-		    <legend>
-			    Sign In
-			    <span class="pull-right">(or <a href="signup.php">create account</a>)</span>
+		    <legend>Sign In
+			<span class="pull-right">(or <a href="signup.php">create account</a>)</span>
 		    </legend>
-		    <div class="control-group">
-			    <label class="control-label" for="username">Username</label>
-			    <div class="controls">
-				    <input type="text" id="username" name="username" placeholder="Your username" required>
-			    </div>
+		    <div class="form-group">
+			<label for="username" class="col-lg-2 control-label">Username</label>
+			<div class="col-lg-10">
+			    <input type="text" class="form-control" id="username" name="username" placeholder="Your username" required>
+			</div>
 		    </div>
-		    <div class="control-group">
-			    <label class="control-label" for="password">Password</label>
-			    <div class="controls">
-				    <input type="password" id="password" name="password" placeholder="******" required>
-			    </div>
-		    </div>
-		    <div class="control-group">
-			    <div class="controls">
-				    <button type="submit" name="submit" class="btn btn-success pull-right">Login</button>
-			    </div>
+		    <div class="form-group">
+			<label for="password" class="col-lg-2 control-label">Password</label>
+			<div class="col-lg-10">
+			    <input type="password" id="password" class="form-control" name="password" placeholder="******" required>
+			    <br>
+			    <button type="submit" name="submit" class="btn btn-success">Sign in</button>
+			    <a href="forgotPassword.php" class="btn btn-primary">Forgot Password?</a>
+			</div>
 		    </div>
 		</form>
-		<?php
+		
+	    </div>
+	</div>
+	    <?php
 		if($status==1){
 		    $output="<div class=\"alert alert-success\">
 			    Login successful.
@@ -106,10 +104,12 @@ if(isset($_POST['submit'])){
 		else{
 		    echo "";
 		}
-		?>
-	    </div>
+	    ?>	
 	</div>
     </div>
 </div>
+
+
+
 
 <?php include("includes/footer.php"); ?>
