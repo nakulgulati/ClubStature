@@ -27,35 +27,46 @@
 
 
 <?php
-
+  $collfilter = "";
+  if(isset($_GET['submitColl'])){
+    $collfilter = $_GET['college'];
+  }
 ?>
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>Overall Rating</h2>
-          <p> <?php printTopList("overallRating"); ?></p>
+          <p> <?php 
+              global $collfilter;
+              printTopList("overallRating",$collfilter); 
+              ?>
+          </p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" data-src="holder.js/140x140">
 
 
           <h2>Rigor</h2>
-          <p><?php printTopList("rigor"); ?></p>
+          <p><?php 
+              global $collfilter;
+              printTopList("rigor", $collfilter); 
+              ?>
+          </p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" data-src="holder.js/140x140">
 
 
           <h2>Supportiveness</h2>
-          <p> <?php printTopList("cohesiveness"); ?> </p>
+          <p> <?php global $collfilter; printTopList("cohesiveness", $collfilter); ?> </p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
       <hr class="featurette-divider">
 
       <h2>Time Commitment</h2>
-          <p> <?php printTopList("scheduleFriendliness"); ?> </p>
+          <p> <?php global $collfilter; printTopList("scheduleFriendliness", $collfilter); ?> </p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
@@ -83,7 +94,7 @@
     ?>
 
     
-    <input type = "submit" name = "submitPreference">
+    <input type = "submit" name = "submitColl">
     </form>
     </div>
 

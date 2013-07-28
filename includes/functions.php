@@ -293,10 +293,17 @@
 		}
 	}
         
-        function printTopList($fieldname){
+        function printTopList($fieldname, $collfilter = ""){
+            $query = "";
+            if ($collfilter == ""){
+                $query = "SELECT * FROM clubs ORDER BY {$fieldname} ASC LIMIT 10";
+            }
+
+            else{
+                $query = "SELECT * FROM clubs ORDER BY {$fieldname} WHERE college = {$collfilter} ASC LIMIT 10";
+            }
             global $connection;
-            $output="";
-            $query = "SELECT * FROM clubs ORDER BY {$fieldname} ASC LIMIT 10";
+            $output="";  
             $listSet = mysql_query($query,$connection);
             
             if($fieldname!="hits"){
