@@ -83,9 +83,7 @@ if(isset($_POST['submit'])){
 		    </div>
 		</form>
 		
-	    </div>
-	</div>
-	    <?php
+		<?php
 		if($status==1){
 		    $output="<div class=\"alert alert-success\">
 			    Login successful.
@@ -105,6 +103,9 @@ if(isset($_POST['submit'])){
 		    echo "";
 		}
 	    ?>	
+	    </div>
+	</div>
+	    
 	</div>
     </div>
 </div>

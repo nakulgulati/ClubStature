@@ -16,7 +16,12 @@
 }
 
 .wrapper{
-	padding-top: 100px;
+	margin-top: 100px;
+}
+
+.greeting{
+	display: inline-block;
+	font-size: 20px;
 }
 
 
@@ -40,6 +45,8 @@ legend > span{
 .user{
 	text-decoration: none;
 	color: white;
+	display: inline;
+	font-size: 20px;
 }
 
 .user:hover, .user:focus{
@@ -72,7 +79,7 @@ h3.user{
 }
 .scoreOther{
 	font-size: 40px;
-	margin-top: 40px;
+	margin-top: 25px;
 }
 
 #info{
@@ -109,8 +116,12 @@ h3.user{
 	display: inline;	
 }
 
-#commentArea{
+/*#commentArea{
 	width: 886px;
+}*/
+
+#postComment{
+	margin-top: 10px;
 }
 
 .review{

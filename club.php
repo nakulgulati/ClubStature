@@ -147,8 +147,8 @@ if(isset($_POST['submit'])){
         <div class="well" id="comment">
             <!--Post a comment-->
             <form method="post" action="club.php?clubID=<?php echo $_GET['clubID']?>">
-                <textarea rows="4" id="commentArea" placeholder="Write your comment..." name="comment"></textarea><br>
-                <button name="submit" type="submit" class="btn btn-info pull-right"><i class="icon-comment icon-white"></i> Post Comment</button>
+                <textarea class="form-control" rows="4" id="commentArea" placeholder="Write your comment..." name="comment"></textarea>
+                <button name="submit" id="postComment" type="submit" class="btn btn-info"><span class="glyphicon glyphicon-comment"></span> Post Comment</button>
             </form>
         </div>
         <div id="reviews">

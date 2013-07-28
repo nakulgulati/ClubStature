@@ -50,11 +50,11 @@
                 //Display user welcome message
                 $userDetails = getUserInfo($_SESSION['userId']);
                 $output .= "<div class=\"btn-group pull-right\">
-                            <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
+                            <p class=\"navbar-text greeting\" >Greetings,</p><p class=\"navbar-text user dopdown-toggle\" data-toggle=\"dropdown\"> {$userDetails['username']}</p>
                             <ul class=\"dropdown-menu\">
                             <li><a href=\"userprofile.php\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"> Log Out</a></li>
+                            <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
                             </ul>
                             </div>";
             }
