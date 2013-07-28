@@ -5,33 +5,9 @@
 
 <?php
 //Prints nav bar
-  //$nav = printNav(true);
-  //echo $nav;
+  $nav = printNav(true);
+  echo $nav;
 ?>
-
-<?php
-if(isset($_POST['addClub'])){
-    $clubName=$_POST['clubName'];
-    $college=$_POST['college'];
-    $category=$_POST['category'];
-    $url=$_POST['url'];
-    $description=$_POST['description'];
-    $fileName = $_FILES["file"]["name"];
-    
-    
-    $fileName = uploadFile($fileName,$clubName);
-
-    if (isCombinationUnique("clubs","college","clubName",$college,$clubName)){
-    $query="INSERT INTO clubs(clubName,college,category,url,description,image) VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}')";
-    mysql_query($query,$connection);
-    }
-
-    else{
-      echo "You've entered a duplicate club";
-    }
-}
-?>
-
 
 <div class="wrapper">
       <div class="container">
@@ -101,6 +77,36 @@ if(isset($_POST['addClub'])){
       </div>
     </div>
       </form>
+
+<?php
+    if(isset($_POST['addClub'])){
+      $clubName=$_POST['clubName'];
+      $college=$_POST['college'];
+      $category=$_POST['category'];
+      $url=$_POST['url'];
+      $description=$_POST['description'];
+      $fileName = $_FILES["file"]["name"];
+    
+      $fileName = uploadFile($fileName,$clubName);
+
+          if (isCombinationUnique("clubs","college","clubName",$college,$clubName)){
+            $query="INSERT INTO clubs(clubName,college,category,url,description,image) VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}')";
+            mysql_query($query,$connection);
+            $output="<div class=\"alert alert-success\">
+            Club Creation successful!
+            </div>";
+            echo $output;
+            }
+
+    else{
+          $output="<div class=\"alert alert-error\">
+          Club addition failed: a duplicate organization exists.
+          </div>";
+          echo $output;
+      //echo "You've entered a duplicate club";
+    }
+}
+?>
 	  
 </div>
 <?php include("includes/footer.php"); ?>
