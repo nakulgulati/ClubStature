@@ -432,5 +432,34 @@
 			return $newName;
     		}
 	}
-    }    
+    }
+
+    function changePassword($user, $originalpassword, $newpassword, $verifynewpassword){
+    global $connection;
+    if (!loggedIn()){
+        redirect_to("login.php");
+    }
+
+    $searcheshwar = "SELECT hashedPass FROM users WHERE username = '{$user}'";
+    $result = mysql_query($searcheshwar, $connection);
+    $row = mysql_fetch_array($result);
+    $hashedOriginalPassword = $row['hashedPass']; 
+    $newpassword = $_POST["newpass"];
+    $verifynewpassword = $_POST["verifynewpass"];
+    if (($newpassword != $verifynewpassword) or (strlen($newpassword) < 6)){
+        echo "You gotta be <i> sure </i> about your new password, dawg, and your new password <i> has </i> to be greater than 6 characters.";
+    }
+    
+    else { 
+        if($hashedOriginalPassword == sha1($originalpassword)){
+            echo "you are one step closer to changing your password!";
+            echo "<br>";
+            $enteredpassword = sha1($newpassword);
+            $updatequery = "UPDATE users SET hashedPass = '{$enteredpassword}' WHERE username = '{$user}'";
+            mysql_query($updatequery, $connection);
+            echo "<br>";
+            echo "You have successfully changed your password!";
+        } 
+    }
+}    
 ?>

@@ -12,17 +12,33 @@
   $meassage="Please enter your new desired email ID";
   if(isset($_POST['submit']))
   {
+    changepass($_POST['mail']);
+    //$query="SELECT * FROM users WHERE username='{$_SESSION['username']}'";
+    //$result=mysql_query($query,$connection);
+    //$row=mysql_fetch_array($result);
+    //$oldmail=$row['email'];
+    //$mail=$_POST['mail'];
+    //$query="UPDATE users SET email='{$mail}' WHERE username='{$_SESSION['username']}'";
+    //if(mysql_query($query,$connection))
+    //{
+    //  $message="Your email ID has been changed";
+    //  //redirect_to("userprofile.php");
+    //}
+  }
+  function changepass($mail)
+  {
+    global $connection;
     $query="SELECT * FROM users WHERE username='{$_SESSION['username']}'";
     $result=mysql_query($query,$connection);
     $row=mysql_fetch_array($result);
     $oldmail=$row['email'];
-    $mail=$_POST['mail'];
+    //$mail=$_POST['mail'];
     $query="UPDATE users SET email='{$mail}' WHERE username='{$_SESSION['username']}'";
     if(mysql_query($query,$connection))
     {
       $message="Your email ID has been changed";
-      redirect_to("userprofile.php");
-    }    
+      //redirect_to("userprofile.php");
+    }
   }
 ?>
 
