@@ -21,9 +21,14 @@ if(isset($_POST['addClub'])){
     
     $fileName = uploadFile($fileName,$clubName);
 
+    if (isCombinationUnique("clubs","college","clubName",$college,$clubName)){
     $query="INSERT INTO clubs(clubName,college,category,url,description,image) VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}')";
-
     mysql_query($query,$connection);
+    }
+
+    else{
+      echo "You've entered a duplicate club";
+    }
 }
 ?>
 
