@@ -64,7 +64,7 @@ background-color:#660033;
       echo "<br>";
       echo "<h4> Your email id</h4>";
       echo "<h3><p class=\"text-info\"> {$email}</h3> </p>";
-      echo "<a href=\"changemail.php\"><button>Change email ID</button></a>";
+      //echo "<a href=\"changemail.php\"><button>Change email ID</button></a>";
       echo "</br>";
       ?>
       
@@ -98,15 +98,14 @@ background-color:#660033;
       
 
       <span class="inset">
-	<a href="forgotPassword.php"><!--<button type="button" class="btn btn-info">-->Forgot password<!--</button>--></a>
-	<a href="mailtestPassword.php"><!--<button type="button" class="btn btn-info">-->Mailing Test password<!--</button>--></a>
-	<a href="changePassword.php"><!--<button type="button" class="btn btn-info">-->Change password<!--</button>--></a>
-	<a href="deleteAccount.php"><!--<button type="button" class="btn btn-danger">-->Delete account<!--</button>--></a>
+	<a data-toggle="modal" href="#ce" data-target="#ce">Change Email-ID</a>
+	<a data-toggle="modal" href="#cp" data-target="#cp">Change password</a>
+	<a href="deleteAccount.php">Delete account</a>
       </span>
       <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Launch demo modal</a>
 
-      <!-- Modal -->
-      <div class="modal" id="myModal">
+      <!-- Change email ID -->
+      <div class="modal" id="ce">
 	<div class="modal-dialog">
 	  <div class="modal-content">
 	    <div class="modal-header">
@@ -114,11 +113,53 @@ background-color:#660033;
 	      <h4 class="modal-title">Modal title</h4>
 	    </div>
 	    <div class="modal-body">
-	      Testing
+	      <form class="form-inline" name="mailchange" method="POST">
+		<label for="newmail">New Email-ID</label>
+		<input type="text" name="mail" size="20" maxlength="40" placeholder="emailID@example.com" required/>
+		<button typoe="submit" class="btn-primary" name="submitE">Submit</button>
+	      </form>
 	    </div>
-	    <div class="modal-footer">
-	      <a href="#" class="btn">Close</a>
-	      <a href="#" class="btn btn-primary">Save changes</a>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <!--end content-->
+      
+      
+      
+      <!-- Change Password -->
+      <div class="modal" id="cp">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	      <h4 class="modal-title">Modal title</h4>
+	    </div>
+	    <div class="modal-body">
+	      <!--form area-->
+		<form class="form-horizontal" method="POST">
+		    <legend>
+			So you wanna change your password, <?php echo $_SESSION['username']; ?> ?
+		    </legend>
+		    <div class="control-group">
+			<label class="control-label" >Original Password</label>
+			<div class="controls">
+			    <input type="password" name="originpass" placeholder="Your original password" required>
+			</div>
+		    </div>
+		    <div class="control-group">
+			<label class="control-label" for="newpass">New Password</label>
+			<div class="controls">
+			    <input type="password" id="newpass" name="newpass" placeholder="Your new password (atleast 6 characters)" required>
+			</div>
+		    </div>
+		    <div class="control-group">
+			<label class="control-label" for="verifynewpass">Verify New Password</label>
+			<div class="controls">
+			    <input type="password" id="verifynewpass" name="verifynewpass" placeholder="^The thing up there" required>
+			</div>
+		    </div> 
+		    <input type="submit" name="submitP">
+		</form>
 	    </div>
 	  </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -127,5 +168,15 @@ background-color:#660033;
     </div>
   </div>
 </div>         
-            
+<?php
+  if(isset($_POST['submitE']))
+  {
+    changemail($_POST['mail']);
+    redirect_to("userprofile.php");
+  }
+  if(isset($_POST['submitP']))
+  {
+    changePassword($_SESSION['username'],$_POST['originpass'],$_POST['newpass'],$_POST['verifynewpass']);
+  }
+?>
 <?php include("includes/footer.php"); ?>
