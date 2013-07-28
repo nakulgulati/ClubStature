@@ -32,46 +32,64 @@
 ?>
 <div class="wrapper">
     <div class="container">
-        <div class="hero-unit hidden-phone">
+        <div class="row">
+        <div class="jumbotron">
         <h1>Welcome to <?php echo NAME; ?>...</h1>
         <p>Here you can rate and review your favorite clubs.&nbsp;</p>
     </div>
-    <div class="row-fluid">
-    <div id="searchBox" class="well span8">
-        <h4>Know the club name?</h4> 
-    <form method="get" class="form-inline" action="index.php">
-        <div class="input-append">
-            <input type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
-            <button type="submit" class="btn" name="submit" value="submit"><i class="icon-search"></i></button>
         </div>
-    </form>
-    <table class="table table-striped">
-    <?php
-    if(isset($_GET['submit'])){
-        if($_GET['searchClub']!=NULL){
-            if(mysql_num_rows($clubSet)>0){
-                while($club = mysql_fetch_array($clubSet)){
-                    echo "<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['overallRating']}</td></tr>";
+    <div class="row">
+        
+    <div id="searchBox" class="well col-lg-7">
+        <form method="get" class="form-inline" action="index.php">
+            <legend>Know the club name?</legend>
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input class="form-control" type="text" id="searchClub" name="searchClub" data-provide="typeahead" data-items="4" placeholder="Enter club name to search"/>
+                    <span class="input-group-btn">
+                       <button type="submit" class="btn" name="submit" value="submit"><span class="glyphicon glyphicon-search"></button>
+                    </span>
+                </div><!-- /input-group -->
+            </div>
+        </form>
+        Or for advanced search go to <a href="search.php">Search Clubs</a>
+        <table class="table table-striped">
+        <?php
+        if(isset($_GET['submit'])){
+            if($_GET['searchClub']!=NULL){
+                if(mysql_num_rows($clubSet)>0){
+                    while($club = mysql_fetch_array($clubSet)){
+                        echo "<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['overallRating']}</td></tr>";
+                    }
                 }
             }
-            else{
-                echo "No match found :(<br>
-                Hint: Use the suggestions on typing to search. :)";    
+        } 
+        
+        ?>
+        </table>
+        <?php
+            if(isset($_GET['submit'])){
+                if($_GET['searchClub']!=NULL){
+                    if(mysql_num_rows($clubSet)==0){
+                        echo "<div class=\"alert alert-info alert-block\">No match found :(<br>
+                            Hint: Use the suggestions on typing to search. :) </div>";
+                    }
+                }
             }
-        }
-        elseif($_GET['searchClub']==NULL){
-            echo "<div class=\"alert alert-warning\">
-                Dawg you got to enter something to search!!!
-                </div>";
-        }
-    } 
-    
-    ?>
-    </table>
-    Or for advanced search go to <a href="search.php">Search Clubs</a>
+        ?>
+        <?php
+            if(isset($_GET['submit'])){
+                if($_GET['searchClub']==NULL){
+                    echo "<div class=\"alert alert-block alert-warning\">
+                        Dawg you got to enter something to search!!!
+                        </div>";
+                }
+            }
+        ?>
+        
     </div>
-    <div class="well span4" id="famousClubs">
-        <h4>Most Searched Clubs</h4>
+    <div class="well col-lg-4 col-offset-1" id="famousClubs">
+        <h4><strong>Most Searched Clubs</strong></h4>
         <?php printTopList("hits"); ?>
     </div>
     </div>
