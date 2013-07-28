@@ -57,7 +57,16 @@ if(isset($_POST['submit'])){
     <div class="container">
        <div id="club" class="well">
         <!--club-->
-        <div class="imgHolder"><img id="clubImg" src="images/<?php echo $clubDetails['image']; ?>"></div>
+        <?php
+            $img;
+            if($clubDetails['image']==""){
+                $img =  "no-image.gif";
+            }
+            else{
+                $img = $clubDetails['image'];
+            }
+        ?>
+        <div class="imgHolder"><img id="clubImg" src="img/clubImages/<?php echo $img; ?>"></div>
         <div id="info">
             <ul id="clubInfo">
                 <li><h2><?php echo $clubDetails['clubName']; ?></h2></li>
