@@ -51,7 +51,7 @@ background-color:#660033;
 
 <div class="wrapper">
   <div class="container">
-    <div class="hero-unit hidden-phone">
+    <div class="well">
       <!--body content here-->
       <h1 class="text-center">Account Admin</h1>
       <?php
@@ -97,12 +97,32 @@ background-color:#660033;
 	
       
 
-      <span>
-	<a href="forgotPassword.php"><button type="button" class="btn btn-info">Forgot password</button></a>
-  <a href="mailtestPassword.php"><button type="button" class="btn btn-info">Mailing Test password</button></a>
-	<a href="changePassword.php"><button type="button" class="btn btn-info">Change password</button></a>
-	<a href="deleteAccount.php"><button type="button" class="btn btn-danger">Delete account</button></a>
+      <span class="inset">
+	<a href="forgotPassword.php"><!--<button type="button" class="btn btn-info">-->Forgot password<!--</button>--></a>
+	<a href="mailtestPassword.php"><!--<button type="button" class="btn btn-info">-->Mailing Test password<!--</button>--></a>
+	<a href="changePassword.php"><!--<button type="button" class="btn btn-info">-->Change password<!--</button>--></a>
+	<a href="deleteAccount.php"><!--<button type="button" class="btn btn-danger">-->Delete account<!--</button>--></a>
       </span>
+      <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Launch demo modal</a>
+
+      <!-- Modal -->
+      <div class="modal" id="myModal">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	      <h4 class="modal-title">Modal title</h4>
+	    </div>
+	    <div class="modal-body">
+	      Testing
+	    </div>
+	    <div class="modal-footer">
+	      <a href="#" class="btn">Close</a>
+	      <a href="#" class="btn btn-primary">Save changes</a>
+	    </div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
       <!--end content-->
     </div>
   </div>
