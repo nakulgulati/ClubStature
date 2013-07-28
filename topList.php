@@ -25,12 +25,15 @@
 
     <div class="container marketing">
 
+
+<?php
+
+?>
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>Overall Rating</h2>
-          
           <p> <?php printTopList("overallRating"); ?></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
@@ -61,13 +64,13 @@
 
     <div style = "text-align: center;"> 
     
-    <label>College</label>
-                  
+    <form method = "get">
+    <label>College</label>           
     <?php
         global $connection;
         $output = "<select name =\"college\">";
         $query = "SELECT name FROM colleges ORDER BY name";
-        $output.= "<option></option> ";
+        //$output.= "<option></option> ";
         //geting the list of colleges
         $resultset = mysql_query($query, $connection);
         //$resultSet = getData("colleges","name");
@@ -77,8 +80,13 @@
     
     $output .= " </select>";
     echo $output;
-    ?> <input type = "submit" name = "submitPreference"> 
+    ?>
+
+    
+    <input type = "submit" name = "submitPreference">
+    </form>
     </div>
+
 
 
 
