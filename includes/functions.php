@@ -435,8 +435,8 @@
     }
 
     function changePassword($user, $originalpassword, $newpassword, $verifynewpassword){
-    
-    if (!loggedIn){
+    global $connection;
+    if (!loggedIn()){
         redirect_to("login.php");
     }
 
