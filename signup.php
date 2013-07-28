@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
     
     $errors = addUser($username,$password,$verifyPassword,$email);   
 	
-	sendMail($_SESSION['userId'],"create");
+	//sendMail($_SESSION['userId'],"create");
 }
 
 

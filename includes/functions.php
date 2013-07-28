@@ -335,10 +335,10 @@
 
         $host     = "ssl://smtp.gmail.com";
         $port     = "465";
-        $username = "darklord.mario666@gmail.com";  //<> give errors
-        $password = "darklordeshwar";
+        $username = "clubstature@gmail.com";  //<> give errors
+        $password = "pokemonshowdown";
 
-        $from     = "<darklord.mario666@gmail.com>";
+        $from     = "<clubstature@gmail.com>";
 
         //echo $userId;
 
@@ -346,8 +346,8 @@
 
         $to = "<" . $userInfo['email'] . ">";
 
-
-        $body = file_get_contents('./emailUpperHalf.html');
+        $body = "";
+        //$body = file_get_contents('./emailUpperHalf.html');
         if($status == "forgot"){  //if you forgot your password
             
             $body .= "Hello {$userInfo['username']},
@@ -378,7 +378,7 @@
             $subject = "Account creation ";
         }
 
-        $body .= file_get_contents('./emailLowerHalf.html');
+        //$body .= file_get_contents('./emailLowerHalf.html');
 
         $headers = array(
         'From'    => $from,
