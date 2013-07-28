@@ -24,15 +24,19 @@
     }
     
     function printNav($public = true){
-        $output = "";
-        $output .= "<div class=\"navbar navbar-inverse navbar-fixed-top\">
-                    <div class=\"navbar-inner\">
-                    <div class=\"container\">
-                    <a class=\"brand\" href=\"index.php\">";
-        $output .= NAME;            
-        $output .= "</a>";
+        $output =   "<div class=\"container\">
+                    <div class=\"navbar navbar-inverse navbar-fixed-top\">
+                    <a href=\"index.php\"><img class=\"logo\" src=\"img/logo.png\"></a>    
+                    <div class=\"container navContent\">
+                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".nav-collapse\">
+                    <span class=\"icon-bar\"></span>
+                    <span class=\"icon-bar\"></span>
+                    <span class=\"icon-bar\"></span>
+                    </button>"; 
+      
         if($public == true){
-            $output .= "<ul class=\"nav\">";
+            $output .= "<div class=\"nav-collapse collapse\">
+                        <ul class=\"nav navbar-nav\">";
      
             $menuSet = getNavItems();
             
@@ -48,21 +52,19 @@
                 $output .= "<div class=\"btn-group pull-right\">
                             <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
                             <ul class=\"dropdown-menu\">
-                            <li><a href=\"userprofile.php\"><i class=\"icon-user\"></i>Settings</a></li>
+                            <li><a href=\"userprofile.php\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"logout.php\"><i class=\"icon-off\"></i> Log Out</a></li>
-			    
+                            <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"> Log Out</a></li>
                             </ul>
-                            </div>"; //end of btn group
+                            </div>";
             }
             else{
-                $output .= "<div class = \"pull-right\">
-                            <a href = \"login.php\" class = \"btn btn-success\">Login</a>
-                            <a href = \"signup.php\" class = \"btn btn-info\">Sign Up</a>
-                            <div>";
+                $output .= "<div class=\"pull-right\">
+                            <a class=\"btn btn-success navbar-btn\" href=\"login.php\">Login</a>
+                            <a class=\"btn btn-info navbar-btn\" href=\"login.php\">Sign Up</a>
+                            </div>";
             }            
             $output .= "</div>
-                        </div>
                         </div>
                         </div>
                         </div>";

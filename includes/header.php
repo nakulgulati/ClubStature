@@ -27,6 +27,7 @@
     
 	<!--stylesheets-->
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	    <link href="css/bootstrap-glyphicons.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
     </head>	
     <body>	

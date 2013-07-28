@@ -19,7 +19,17 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-              </ul>
+              </ul> 
+              
+              <div class="btn-group pull-right">
+                <h3 class="user dopdown-toggle" data-toggle="dropdown">{$userDetails['username']}</h3>
+                <ul class="dropdown-menu">
+                <li><a href="userprofile.php"><span class="glyphicon glyphicon-user"></span> Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="logout.php"><span class="glyphicon glyphicon-off"> Log Out</a></li>
+                </ul>
+                </div>
+              
               <div class="pull-right">
               <a class="btn btn-success navbar-btn" href="login.php">Login</a>
               <a class="btn btn-info navbar-btn" href="login.php">Sign Up</a>
