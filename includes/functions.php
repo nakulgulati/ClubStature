@@ -52,7 +52,7 @@
                 $output .= "<div class=\"btn-group pull-right\">
                             <p class=\"navbar-text greeting\" >Greetings,</p><p class=\"navbar-text user dopdown-toggle\" data-toggle=\"dropdown\"> {$userDetails['username']}</p>
                             <ul class=\"dropdown-menu\">
-                            <li><a href=\"userprofile.php\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
+                            <li><a href=\"user.php?option=profile\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
                             </ul>
@@ -96,7 +96,7 @@
 	    array_push($errors,"Username cannot contain special characters.");
 	}
     
-	if(strlen($password)>6){
+	if(strlen($password)>=6){
 	    if($password != $verifyPassword){
 	        array_push($errors,"Passwords don't match.");
 	    }
@@ -436,48 +436,118 @@
     		}
 	}
     }
-
-    function changePassword($user, $originalpassword, $newpassword, $verifynewpassword){
-    global $connection;
-    if (!loggedIn()){
-        redirect_to("login.php");
-    }
-
-    $searcheshwar = "SELECT hashedPass FROM users WHERE username = '{$user}'";
-    $result = mysql_query($searcheshwar, $connection);
-    $row = mysql_fetch_array($result);
-    $hashedOriginalPassword = $row['hashedPass']; 
-    $newpassword = $_POST["newpass"];
-    $verifynewpassword = $_POST["verifynewpass"];
-    if (($newpassword != $verifynewpassword) or (strlen($newpassword) < 6)){
-        echo "You gotta be <i> sure </i> about your new password, dawg, and your new password <i> has </i> to be greater than 6 characters.";
-    }
     
-    else { 
-        if($hashedOriginalPassword == sha1($originalpassword)){
-            echo "you are one step closer to changing your password!";
-            echo "<br>";
-            $enteredpassword = sha1($newpassword);
-            $updatequery = "UPDATE users SET hashedPass = '{$enteredpassword}' WHERE username = '{$user}'";
-            mysql_query($updatequery, $connection);
-            echo "<br>";
-            echo "You have successfully changed your password!";
-        } 
-    }
-}
-    function changemail($mail)
-    {
+    function updateInfo($username,$newName,$newEmail,$newCollege){
 	global $connection;
-	$query="SELECT * FROM users WHERE username='{$_SESSION['username']}'";
-	$result=mysql_query($query,$connection);
-	$row=mysql_fetch_array($result);
-	$oldmail=$row['email'];
-	//$mail=$_POST['mail'];
-	$query="UPDATE users SET email='{$mail}' WHERE username='{$_SESSION['username']}'";
-	if(mysql_query($query,$connection))
-	{
-	  $message="Your email ID has been changed";
-	  //redirect_to("userprofile.php");
+	
+	$userDetails = getData("users","*","username",$username);
+	$user = mysql_fetch_array($userDetails);
+	
+	
+	if($user['name']==$newName && $user['email']==$newEmail && $user['college']==$newCollege){
+	    return 0;
+	}
+	else{
+	    $query = "UPDATE users SET ";
+	    
+	    if(($user['name']!=$newName) && ($user['email']==$newEmail) && ($user['college']==$newCollege)){
+		$query.="name = '{$newName}' ";
+	    }
+	    elseif($user['name']!=$newName){
+		$query.="name = '{$newName}', ";
+	    }
+	    
+	    if(($user['email']!=$newEmail) && ($user['college']!=$newCollege)){
+		$query.="email = '{$newEmail}', ";
+	    }
+	    elseif($user['email']!=$newEmail){
+		$query.="email = '{$newEmail}' ";	    
+	    }
+	    
+	    if($user['college']!=$newCollege){
+		$query.="college = '{$newCollege}' ";
+	    }
+	
+	    $query.="WHERE username = '{$username}'";
+	    
+	    if(mysql_query($query,$connection)){
+		return 1;
+	    }
+	    else{
+		return 0;
+	    }
 	}
     }
+    
+    function changePassword($username,$oldPass,$newPass,$verifyNewPass){
+	global $connection;
+	$errors = array("status" => 0);
+	
+	$userDetails = getData("users","*","username",$username);
+	$user = mysql_fetch_array($userDetails);
+	
+	if(sha1($oldPass)!=$user['hashedPass']){
+	    array_push($errors,"Old password incorrect.");
+            return $errors;
+	}
+	
+	if(strlen($newPass)>=6){
+	    if($newPass != $verifyNewPass){
+	        array_push($errors,"Passwords don't match.");
+	    }
+	}
+	else{
+	    array_push($errors,"Password should be minimum 6 characters.");
+	}
+	
+	if($oldPass==$newPass){
+	    array_push($errors,"Old password and new password cannot be same.");
+            return $errors;
+	}
+	$newPass = sha1($newPass);
+	if(count($errors)==1){
+            $query = "UPDATE users SET hashedPass = '{$newPass}' WHERE username = '{$username}'";
+	
+            if(mysql_query($query,$connection)){
+                $errors['status'] = 1;
+                array_push($errors,"Password changes successfully");
+                
+            }
+	}
+	return $errors;
+	
+    }
+    
+    function printUserNav($selectedOpt){
+	$output = "<ul class=\"nav nav-pills nav-stacked\">";
+	
+	$resultSet = getData("userNav","*","heading","1");
+	$output.="<legend>Information</legend>";
+	
+	while($row = mysql_fetch_array($resultSet)){
+	    $output.="<li";
+	    if($row['option']==$selectedOpt){
+		$output.=" class=\"active\" ";
+	    }
+	    
+	    $output.="><a href=\"user.php?option={$row['option']}\">{$row['menu']}</a></li>";   
+	}
+	
+	$resultSet = getData("userNav","*","heading","2");
+	$output.="<legend>Change Account Settings</legend>";
+	
+	while($row = mysql_fetch_array($resultSet)){
+	    $output.="<li";
+	    if($row['option']==$selectedOpt){
+		$output.=" class=\"active\" ";
+	    }
+	    
+	    $output.="><a href=\"user.php?option={$row['option']}\">{$row['menu']}</a></li>";   
+	}
+	
+	$output.="</ul>";
+	echo $output;
+    }
+    
+    
 ?>
