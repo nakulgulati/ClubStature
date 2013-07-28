@@ -40,15 +40,6 @@ global $connection;
     redirect_to("userprofile.php");
   }
 ?>
-<head>
-  <title>User Profile</title>
-</head>
-<style>
-body
-{
-background-color:#660033;
-}
-</style>
 
 <div class="wrapper">
   <div class="container">

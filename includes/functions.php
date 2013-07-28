@@ -303,14 +303,14 @@
                 $output="<table class=\"table-striped\"
                         <tr><th>Club Name</th><th>Rating</th></tr>";
                 while($listItem = mysql_fetch_array($listSet)){
-                    $output.=   "<tr><td>{$listItem['clubName']}</td><td>{$listItem[$fieldname]}</td></tr>";
+                    $output.=   "<tr><td><a href=\"club.php?clubID={$listItem['id']}\">{$listItem['clubName']}</a></td><td>{$listItem[$fieldname]}</td></tr>";
                 }
                 $output.="</table>";
             }
             elseif($fieldname=="hits"){
                 $output="<ol>";
                 while($listItem = mysql_fetch_array($listSet)){
-                    $output.="<li>{$listItem['clubName']}</li>";
+                    $output.="<li><a href=\"club.php?clubID={$listItem['id']}\">{$listItem['clubName']}</a></li>";
                 }
                 $output.="</ol>";
             }
