@@ -67,6 +67,15 @@
 
 <br><br><br> <hr>
 
+<div style = "text-align: center;">   <h1> Privacy Policy </h1>  </div>
+<br> <hr>
+
+<h3> The only data we collect from you is your username and email address.  <br> <br>
+	You may choose to submit your real name and institution you attend.  <br> <br>
+	Although this is by no means required, it will improve the authenticity of your review.  <br> </h3>
+
+<br><br><br> <hr>
+
 <table class="table table-striped table-hover">
   <thead>
     <tr>
