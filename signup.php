@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
 ?>
 
 
-<div class="wrapper  mail">
+<div class="wrapper">
 	<div class="container">
 		<div class = "row">
 			<div class = "well col-offset-3 col-lg-6">

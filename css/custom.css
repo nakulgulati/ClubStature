@@ -28,6 +28,10 @@ body{
 	margin-right: 20px;
 }
 
+#myTabContent{
+	background: #fff;
+}
+
 .navbar-nav>li>a{
 	padding-top: 20px;
 }
