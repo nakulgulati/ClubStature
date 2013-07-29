@@ -39,13 +39,10 @@ if(isset($_POST['submit'])){
 ?>
 
 
-<div class="wrapper">
+<div class="wrapper  mail">
 	<div class="container">
 		<div class = "row">
-			<div class = "col-lg-6">
-			<!--image/text area-->
-			</div>
-			<div class = "col-lg-6">
+			<div class = "well col-offset-3 col-lg-6">
 			<!--form area-->
 			    <form class="form-horizontal" method="post" action="signup.php">
 				<legend>Sign Up

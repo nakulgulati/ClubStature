@@ -36,7 +36,7 @@
       
         if($public == true){
             $output .= "<div class=\"nav-collapse collapse\">
-                        <ul class=\"nav navbar-nav\">";
+                        <ul class=\"nav navbar-nav main\">";
      
             $menuSet = getNavItems();
             
