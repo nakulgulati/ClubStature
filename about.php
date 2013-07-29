@@ -16,15 +16,15 @@
 <div class="container">
   <div class="hero-unit">
  <div style = "text-align: center;">   <img src="logo.png" width= 400px alt="Club Stature"> </div>
-    <br>
+    <br> <h3>
     <p>Ever thought about getting more involved in college, but didn&#39;t know where to start? 
 	   Well do we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
 	   We try to help you make the best of your college experience by helping you choose the organization that is the right fit for you. 
 	</p>
 	<p>
-	Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they&#39;re about. <br> 
+	Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they&#39;re about.
 	Happy hunting!
-	</p>
+	</p>  </h3>
     
 	
   </div>
@@ -57,15 +57,6 @@
 </p>
 
 <!-- End of button -->
-
-<div style = "text-align: center;">   <h1>Terms and Conditions</h1>  </div>
-<br> <hr>
-
-<h3>1.  When posting, I will post accurate, constructive reviews  <br> <br>
-2.  I will refrain from using inappropriate language  <br> <br>
-3.  I will respect the opinions of others on the website  <br> </h3>
-
-<br><br><br> <hr>
 
 <div style = "text-align: center;">   <h1> Privacy Policy </h1>  </div>
 <br> <hr>
