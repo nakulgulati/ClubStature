@@ -15,16 +15,6 @@
   <div class="container">
 
 <div style = "text-align: center;"><h1><u> Top Lists </u></h1> </div>
-<br> <br> <br>
-   
-
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
-    <div class="container marketing">
-
 
 <?php
   $collfilter = "";
@@ -32,9 +22,8 @@
     $collfilter = $_GET['college'];
   }
 ?>
-      <!-- Three columns of text below the carousel -->
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <img class="img-circle" data-src="holder.js/140x140">
           <h2>Overall Rating</h2>
           <p> <?php 
@@ -43,7 +32,7 @@
               ?>
           </p>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <img class="img-circle" data-src="holder.js/140x140">
 
 
@@ -54,21 +43,25 @@
               ?>
           </p>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
+        </div><!-- /.row -->
+        <div class="row">
+        <div class="col-lg-6">
           <img class="img-circle" data-src="holder.js/140x140">
 
 
           <h2>Supportiveness</h2>
           <p> <?php global $collfilter; printTopList("cohesiveness", $collfilter); ?> </p>
         </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-
+        
+      
+  
       <hr class="featurette-divider">
-
+<div class="col-lg-6">
       <h2>Time Commitment</h2>
           <p> <?php global $collfilter; printTopList("scheduleFriendliness", $collfilter); ?> </p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
+      </div>
 
     </div><!-- /.container -->
     <br> <br>

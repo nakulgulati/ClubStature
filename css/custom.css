@@ -11,6 +11,39 @@
 	margin-left: 20px;
 }
 
+body{
+	background-image: url('../img/back.png');
+	background-repeat: repeat-x;
+	background-position-y: 82px;
+}
+
+.jumbotron > H1{
+	font-family: 'Racing Sans One', cursive;
+}
+
+.main > li{
+	font-family: 'Joti One', cursive;
+	font-weight: bold;
+	font-size: 25px;
+	margin-right: 20px;
+}
+
+#myTabContent{
+	background: #fff;
+}
+
+.navbar-nav>li>a{
+	padding-top: 20px;
+}
+
+.nav > li:first-child{
+	margin-left: 20px;
+}
+
+.nav > li:last-child{
+	margin-right: 0px;
+}
+
 #searchClub,#searchCollege{
 	width: 282px;
 }
