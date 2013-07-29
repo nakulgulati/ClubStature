@@ -45,7 +45,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Got any suggestions or feedback?</h4>
+          <h4 class="modal-title">Got any suggestions or feedback?  Would you like to see a new feature?</h4>
         </div>
         <div class="modal-body">
          Simply shoot us an email to clubstature@gmail.com!
@@ -56,7 +56,7 @@
 
 </p>
 
-<!-- End of button -->
+<!-- End of button -->    
 
 <div style = "text-align: center;">   <h1> Privacy Policy </h1>  </div>
 <br> <hr>
@@ -102,7 +102,7 @@
     </tr>
   </tbody>
 </table>
-<span class="label pull-right"> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </span>
+<span class="label pull-right"><h4> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </h4> </span>
 
 </div>
 

@@ -35,7 +35,7 @@
         <div class="row">
         <div class="jumbotron">
         <h1>Welcome to <?php echo NAME; ?>...</h1>
-        <p>Here you can rate and review your favorite clubs.&nbsp;</p>
+        <p>Here you can discuss and review your current or prospective organizations on campus!&nbsp;</p>
     </div>
         </div>
     <div class="row">
