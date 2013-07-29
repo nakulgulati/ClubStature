@@ -54,13 +54,16 @@
 			if($_GET['option']=="profile"){
 			    echo "<h3>Account Information</h3>";
 			    
-			    if(($_SESSION['status']==1) && isset($_SESSION['status'])){
-				echo "<div class=\"alert alert-success\">
-				    <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
-				    <strong>Server:</strong> Information has been updated. :)
-				    </div>";
-				$_SESSION['status']=0;
+			    if(isset($_SESSION['status'])){
+				if($_SESSION['status']==1){
+				    echo "<div class=\"alert alert-success\">
+				        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+				        <strong>Server:</strong> Information has been updated. :)
+				        </div>";
+				    $_SESSION['status']=0;
+				}
 			    }
+			    
 			    
 			    echo "<table>
 				<tr><td>Username:</td><td>{$user['username']}</td></tr>
