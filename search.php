@@ -70,7 +70,8 @@
 ?>
 <div class="wrapper">
     <div class="container">
-      
+        
+    <h1 class="page-header">Search Clubs</h1>
     <form method="get" class="form-inline" action="search.php">
       
       <div class="col-lg-3" id="clubSearch">
@@ -114,7 +115,7 @@
     if(isset($_GET['submit'])){
       if($_GET['searchClub']!=NULL || $_GET['searchCollege']!=NULL ){
         if(mysql_num_rows($clubSet)>0){
-          $output.="<table class=\"table table-striped\">";
+          $output.="<br><table class=\"table table-striped results\">";
           $output.="<tr><th>Club Name</th><th>College</th><th>Category</th><th>Overall Rating</th></tr>";
             while($club = mysql_fetch_array($clubSet)){
               $output.="<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['category']}</td><td>{$club['overallRating']}</td></tr>";
@@ -129,13 +130,12 @@
       }
     }
       elseif($_GET['searchClub']==NULL && $_GET['searchCollege']==NULL){
-            echo "<div class=\"alert alert-warning\">
+            echo "<br><div id=\"searchError\" class=\"alert alert-warning col-lg-5\">
                 Dawg you got to enter something to search!!!
                 </div>";
         }
     }  
     ?>
-    
     </div>
 </div>
 

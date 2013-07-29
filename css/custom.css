@@ -32,6 +32,11 @@ body{
 	background: #fff;
 }
 
+#searchError{
+	margin-left: 15px;
+	width: 457px;
+}
+
 .navbar-nav>li>a{
 	padding-top: 20px;
 }
@@ -60,6 +65,10 @@ body{
 
 legend > span{
 	font-size: 14px;
+}
+
+.results{
+	margin-left: 15px;
 }
 
 .content{
