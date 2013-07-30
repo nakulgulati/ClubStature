@@ -10,77 +10,79 @@
 ?>
 
 <div class="wrapper">
-      <div class="container">
-        <div class="well">
-          <h1>Create a club page</h1>
-        </div>
-        <div class="row">
-          <div class="span5">
-            <p>This page will help you to set up your club page.</p>
-          </div>
-          <div class="span8">
-            <div class="container-fluid">
-              <br>
-              <br>
-              <form method="post" action="addClub.php" enctype="multipart/form-data">
-                  <label>Name of the Club</label>
-                  <input name="clubName" type="text" class="input-medium" required>
-                  <label>Category</label>
-                  <br>
-		  <?php
-      
-		  $output = "<select name =\"category\">";
-      $output.= "<option></option> ";
-		  //getting the list of categories
-		  $resultSet = getData("categoryname","category");
-		  while($row = mysql_fetch_array($resultSet)){
-		  	  $output .= "<option>{$row['category']}</option>";
-		  }
-		  
-      $output .= " </select>";
-		  echo $output;
-		  ?>
-                  <label>College</label>
-                  
-		<?php
-        global $connection;
-		    $output = "<select name =\"college\">";
-        $query = "SELECT name FROM colleges ORDER BY name";
-		    $output.= "<option></option> ";
-		    //geting the list of colleges
-        $resultset = mysql_query($query, $connection);
-		    //$resultSet = getData("colleges","name");
-		    while($row = mysql_fetch_array($resultset)){
-		$output .= "<option>{$row['name']}</option>";
-		}
-		
-		$output .= " </select>";
-		echo $output;
-		?>
-                  
-                  <label>Link to the Club's Page</label>
-                  <input name="url" type="text" class="input-medium" required>
-                  <label>Insert your club logo </label>
-                  <input type="file" name="file" id="file">
-                  <p>Please give a brief description of your club...</p>
-                  <div class="row"></div>
-                  <div class="drag-mask" data-ds-form="textarea" style="width: 904px; height: 114px;">
-                    <textarea name="description" style="margin: 0px -322px 10px 0px; width: 904px; height: 114px;"
-                    class="input-block-level" required></textarea>
-              
-              </div>
+    <div class="container">
+        <h1 class="page-header">Add a Club</h1>
+        <form class="form-horizontal" method="post" action="addClub.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="clubName" class="col-lg-2 control-label">Name of Club</label>
+                <div class="col-lg-6">
+                    <input type="text" class="form-control" id="clubName" name="clubName" placeholder="Club name">
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-actions">
-        <input type="submit" class="btn btn-primary" value="Create Club" name="addClub">
-        <input type="reset" class="btn" value="Reset">
-      	<!--<input type="submit" class="btn btn-primary" value="Request Club" name="clubRequested">--> 
+            <div class="form-group">
+                <label for="category" class="col-lg-2 control-label">Category</label>
+                <div class="col-lg-6">
+                <?php
+                    $output = "<select class=\"form-control\" name =\"category\">";
+                    $output.= "<option></option> ";
+                    //getting the list of categories
+                    $resultSet = getData("categoryname","category");
+                    while($row = mysql_fetch_array($resultSet)){
+                        $output .= "<option>{$row['category']}</option>";
+                    }
+                    
+                    $output .= " </select>";
+                    echo $output;
+                ?>
+                </div>
+            </div>
             
-      </div>
+            <div class="form-group">
+                <label for="college" class="col-lg-2 control-label">College</label>
+                <div class="col-lg-6">
+                    <?php
+                        $output = "<select class=\"form-control\" name =\"college\">";
+                        $query = "SELECT name FROM colleges ORDER BY name";
+                        $output.= "<option></option> ";
+                        //geting the list of colleges
+                        $resultset = mysql_query($query, $connection);
+                        //$resultSet = getData("colleges","name");
+                        while($row = mysql_fetch_array($resultset)){
+                            $output .= "<option>{$row['name']}</option>";
+                        }
+                    
+                        $output .= " </select>";
+                        echo $output;
+                    ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="col-lg-2 control-label">Club Url</label>
+                <div class="col-lg-6">
+                    <input type="url" class="form-control" id="url" name="url" placeholder="club url">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="file" class="col-lg-2 control-label">Club Logo</label>
+                <div class="col-lg-6">
+                    <input class="form-control" type="file" name="file" id="file">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="file" class="col-lg-2 control-label">Description</label>
+                <div class="col-lg-6">
+                    <textarea class="form-control" name="description" class="input-block-level"></textarea><br>
+                    <button type="submit" class="btn btn-primary" value="Create Club" name="addClub">Create Club</button>
+                </div>
+            </div>
+        </form>
     </div>
-      </form>
+</div>
+
+
+
 
 <?php
     if(isset($_POST['addClub'])){
@@ -111,6 +113,5 @@
     }
 }
 ?>
-	  
-</div>
+    
 <?php include("includes/footer.php"); ?>

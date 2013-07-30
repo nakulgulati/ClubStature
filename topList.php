@@ -9,98 +9,102 @@
   echo $nav;
 ?>
 
-
-
-<div class="wrapper">
-  <div class="container">
-
-<div style = "text-align: center;"><h1><u> Top Lists </u></h1> </div>
-
 <?php
   $collfilter = "";
   if(isset($_GET['submitColl'])){
-    $collfilter = $_GET['college'];
+    if($_GET['college']!="(select a college)"){
+        $collfilter = $_GET['college'];
+    }
   }
 ?>
-      <div class="row">
-        <div class="col-lg-6">
-          <img class="img-circle" data-src="holder.js/140x140">
-          <h2>Overall Rating</h2>
-          <p> <?php 
-              $collfilter;
-              printTopList("overallRating",$collfilter); 
-              ?>
-          </p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-6">
-          <img class="img-circle" data-src="holder.js/140x140">
 
-
-          <h2>Rigor</h2>
-          <p><?php 
-              global $collfilter;
-              printTopList("rigor", $collfilter); 
-              ?>
-          </p>
-        </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-        <div class="row">
-        <div class="col-lg-6">
-          <img class="img-circle" data-src="holder.js/140x140">
-
-
-          <h2>Supportiveness</h2>
-          <p> <?php global $collfilter; printTopList("cohesiveness", $collfilter); ?> </p>
-        </div><!-- /.col-lg-4 -->
+<div class="wrapper">
+    <div class="container">
         
-      
-  
-      <hr class="featurette-divider">
-<div class="col-lg-6">
-      <h2>Time Commitment</h2>
-          <p> <?php global $collfilter; printTopList("scheduleFriendliness", $collfilter); ?> </p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-      </div>
-
-    </div><!-- /.container -->
-    <br> <br>
-
-    <div style = "text-align: center;"> 
-    
-    <form method = "get">
-    <label>College</label>           
-    <?php
+        <h1 class="page-header">Top Lists</h1>
+        
+        <form class="form-inline">
+            <div class="col-lg-4">
+        <?php
         global $connection;
-        $output = "<select name =\"college\">";
+        $output = "<select class=\"form-control\" name =\"college\">";
         $query = "SELECT name FROM colleges ORDER BY name";
-        //$output.= "<option></option> ";
+        $output.= "<option>(select a college)</option> ";
         //geting the list of colleges
         $resultset = mysql_query($query, $connection);
         //$resultSet = getData("colleges","name");
         while($row = mysql_fetch_array($resultset)){
-    $output .= "<option>{$row['name']}</option>";
-    }
+            $output .= "<option>{$row['name']}</option>";
+        }
     
-    $output .= " </select>";
-    echo $output;
-    ?>
-
-    
-    <input type = "submit" name = "submitColl">
-    </form>
-    </div>
-
-
-
-
-  <!--  <div class="row-fluid">
-        <?php printTopList("overallRating"); ?> //the overall rating top list...
+        $output .= " </select>";
+        echo $output;
+        ?>
+        </div>
+        <button type="submit" name="submitColl" class="btn btn-info">Filter</button>
+        </form>
+        <br>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="col-lg-6 col-offset-3">
+                    <div id="oR" class="well">
+                        <h2>Overall Rating</h2>
+                        <p>
+                        <?php 
+                          $collfilter;
+                          printTopList("overallRating",$collfilter); 
+                        ?>
+                      </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="col-lg-6 col-offset-3">
+                    <div id="r" class="well">
+                        <h2>Rigor</h2>
+                        <p>
+                        <?php 
+                          $collfilter;
+                          printTopList("rigor",$collfilter); 
+                        ?>
+                      </p>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        <?php printTopList("rigor"); ?>
-    </div>  -->
-  
-  </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="col-lg-6 col-offset-3">            
+                    <div id="c" class="well">
+                        <h2>Cohesiveness</h2>
+                        <p>
+                            <?php 
+                                $collfilter;
+                                printTopList("cohesiveness",$collfilter); 
+                            ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="col-lg-6 col-offset-3">
+                    <div id="sF" class="well">
+                        <h2>Schedule Friendliness</h2>
+                        <p>
+                            <?php 
+                                $collfilter;
+                                printTopList("scheduleFriendliness",$collfilter); 
+                            ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
 </div>
+
 
 <?php include("includes/footer.php"); ?>

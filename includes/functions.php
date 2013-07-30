@@ -61,7 +61,7 @@
             else{
                 $output .= "<div class=\"pull-right\">
                             <a class=\"btn btn-success navbar-btn\" href=\"login.php\">Login</a>
-                            <a class=\"btn btn-info navbar-btn\" href=\"login.php\">Sign Up</a>
+                            <a class=\"btn btn-info navbar-btn\" href=\"signup.php\">Sign Up</a>
                             </div>";
             }            
             $output .= "</div>
@@ -554,6 +554,53 @@
 	
 	$output.="</ul>";
 	echo $output;
+    }
+    
+    function updateNewPassword($resetCode,$newPass,$verifyNewPass){
+        global $connection;
+        $errors = array();
+        $userDetails = getData("users","*","resetCode",$resetCode);
+        $user = mysql_fetch_array($userDetails);
+        
+        //password processing
+        if(strlen($newPass)>=6){
+	    if($newPass != $verifyNewPass){
+	        array_push($errors,"Passwords don't match.");
+                return $errors;
+	    }
+	}
+	else{
+	    array_push($errors,"Password should be minimum 6 characters.");
+            return $errors;
+	}
+        
+        $newPass = sha1($newPass);
+        
+        $query="UPDATE users SET hashedPass = '{$newPass}', resetCode = -1 WHERE resetCode = {$resetCode}";
+        
+        if(mysql_query($query,$connection)){
+            array_push($errors,"Password reset successful.");
+            return $errors;
+        }
+    }
+    
+    function generateNewPassword($email){
+        global $connection;
+        
+        $resultSet = getData("users","*","email",$email);
+        if(mysql_num_rows($resultSet)==1){
+            $row = mysql_fetch_array($resultSet);
+            
+            $randNo = rand(100,10000);
+            
+            $query="UPDATE  `users` SET  `resetCode`={$randNo} WHERE  `email` =  '{$email}' ";
+            mysql_query($query,$connection);
+            
+            return $randNo;
+        }
+        else{
+            return -1;
+        }
     }
     
     

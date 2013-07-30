@@ -35,9 +35,7 @@ if(isset($_POST['submit'])){
     
 }
 
-
 ?>
-
 
 <div class="wrapper">
 	<div class="container">
@@ -74,38 +72,31 @@ if(isset($_POST['submit'])){
 
 					<div class="checkbox">
 					    <label>
-						<input type="checkbox" required> <a data-toggle="modal" href="#myModal"> I accept the terms and conditions.  </a>
+						<input type="checkbox" required> I accept the  <a data-toggle="modal" href="#tc">Terms and Conditions.  </a>
 					    </label>
 					</div>
-
-
-<!-- Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-       <!--   <h4 class="modal-title">Terms and Conditions</h4>  -->
-        </div>
-        <div class="modal-body">
-
-        <div style = "text-align: center;">   <h1>Terms and Conditions</h1>  </div>
-<br> <hr>
-
-<h3>1.  When posting, I will post accurate, constructive reviews  <br> <br>
-2.  I will refrain from using offensive language  <br> <br>
-3.  I will respect others' opinions on the website  <br> </h3>
-
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-<!-- End of modal  -->
 					    <button type="submit" name="submit" class="btn btn-success">Sign up</button>
 				    </div>
 				</div>
 			    </form>
+			    
+<div class="modal fade" id="tc">
+    <div class="modal-dialog">
+	<div class="modal-content">
+	    <div class="modal-body">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<div style = "text-align: center;">
+		    <h3>Terms and Conditions</h3>
+		</div>
+		<br> <hr>
+		<h5>1.  When posting, I will post accurate, constructive reviews  <br> <br>
+		2.  I will refrain from using offensive language  <br> <br>
+		3.  I will respect others' opinions on the website  <br> </h5>
+	    </div>
+	</div>
+    </div>
+</div>
+			    
 				<?php
 				global $errors;
 				

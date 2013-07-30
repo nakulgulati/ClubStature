@@ -11,11 +11,11 @@
 	margin-left: 20px;
 }
 
-body{
+/*body{
 	background-image: url('../img/back.png');
 	background-repeat: repeat-x;
 	background-position-y: 82px;
-}
+}*/
 
 .jumbotron > H1{
 	font-family: 'Racing Sans One', cursive;
