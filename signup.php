@@ -7,8 +7,8 @@
 
 <?php
 //Prints nav bar
-  $nav = printNav(false);
-  echo $nav;
+  //$nav = printNav(false);
+  //echo $nav;
 ?>
 
 <?php
@@ -105,7 +105,7 @@ if(isset($_POST['submit'])){
 					$output="<div class=\"alert alert-success\">
 						{$errors[0]}
 						</div>";
-					$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL=login.php\">";
+					//$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL=login.php\">";
 					echo $output;
 				    }
 				    elseif(($errors['status']==0) && (count($errors)>1)){

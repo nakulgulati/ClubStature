@@ -551,6 +551,18 @@
 	    
 	    $output.="><a href=\"user.php?option={$row['option']}\">{$row['menu']}</a></li>";   
 	}
+        
+        $resultSet = getData("userNav","*","heading","3");
+	$output.="<legend>Log Out</legend>";
+	
+	while($row = mysql_fetch_array($resultSet)){
+	    $output.="<li";
+	    if($row['option']==$selectedOpt){
+		$output.=" class=\"active\" ";
+	    }
+	    
+	    $output.="><a href=\"logout.php\">{$row['menu']}</a></li>";   
+	}
 	
 	$output.="</ul>";
 	echo $output;
@@ -601,6 +613,25 @@
         else{
             return -1;
         }
+    }
+    
+    function logout($returnTo = ""){
+        session_start(); //Finding session start
+    
+        // 2. Unset all the session variables
+        $_SESSION = array(); // Reset all the session variables
+        
+        if(isset($_COOKIE[session_name()])) {
+            //Destroy the session cookie
+                setcookie(session_name(), '', time()-42000, '/');
+        }
+    
+        session_destroy(); //Destroy the session
+        
+        if($returnTo !=""){
+            redirect_to("{$returnTo}");        
+        }
+        
     }
     
     

@@ -5,7 +5,7 @@
 
 <?php
     if(!loggedIn()) {
-	redirect_to("{$_SERVER['REQUEST_URI']}");
+	redirect_to("index.php");
 }
 ?>
 
@@ -33,6 +33,34 @@
     
     if(isset($_POST['changePass'])){
 	$errors = changePassword($_SESSION['username'],$_POST['oldPass'],$_POST['newPass'],$_POST['verifyNewPass']);
+    }
+    
+    if(isset($_POST['deleteAccount'])){
+	
+	$errors = deleteAccount($_SESSION['username'],$_POST['pass']);
+	//show message
+	//redirect
+    }
+    
+    function deleteAccount($username,$pass){
+	global $connection;
+	$userDetails = getData("users","*","username",$username);
+	$user = mysql_fetch_array($userDetails);
+	
+	$errors = array();
+	
+	if(sha1($pass) == $user['hashedPass']){
+	    $query="DELETE FROM users WHERE username='{$username}'";
+	    
+	    if(mysql_query($query, $connection)){
+		$errors['status'] = 1;
+		return $errors;
+	    }
+	}
+	else{
+	    $errors['status'] = 0;
+	    return $errors;
+	}
     }
 ?>
 
@@ -165,6 +193,41 @@
 				    </div>
 				    </div>
 				    </form>";
+			    echo $output;
+			}
+			elseif($_GET['option']=="deleteAccount"){
+			    
+			    echo "<h3>Delete Account</h3>";
+			    
+			    if(isset($_POST['deleteAccount'])){
+				if($errors['status']==1){
+				    $output="<div class=\"alert alert-success\">
+					    <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+					    <strong>Server: </strong> Account deletion in progress. You will be redirected on completion.
+					    </div>
+					    <META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL=logout.php\">";
+				    echo $output;
+				}
+				elseif(($errors['status']==0)){
+				    $output="<div class=\"alert alert-danger\">
+					    <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+					    <strong>Server: </strong>
+					    Incorrect password";
+				    $output.= "</div>";
+				    echo $output;
+				}
+			    }
+			    
+			    $output="<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=deleteAccount\">
+				   <div class=\"form-group\">
+				   <label for=\"pass\" class=\"col-lg-2 control-label\">Enter your Password</label>
+				   <div class=\"col-lg-6\">
+				   <input type=\"password\" class=\"form-control\" id=\"pass\" name=\"pass\" placeholder=\"Your Password\">
+				   <br>
+				   <button type=\"submit\" name=\"deleteAccount\" class=\"btn btn-danger\">Delete Account</button>
+				   </div>
+				   </div>
+				   </form>";
 			    echo $output;
 			}
 		    }
