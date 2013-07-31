@@ -78,7 +78,7 @@
             if(isset($_GET['submit'])){
                 if($_GET['searchClub']==NULL){
                     echo "<div class=\"alert alert-block alert-warning\">
-                        Dawg you got to enter something to search!!!
+                        Please enter something to search!
                         </div>";
                 }
             }

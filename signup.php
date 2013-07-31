@@ -7,8 +7,8 @@
 
 <?php
 //Prints nav bar
-  //$nav = printNav(false);
-  //echo $nav;
+  $nav = printNav(true);
+  echo $nav;
 ?>
 
 <?php
@@ -25,12 +25,12 @@ if(isset($_POST['submit'])){
     $errors = addUser($username,$password,$verifyPassword,$email);   
 	
     
-    	
-    if($errors['status']==1){
+    if($errors['status']==1){  //if there were no errors
 	$userDetails = getData("users","*","username",$username);
 	$user = mysql_fetch_array($userDetails);
 	
 	sendMail($user['id'],"create");
+	
     }
     
 }
