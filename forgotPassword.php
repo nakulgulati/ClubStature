@@ -4,93 +4,86 @@
 <?php include("includes/header.php"); ?>
 
 <?php
-////Prints nav bar
-//  $nav = printNav(true);
-//  echo $nav;
+//Prints nav bar
+  $nav = printNav(true);
+  echo $nav;
 ?>
 
 <?php
-    $inp=false;
+        
+    $errors = array();
     
-    
-    
-    function resetPassword($username,$emailId)
-    {
-        global $connection;
-        $result = getData("users","*","username",$username);
-        echo "hello!";
-        if(mysql_num_rows($result)!=0)
-        {
-            $row=mysql_fetch_array($result);
-            $datEmail=$row['email'];
-            echo $datEmail;
-            if($datEmail==$emailId)
-            {
-                echo "match!";
-                
-                $randomNo = rand(100,100000);
-                $hash1=sha1($randomNo);
-                $pass=substr($hash1,0,7);
-                $hashPass=sha1($pass);
-                $query="UPDATE users SET hashedPass = '{$hashPass}' WHERE username = '{$username}'";
-                if(mysql_query($query,$connection))
-                {
-                    echo "password reset to {$pass}";
-                    sendMail($_SESSION['userId'],"forgot", $pass);
-                    
-                }
-                else{
-                    echo "failed";
-                }
-                $inp=true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
+    if(isset($_POST['sendCode'])){
+        $resetCode = generateNewPassword($_POST['email']);
+        
+        $userDetails = getData("users","*","email",$_POST['email']);
+        $user = mysql_fetch_array($userDetails);
+        
+        //if($resetCode!=-1){
+        //    sendMail($user['id'],"change","www.clubstature.com/forgotPassword.php?section=resetPass&email={$_POST['email']}&resetCode={$resetCode}");       
+        //}
+        //else{
+        //    array_push($errors,"Enter a valid email");
+        //}
     }
+    
+    if(isset($_POST['setPass'])){
+        if(isset($_GET['email']) && isset($_GET['resetCode'])){
+            echo $_GET['email'];
+            echo $_GET['resetCode'];
+            $errors = updateNewPassword($_GET['resetCode'],$_POST['newPass'],$_POST['verifyNewPass']);
+        }
+    }  
 ?>
 
 <div class="wrapper">
   <div class="container">
-    <div class="hero-unit hidden-phone">
-        
-        <form name="resetInp" action="forgotPassword.php" method="GET" enctype="">
-            <label class="control-label" for="name">Username</label>
-            <input type="text" name="name" size="15" required/>
-            <br/>
-            <label class="control-label" for="email">Email-ID</label>
-            <input type="text" name="email" size="15" required/>
-            <br/>
-            <hr>
-            <input type="submit" name="submit"/>
-        </form>
-        
-        <?php
-            
-            if(isset($_GET['submit']))
-            {
-                resetPassword($_GET['name'],$_GET['email']);
+    
+    <?php
+        if(isset($_GET['section'])){
+            $output="";
+            if($_GET['section']=="genCode"){
+                $output.="<h1 class=\"page-header\">Forgot Password</h1>
+                        <form class=\"form-horizontal\" action=\"forgotPassword.php?section=genCode\" method=\"post\">
+                        <div class=\"form-group\">
+                        <label for=\"email\" class=\"col-lg-2 control-label\">Email</label>
+                        <div class=\"col-lg-3\">
+                        <input type=\"text\" class=\"form-control\" id=\"email\" name=\"email\" placeholder=\"Email\">
+                        <span class=\"help-block\">Enter your email to reset password.</span>
+                        <button type=\"submit\" class=\"btn btn-default\" name=\"sendCode\">Send Password Reset Code</button>
+                        </div>
+                        </div>
+                        </form>";
+                        
+                echo $output;
             }
-            
-            //if($inp)
-            //{
-            //    echo "match";
-            //}
-            //else
-            //{
-            //    echo "enter your username and matching email id";
-            //}
-        ?>
+            elseif($_GET['section']=="resetPass"){
+                if(isset($_GET['resetCode']) && isset($_GET['email'])){
+                    $output.="<h1 class=\"page-header\">Reset Password</h1>
+                            <form class=\"form-horizontal\" action=\"{$_SERVER['HTTP_REFERER']}\" method=\"post\">
+                            <div class=\"form-group\">
+                            <label for=\"newPass\" class=\"col-lg-2 control-label\">Enter New Password</label>
+                            <div class=\"col-lg-3\">
+                            <input type=\"password\" class=\"form-control\" id=\"email\" name=\"newPass\" placeholder=\"New password\">
+                            </div>
+                            </div>
+                            <div class=\"form-group\">
+                            <label for=\"verifyNewPass\" class=\"col-lg-2 control-label\">Verify New Password</label>
+                            <div class=\"col-lg-3\">
+                            <input type=\"password\" class=\"form-control\" id=\"verifyNewPass\" name=\"verifyNewPass\" placeholder=\"What's up there ^\">
+                            <br>
+                            <button type=\"submit\" class=\"btn btn-default\" name=\"setPass\">Reset Password</button>
+                            </div>
+                            </div>
+                            </form>";
+                            
+                    echo $output;
+                }
+            }
+        }
+    ?>
         
-    </div>
   </div>
 </div>
-            
-            
+
 <?php include("includes/footer.php"); ?>

@@ -9,50 +9,63 @@
   echo $nav;
 ?>
 
+<html>
+<body>
+
 <div class="wrapper">
 <div class="container">
   <div class="hero-unit">
-    <h1><?php echo NAME; ?></h1>
-    <br>
+ <div style = "text-align: center;">   <img src="logo.png" width= 400px alt="Club Stature"> </div>
+    <br> <h3>
     <p>Ever thought about getting more involved in college, but didn&#39;t know where to start? 
-	   Well, we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
+	   Well do we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
 	   We try to help you make the best of your college experience by helping you choose the organization that is the right fit for you. 
 	</p>
 	<p>
-	Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they&#39;re about. <br> 
+	Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they&#39;re about.
 	Happy hunting!
-	</p>
+	</p>  </h3>
     
 	
   </div>
 </div>
 
 <div style="text-align: center;">
-<img src="http://i1.ytimg.com/vi/AgRABgfw42Y/maxresdefault.jpg" height = 150px width= 200px alt="Our logo should be here">
+
 </div>
 <br>
 
 <!-- Button to trigger modal -->
 <p class = "text-center">
-<a href="#myModal" role="button" class="btn" data-toggle="modal" align = "center">Got any suggestions?</a>
- 
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <h3 id="myModalLabel"> Contact Info </h3>
-  </div>
-  <div class="modal-body">
-    <p>Just shoot us an email to clubstature@gmail.com!</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <!-- <button class="btn btn-primary">Save changes</button>  -->
-  </div>
-</div>
+  <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Contact Info</a>
+
+  <!-- Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Got any suggestions or feedback?  Would you like to see a new feature?</h4>
+        </div>
+        <div class="modal-body">
+         Simply shoot us an email to clubstature@gmail.com!
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
 </p>
 
-<!-- End of button -->
+<!-- End of button -->    
+
+<div style = "text-align: center;">   <h1> Privacy Policy </h1>  </div>
+<br> <hr>
+
+<h3> The only data we collect from you is your username and email address.  <br> <br>
+	You may choose to submit your real name and institution you attend.  <br> <br>
+	Although this is by no means required, it will improve the authenticity of your review.  <br> </h3>
+
+<br><br><br> <hr>
 
 <table class="table table-striped table-hover">
   <thead>
@@ -89,7 +102,7 @@
     </tr>
   </tbody>
 </table>
-<span class="label pull-right"> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </span>
+<span class="label pull-right"><h4> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </h4> </span>
 
 </div>
 

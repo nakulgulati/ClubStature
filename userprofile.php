@@ -17,6 +17,7 @@ if(!loggedIn()) {
   echo $nav;
 ?>
 <?php
+  $status=1;
 global $connection;
   $ccheck=false;
   $query="SELECT * FROM users WHERE username='{$_SESSION['username']}'";
@@ -39,19 +40,10 @@ global $connection;
     redirect_to("userprofile.php");
   }
 ?>
-<head>
-  <title>User Profile</title>
-</head>
-<style>
-body
-{
-background-color:#660033;
-}
-</style>
 
 <div class="wrapper">
   <div class="container">
-    <div class="hero-unit hidden-phone">
+    <div class="well">
       <!--body content here-->
       <h1 class="text-center">Account Admin</h1>
       <?php
@@ -64,7 +56,7 @@ background-color:#660033;
       echo "<br>";
       echo "<h4> Your email id</h4>";
       echo "<h3><p class=\"text-info\"> {$email}</h3> </p>";
-      echo "<a href=\"changemail.php\"><button>Change email ID</button></a>";
+      //echo "<a href=\"changemail.php\"><button>Change email ID</button></a>";
       echo "</br>";
       ?>
       
@@ -97,15 +89,103 @@ background-color:#660033;
 	
       
 
-      <span>
-	<a href="forgotPassword.php"><button type="button" class="btn btn-info">Forgot password</button></a>
-  <a href="mailtestPassword.php"><button type="button" class="btn btn-info">Mailing Test password</button></a>
-	<a href="changePassword.php"><button type="button" class="btn btn-info">Change password</button></a>
-	<a href="deleteAccount.php"><button type="button" class="btn btn-danger">Delete account</button></a>
+      <span class="inset">
+	<a data-toggle="modal" href="#ce" data-target="#ce">Change Email-ID</a>
+	<a data-toggle="modal" href="#cp" data-target="#cp">Change password</a>
+	<a href="deleteAccount.php">Delete account</a>
       </span>
+      <!-- Change email ID -->
+      <div class="modal" id="ce">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	      <h4 class="modal-title">Modal title</h4>
+	    </div>
+	    <div class="modal-body">
+	      <form class="form-inline" name="mailchange" method="POST">
+		<label for="newmail">New Email-ID</label>
+		<input type="text" name="mail" size="20" maxlength="40" placeholder="emailID@example.com" required/>
+		<button typoe="submit" class="btn-primary" name="submitE">Submit</button>
+	      </form>
+	    </div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
       <!--end content-->
+      
+      
+      
+      <!-- Change Password -->
+      <div class="modal" id="cp">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	      <h4 class="modal-title">Modal title</h4>
+	    </div>
+	    <div class="modal-body">
+	      <!--form area-->
+		<form class="form-horizontal" method="POST">
+		    <legend>
+			So you wanna change your password, <?php echo $_SESSION['username']; ?> ?
+		    </legend>
+		    <div class="control-group">
+			<label class="control-label" >Original Password</label>
+			<div class="controls">
+			    <input type="password" name="originpass" placeholder="Your original password" required>
+			</div>
+		    </div>
+		    <div class="control-group">
+			<label class="control-label" for="newpass">New Password</label>
+			<div class="controls">
+			    <input type="password" id="newpass" name="newpass" placeholder="Your new password (atleast 6 characters)" required>
+			</div>
+		    </div>
+		    <div class="control-group">
+			<label class="control-label" for="verifynewpass">Verify New Password</label>
+			<div class="controls">
+			    <input type="password" id="verifynewpass" name="verifynewpass" placeholder="^The thing up there" required>
+			</div>
+		    </div> 
+		    <input type="submit" name="submitP">
+		</form>
+	    </div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <!--end content-->
+      <br/>
+      <?php
+	if($status==1)
+	{
+	  echo "Error! You Must Enter a new Unique Email ID... try again";
+	}
+      ?>
     </div>
   </div>
 </div>         
-            
+<?php
+  if(isset($_POST['submitE']))
+  {
+    $mail=$_POST['mail'];
+    if(isUnique("users","email",$mail))
+    {
+      changemail($_POST['mail']);
+      redirect_to("userprofile.php");
+      $status=0;
+    }
+    else
+    {
+      $status=1;
+      echo "Error! You Must Enter a new Unique Email ID... try again";
+      echo "<script>$('#ce').modal('show')</script>";
+    }
+    
+  }
+  if(isset($_POST['submitP']))
+  {
+    changePassword($_SESSION['username'],$_POST['originpass'],$_POST['newpass'],$_POST['verifynewpass']);
+  }
+?>
 <?php include("includes/footer.php"); ?>

@@ -1,9 +1,74 @@
-.wrapper{
-	padding-top: 100px;
+/*nav bar styles*/
+.navContent{
+	display: inline-block;
+	vertical-align: bottom;
+	min-width: 1000px;
 }
+
+.logo{
+	max-width: 200px;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+/*body{
+	background-image: url('../img/back.png');
+	background-repeat: repeat-x;
+	background-position-y: 82px;
+}*/
+
+.jumbotron > H1{
+	font-family: 'Racing Sans One', cursive;
+}
+
+.main > li{
+	font-family: 'Joti One', cursive;
+	font-weight: bold;
+	font-size: 25px;
+	margin-right: 20px;
+}
+
+#myTabContent{
+	background: #fff;
+}
+
+#searchError{
+	margin-left: 15px;
+	width: 457px;
+}
+
+.navbar-nav>li>a{
+	padding-top: 20px;
+}
+
+.nav > li:first-child{
+	margin-left: 20px;
+}
+
+.nav > li:last-child{
+	margin-right: 0px;
+}
+
+#searchClub,#searchCollege{
+	width: 282px;
+}
+
+.wrapper{
+	margin-top: 100px;
+}
+
+.greeting{
+	display: inline-block;
+	font-size: 20px;
+}
+
 
 legend > span{
 	font-size: 14px;
+}
+
+.results{
+	margin-left: 15px;
 }
 
 .content{
@@ -22,6 +87,8 @@ legend > span{
 .user{
 	text-decoration: none;
 	color: white;
+	display: inline;
+	font-size: 20px;
 }
 
 .user:hover, .user:focus{
@@ -54,7 +121,7 @@ h3.user{
 }
 .scoreOther{
 	font-size: 40px;
-	margin-top: 40px;
+	margin-top: 25px;
 }
 
 #info{
@@ -71,7 +138,15 @@ h3.user{
 }
 
 #club{
-	height: 260px;
+	max-width: 940px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#comment,#reviews{
+	max-width: 940px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 #clubImg{
@@ -83,8 +158,12 @@ h3.user{
 	display: inline;	
 }
 
-#commentArea{
+/*#commentArea{
 	width: 886px;
+}*/
+
+#postComment{
+	margin-top: 10px;
 }
 
 .review{
@@ -153,18 +232,6 @@ h3.user{
 
 .help:hover{
 	text-decoration: none;
-}
-
-#clubSearch,#collegeSearch{
-	margin-right: 10px;
-}
-
-#searchBy{
-	position: fixed;
-}
-
-#categorySelect{
-	margin-left: 230px;
 }
 
 span.inset{
