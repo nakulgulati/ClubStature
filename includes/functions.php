@@ -24,15 +24,19 @@
     }
     
     function printNav($public = true){
-        $output = "";
-        $output .= "<div class=\"navbar navbar-inverse navbar-fixed-top\">
-                    <div class=\"navbar-inner\">
-                    <div class=\"container\">
-                    <a class=\"brand\" href=\"index.php\">";
-        $output .= NAME;            
-        $output .= "</a>";
+        $output =   "<div class=\"container\">
+                    <div class=\"navbar navbar-inverse navbar-fixed-top\">
+                    <a href=\"index.php\"><img class=\"logo\" src=\"img/logo.png\"></a>    
+                    <div class=\"container navContent\">
+                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".nav-collapse\">
+                    <span class=\"icon-bar\"></span>
+                    <span class=\"icon-bar\"></span>
+                    <span class=\"icon-bar\"></span>
+                    </button>"; 
+      
         if($public == true){
-            $output .= "<ul class=\"nav\">";
+            $output .= "<div class=\"nav-collapse collapse\">
+                        <ul class=\"nav navbar-nav main\">";
      
             $menuSet = getNavItems();
             
@@ -46,23 +50,21 @@
                 //Display user welcome message
                 $userDetails = getUserInfo($_SESSION['userId']);
                 $output .= "<div class=\"btn-group pull-right\">
-                            <h3 class=\"user dopdown-toggle\" data-toggle=\"dropdown\">{$userDetails['username']}</h3>
+                            <p class=\"navbar-text greeting\" >Greetings,</p><p class=\"navbar-text user dopdown-toggle\" data-toggle=\"dropdown\"> {$userDetails['username']}</p>
                             <ul class=\"dropdown-menu\">
-                            <li><a href=\"userprofile.php\"><i class=\"icon-user\"></i>Settings</a></li>
+                            <li><a href=\"user.php?option=profile\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"logout.php\"><i class=\"icon-off\"></i> Log Out</a></li>
-			    
+                            <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
                             </ul>
-                            </div>"; //end of btn group
+                            </div>";
             }
             else{
-                $output .= "<div class = \"pull-right\">
-                            <a href = \"login.php\" class = \"btn btn-success\">Login</a>
-                            <a href = \"signup.php\" class = \"btn btn-info\">Sign Up</a>
-                            <div>";
+                $output .= "<div class=\"pull-right\">
+                            <a class=\"btn btn-success navbar-btn\" href=\"login.php\">Login</a>
+                            <a class=\"btn btn-info navbar-btn\" href=\"signup.php\">Sign Up</a>
+                            </div>";
             }            
             $output .= "</div>
-                        </div>
                         </div>
                         </div>
                         </div>";
@@ -94,7 +96,7 @@
 	    array_push($errors,"Username cannot contain special characters.");
 	}
     
-	if(strlen($password)>6){
+	if(strlen($password)>=6){
 	    if($password != $verifyPassword){
 	        array_push($errors,"Passwords don't match.");
 	    }
@@ -243,7 +245,7 @@
     function isCombinationUnique($table,$field1,$field2,$value1,$value2){
             global $connection;
             
-            $query="SELECT * FROM {$table} WHERE {$field1} = {$value1} and {$field2} = '{$value2}'";
+            $query="SELECT * FROM {$table} WHERE {$field1} = '{$value1}' and {$field2} = '{$value2}'";
             $result=mysql_query($query,$connection);
             $var= mysql_num_rows($result);
             
@@ -291,24 +293,31 @@
 		}
 	}
         
-        function printTopList($fieldname){
+        function printTopList($fieldname, $collfilter = ""){
+            $query = "";
+            if ($collfilter == ""){
+                $query = "SELECT * FROM clubs ORDER BY {$fieldname} ASC LIMIT 10";
+            }
+
+            else{
+                $query = "SELECT * FROM clubs WHERE college = '{$collfilter}' ORDER BY {$fieldname} ASC LIMIT 10";
+            }
             global $connection;
-            $output="";
-            $query = "SELECT * FROM clubs ORDER BY {$fieldname} ASC LIMIT 10";
+            $output="";  
             $listSet = mysql_query($query,$connection);
             
             if($fieldname!="hits"){
                 $output="<table class=\"table-striped\"
                         <tr><th>Club Name</th><th>Rating</th></tr>";
                 while($listItem = mysql_fetch_array($listSet)){
-                    $output.=   "<tr><td>{$listItem['clubName']}</td><td>{$listItem[$fieldname]}</td></tr>";
+                    $output.=   "<tr><td><a href=\"club.php?clubID={$listItem['id']}\">{$listItem['clubName']}</a></td><td>{$listItem[$fieldname]}</td></tr>";
                 }
                 $output.="</table>";
             }
             elseif($fieldname=="hits"){
                 $output="<ol>";
                 while($listItem = mysql_fetch_array($listSet)){
-                    $output.="<li>{$listItem['clubName']}</li>";
+                    $output.="<li><a href=\"club.php?clubID={$listItem['id']}\">{$listItem['clubName']}</a></li>";
                 }
                 $output.="</ol>";
             }
@@ -317,23 +326,26 @@
         
         function hit($clubId){
             global $connection;
-            $query="SELECT SUM(hits) AS hits FROM clubs;";
+            $query="SELECT hits FROM clubs where id = {$clubId} LIMIT 1;";
             $resultSet = mysql_query($query,$connection);
             $result = mysql_fetch_array($resultSet);
             $hits = $result['hits'];
             $hits++;
-            $query="UPDATE `clubs` SET `hits`={$hits} WHERE `id` = {$clubId}";
-            mysql_query($query,$connection);
+            
+            if(isset($_SERVER['HTTP_REFERER'])){
+                $query="UPDATE `clubs` SET `hits`={$hits} WHERE `id` = {$clubId}";
+                mysql_query($query,$connection);  
+            }
         }
         
         function sendMail($userId, $status, $bodyContent = ""){
 
         $host     = "ssl://smtp.gmail.com";
         $port     = "465";
-        $username = "darklord.mario666@gmail.com";  //<> give errors
-        $password = "darklordeshwar";
+        $username = "clubstature@gmail.com";  //<> give errors
+        $password = "pokemonshowdown";
 
-        $from     = "<darklord.mario666@gmail.com>";
+        $from     = "<clubstature@gmail.com>";
 
         //echo $userId;
 
@@ -341,8 +353,8 @@
 
         $to = "<" . $userInfo['email'] . ">";
 
-
-        $body = file_get_contents('./emailUpperHalf.html');
+        $body = "";
+        //$body = file_get_contents('./emailUpperHalf.html');
         if($status == "forgot"){  //if you forgot your password
             
             $body .= "Hello {$userInfo['username']},
@@ -373,7 +385,7 @@
             $subject = "Account creation ";
         }
 
-        $body .= file_get_contents('./emailLowerHalf.html');
+        //$body .= file_get_contents('./emailLowerHalf.html');
 
         $headers = array(
         'From'    => $from,
@@ -430,5 +442,197 @@
 			return $newName;
     		}
 	}
-    }    
+    }
+    
+    function updateInfo($username,$newName,$newEmail,$newCollege){
+	global $connection;
+	
+	$userDetails = getData("users","*","username",$username);
+	$user = mysql_fetch_array($userDetails);
+	
+	
+	if($user['name']==$newName && $user['email']==$newEmail && $user['college']==$newCollege){
+	    return 0;
+	}
+	else{
+	    $query = "UPDATE users SET ";
+	    
+	    if(($user['name']!=$newName) && ($user['email']==$newEmail) && ($user['college']==$newCollege)){
+		$query.="name = '{$newName}' ";
+	    }
+	    elseif($user['name']!=$newName){
+		$query.="name = '{$newName}', ";
+	    }
+	    
+	    if(($user['email']!=$newEmail) && ($user['college']!=$newCollege)){
+		$query.="email = '{$newEmail}', ";
+	    }
+	    elseif($user['email']!=$newEmail){
+		$query.="email = '{$newEmail}' ";	    
+	    }
+	    
+	    if($user['college']!=$newCollege){
+		$query.="college = '{$newCollege}' ";
+	    }
+	
+	    $query.="WHERE username = '{$username}'";
+	    
+	    if(mysql_query($query,$connection)){
+		return 1;
+	    }
+	    else{
+		return 0;
+	    }
+	}
+    }
+    
+    function changePassword($username,$oldPass,$newPass,$verifyNewPass){
+	global $connection;
+	$errors = array("status" => 0);
+	
+	$userDetails = getData("users","*","username",$username);
+	$user = mysql_fetch_array($userDetails);
+	
+	if(sha1($oldPass)!=$user['hashedPass']){
+	    array_push($errors,"Old password incorrect.");
+            return $errors;
+	}
+	
+	if(strlen($newPass)>=6){
+	    if($newPass != $verifyNewPass){
+	        array_push($errors,"Passwords don't match.");
+	    }
+	}
+	else{
+	    array_push($errors,"Password should be minimum 6 characters.");
+	}
+	
+	if($oldPass==$newPass){
+	    array_push($errors,"Old password and new password cannot be same.");
+            return $errors;
+	}
+	$newPass = sha1($newPass);
+	if(count($errors)==1){
+            $query = "UPDATE users SET hashedPass = '{$newPass}' WHERE username = '{$username}'";
+	
+            if(mysql_query($query,$connection)){
+                $errors['status'] = 1;
+                array_push($errors,"Password changes successfully");
+                
+            }
+	}
+	return $errors;
+	
+    }
+    
+    function printUserNav($selectedOpt){
+	$output = "<ul class=\"nav nav-pills nav-stacked\">";
+	
+	$resultSet = getData("userNav","*","heading","1");
+	$output.="<legend>Information</legend>";
+	
+	while($row = mysql_fetch_array($resultSet)){
+	    $output.="<li";
+	    if($row['option']==$selectedOpt){
+		$output.=" class=\"active\" ";
+	    }
+	    
+	    $output.="><a href=\"user.php?option={$row['option']}\">{$row['menu']}</a></li>";   
+	}
+	
+	$resultSet = getData("userNav","*","heading","2");
+	$output.="<legend>Change Account Settings</legend>";
+	
+	while($row = mysql_fetch_array($resultSet)){
+	    $output.="<li";
+	    if($row['option']==$selectedOpt){
+		$output.=" class=\"active\" ";
+	    }
+	    
+	    $output.="><a href=\"user.php?option={$row['option']}\">{$row['menu']}</a></li>";   
+	}
+        
+        $resultSet = getData("userNav","*","heading","3");
+	$output.="<legend>Log Out</legend>";
+	
+	while($row = mysql_fetch_array($resultSet)){
+	    $output.="<li";
+	    if($row['option']==$selectedOpt){
+		$output.=" class=\"active\" ";
+	    }
+	    
+	    $output.="><a href=\"logout.php\">{$row['menu']}</a></li>";   
+	}
+	
+	$output.="</ul>";
+	echo $output;
+    }
+    
+    function updateNewPassword($resetCode,$newPass,$verifyNewPass){
+        global $connection;
+        $errors = array();
+        $userDetails = getData("users","*","resetCode",$resetCode);
+        $user = mysql_fetch_array($userDetails);
+        
+        //password processing
+        if(strlen($newPass)>=6){
+	    if($newPass != $verifyNewPass){
+	        array_push($errors,"Passwords don't match.");
+                return $errors;
+	    }
+	}
+	else{
+	    array_push($errors,"Password should be minimum 6 characters.");
+            return $errors;
+	}
+        
+        $newPass = sha1($newPass);
+        
+        $query="UPDATE users SET hashedPass = '{$newPass}', resetCode = -1 WHERE resetCode = {$resetCode}";
+        
+        if(mysql_query($query,$connection)){
+            array_push($errors,"Password reset successful.");
+            return $errors;
+        }
+    }
+    
+    function generateNewPassword($email){
+        global $connection;
+        
+        $resultSet = getData("users","*","email",$email);
+        if(mysql_num_rows($resultSet)==1){
+            $row = mysql_fetch_array($resultSet);
+            
+            $randNo = rand(100,10000);
+            
+            $query="UPDATE  `users` SET  `resetCode`={$randNo} WHERE  `email` =  '{$email}' ";
+            mysql_query($query,$connection);
+            
+            return $randNo;
+        }
+        else{
+            return -1;
+        }
+    }
+    
+    function logout($returnTo = ""){
+        session_start(); //Finding session start
+    
+        // 2. Unset all the session variables
+        $_SESSION = array(); // Reset all the session variables
+        
+        if(isset($_COOKIE[session_name()])) {
+            //Destroy the session cookie
+                setcookie(session_name(), '', time()-42000, '/');
+        }
+    
+        session_destroy(); //Destroy the session
+        
+        if($returnTo !=""){
+            redirect_to("{$returnTo}");        
+        }
+        
+    }
+    
+    
 ?>
