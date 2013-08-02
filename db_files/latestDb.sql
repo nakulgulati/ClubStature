@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2013 at 11:53 AM
+-- Generation Time: Aug 02, 2013 at 06:52 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.16
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `clubs` (
   `hits` int(11) NOT NULL DEFAULT '0',
   `creator` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `clubs`
@@ -82,7 +82,9 @@ INSERT INTO `clubs` (`id`, `clubName`, `description`, `category`, `college`, `ov
 (5, 'Work', 'dfgdssd', 'Academic and Professional', 'UC-Berkeley', '0.0', '0.0', '0.0', '0.0', 'test.com', '2-Work', 2, ''),
 (7, 'kdnskfn', 'dfg', 'Academic and Professional', 'NIIT University, Neemrana', '3.2', '2.0', '4.0', '4.0', 'dss', '', 6807, ''),
 (9, 'test 5', 'dfsfsdf', 'Academic and Professional', 'UC-Berkeley', '0.0', '0.0', '0.0', '0.0', 'hjhj', '5-test5', 91, ''),
-(11, 'Michigan Hackers', 'A group of people who use technology to build cool things!', 'Science and Technology', 'University of Michigan', '6.6', '7.7', '6.6', '5.5', 'http://michiganhackers.org/', '5-MichiganHackers', 1, '');
+(11, 'Michigan Hackers', 'A group of people who use technology to build cool things!', 'Science and Technology', 'University of Michigan', '6.6', '7.7', '6.6', '5.5', 'http://michiganhackers.org/', '5-MichiganHackers', 2, ''),
+(12, 'htrdedfghuiokjfd', 'sdrtyuikojufdfg', 'Visual and Performing Arts', 'IIT-Kanpur', '0.0', '0.0', '0.0', '0.0', 'http://www.umich.edu/', '', 0, 'amitkalay'),
+(13, 'IEEE-ACM', 'frtgyhujokiugfvghj', 'Science and Technology', 'University of Michigan', '0.0', '0.0', '0.0', '0.0', 'https://www.facebook.com/sidduraheja', '', 0, 'amitkalay');
 
 -- --------------------------------------------------------
 
@@ -230,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `usernav` (
   `option` varchar(30) NOT NULL,
   `heading` varchar(1) NOT NULL,
   PRIMARY KEY (` id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `usernav`
@@ -239,7 +241,9 @@ CREATE TABLE IF NOT EXISTS `usernav` (
 INSERT INTO `usernav` (` id`, `menu`, `option`, `heading`) VALUES
 (1, 'Profile', 'profile', '1'),
 (2, 'Edit User Profile', 'editProfile', '2'),
-(3, 'Change Password', 'changePass', '2');
+(3, 'Change Password', 'changePass', '2'),
+(4, 'Delete Account', 'deleteAccount', '2'),
+(5, 'Logout', 'logout', '3');
 
 -- --------------------------------------------------------
 
@@ -254,7 +258,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(40) NOT NULL,
   `hashedPass` varchar(40) NOT NULL,
   `college` varchar(50) NOT NULL,
-  `clubscreated` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -262,11 +265,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `name`, `email`, `hashedPass`, `college`, `clubscreated`) VALUES
-(1, 'nakul', 'nakul', 'nakul@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', 'University of Michigan', ''),
-(2, 'gloom', '', 'gloom@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', '', ''),
-(4, 'chootad', '', 'chootmail@ghmfd', '5fa339bbbb1eeaced3b52e54f44576aaf0d77d96', '', ''),
-(5, 'amitkalay', 'Amit Kalay', 'amitkalay@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'University of Michigan', '');
+INSERT INTO `users` (`id`, `username`, `name`, `email`, `hashedPass`, `college`) VALUES
+(1, 'nakul', 'nakul', 'nakul@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', 'University of Michigan'),
+(2, 'gloom', '', 'gloom@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', ''),
+(4, 'chootad', '', 'chootmail@ghmfd', '5fa339bbbb1eeaced3b52e54f44576aaf0d77d96', ''),
+(5, 'amitkalay', 'Amit Kalay', 'amitkalay@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'University of Michigan');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
