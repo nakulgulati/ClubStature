@@ -95,8 +95,9 @@
     
       $fileName = uploadFile($fileName,$clubName);
 
-          if (isCombinationUnique("clubs","college","clubName",$college,$clubName)){
-            $query="INSERT INTO clubs(clubName,college,category,url,description,image) VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}')";
+          if (isCombinationUnique("clubs","college","clubName",$college,$clubName) and (loggedIn())  ){
+            $query="INSERT INTO clubs(clubName,college,category,url,description,image) 
+            VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}')";
             mysql_query($query,$connection);
             $output="<div class=\"alert alert-success\">
             Club Creation successful!
@@ -106,7 +107,7 @@
 
     else{
           $output="<div class=\"alert alert-error\">
-          Club addition failed: a duplicate organization exists.
+          Club addition failed: You are either not logged in, or a duplicate organization exists.
           </div>";
           echo $output;
       //echo "You've entered a duplicate club";
