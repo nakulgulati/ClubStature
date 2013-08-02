@@ -92,12 +92,14 @@
       $url=$_POST['url'];
       $description=$_POST['description'];
       $fileName = $_FILES["file"]["name"];
+      $userInformation = getUserInfo($_SESSION['userId']);
+      $creatorName = $userInformation['username'];
     
       $fileName = uploadFile($fileName,$clubName);
 
           if (isCombinationUnique("clubs","college","clubName",$college,$clubName) and (loggedIn())  ){
-            $query="INSERT INTO clubs(clubName,college,category,url,description,image) 
-            VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}')";
+            $query="INSERT INTO clubs(clubName,college,category,url,description,image,creator)   
+            VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}','{$creatorName}')";
             mysql_query($query,$connection);
             $output="<div class=\"alert alert-success\">
             Club Creation successful!
