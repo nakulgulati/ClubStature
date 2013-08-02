@@ -46,9 +46,9 @@ if(isset($_POST['submit'])){
     $result = mysql_query($commentQuery,$connection);
     }
     else{
-        if(!loggedIn()){
+        //if(!loggedIn()){
             redirect_to("login.php");
-        }
+        //}
     }
 }
 
@@ -137,7 +137,7 @@ if(isset($_POST['submit'])){
                             </div>";
                 echo $rating;
             }else{
-                echo "<span class=\"help-block\">You must me logged in to rate!!!</span>";
+                echo "<span class=\"help-block\">You must me logged in to submit your rating!</span>";
             }
         ?>
         </form>
