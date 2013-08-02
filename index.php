@@ -35,7 +35,7 @@
         <div class="row">
         <div class="jumbotron">
         <h1>Welcome to <?php echo NAME; ?>...</h1>
-        <p>Here you can discuss and review your current or prospective organizations on campus!&nbsp;</p>
+        <p>Here you learn more about the extracurricular organizations you&#39;re interested in.!&nbsp;</p>
     </div>
         </div>
     <div class="row">
@@ -45,7 +45,7 @@
             <legend>Know the club name?</legend>
             <div class="col-lg-6">
                 <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
-                <span class="help-block">Or for advanced search go to <a href="search.php">Search Clubs</a></span>
+                <span class="help-block">You can also use a more <a href="search.php">general search.</a></span>
             </div>
             <button type="submit" class="btn btn-primary" name="submit" value="submit">Search <span class="glyphicon glyphicon-search"></span></button>
         </form>
