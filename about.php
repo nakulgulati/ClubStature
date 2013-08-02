@@ -4,7 +4,7 @@
 <?php include("includes/header.php"); ?>
 
 <?php
-//Prints nav bar
+//Prints nav bar.
   $nav = printNav(true);
   echo $nav;
 ?>
