@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="img/C.png" alt=""><!--put images here-->
+              <img src="clubprofile.png" alt=""><!--put images here-->
               <div class="carousel-caption">
               </div>
             </div>
