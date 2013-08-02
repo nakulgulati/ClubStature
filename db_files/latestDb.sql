@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 28, 2013 at 08:51 PM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: 127.0.0.1
+-- Generation Time: Aug 02, 2013 at 11:53 AM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `ratemyclub`
 --
-CREATE DATABASE `ratemyclub` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `ratemyclub` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `ratemyclub`;
 
 -- --------------------------------------------------------
@@ -69,19 +69,20 @@ CREATE TABLE IF NOT EXISTS `clubs` (
   `url` varchar(50) NOT NULL,
   `image` varchar(50) NOT NULL,
   `hits` int(11) NOT NULL DEFAULT '0',
+  `creator` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `clubs`
 --
 
-INSERT INTO `clubs` (`id`, `clubName`, `description`, `category`, `college`, `overallRating`, `rigor`, `cohesiveness`, `scheduleFriendliness`, `url`, `image`, `hits`) VALUES
-(1, 'Club Stature', 'This is the website\r\n', 'Other', 'NIIT University, Neemrana', 0.0, 0.0, 0.0, 0.0, 'clubstature.com', 'logo.png', 125463),
-(5, 'Work', 'dfgdssd', 'Academic and Professional', 'UC-Berkeley', 0.0, 0.0, 0.0, 0.0, 'test.com', '2-Work', 2),
-(7, 'kdnskfn', 'dfg', 'Academic and Professional', 'NIIT University, Neemrana', 3.2, 2.0, 4.0, 4.0, 'dss', '', 6807),
-(8, 'test 5', 'dfsfsdf', 'Academic and Professional', 'UC-Berkeley', 0.0, 0.0, 0.0, 0.0, 'hjhj', '4-test5', 2),
-(9, 'test 5', 'dfsfsdf', 'Academic and Professional', 'UC-Berkeley', 0.0, 0.0, 0.0, 0.0, 'hjhj', '5-test5', 91);
+INSERT INTO `clubs` (`id`, `clubName`, `description`, `category`, `college`, `overallRating`, `rigor`, `cohesiveness`, `scheduleFriendliness`, `url`, `image`, `hits`, `creator`) VALUES
+(1, 'Club Stature', 'This is the website\r\n', 'Other', 'NIIT University, Neemrana', '0.0', '0.0', '0.0', '0.0', 'clubstature.com', 'logo.png', 125464, ''),
+(5, 'Work', 'dfgdssd', 'Academic and Professional', 'UC-Berkeley', '0.0', '0.0', '0.0', '0.0', 'test.com', '2-Work', 2, ''),
+(7, 'kdnskfn', 'dfg', 'Academic and Professional', 'NIIT University, Neemrana', '3.2', '2.0', '4.0', '4.0', 'dss', '', 6807, ''),
+(9, 'test 5', 'dfsfsdf', 'Academic and Professional', 'UC-Berkeley', '0.0', '0.0', '0.0', '0.0', 'hjhj', '5-test5', 91, ''),
+(11, 'Michigan Hackers', 'A group of people who use technology to build cool things!', 'Science and Technology', 'University of Michigan', '6.6', '7.7', '6.6', '5.5', 'http://michiganhackers.org/', '5-MichiganHackers', 1, '');
 
 -- --------------------------------------------------------
 
@@ -215,15 +216,15 @@ CREATE TABLE IF NOT EXISTS `rating` (
 --
 
 INSERT INTO `rating` (`id`, `clubId`, `clubName`, `userId`, `username`, `rigor`, `cohesiveness`, `scheduleFriendliness`) VALUES
-(1, 7, 'kdnskfn', 1, 'nakul', 2.0, 4.0, 4.0);
+(1, 7, 'kdnskfn', 1, 'nakul', '2.0', '4.0', '4.0');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userNav`
+-- Table structure for table `usernav`
 --
 
-CREATE TABLE IF NOT EXISTS `userNav` (
+CREATE TABLE IF NOT EXISTS `usernav` (
   ` id` int(11) NOT NULL AUTO_INCREMENT,
   `menu` varchar(30) NOT NULL,
   `option` varchar(30) NOT NULL,
@@ -232,10 +233,10 @@ CREATE TABLE IF NOT EXISTS `userNav` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `userNav`
+-- Dumping data for table `usernav`
 --
 
-INSERT INTO `userNav` (` id`, `menu`, `option`, `heading`) VALUES
+INSERT INTO `usernav` (` id`, `menu`, `option`, `heading`) VALUES
 (1, 'Profile', 'profile', '1'),
 (2, 'Edit User Profile', 'editProfile', '2'),
 (3, 'Change Password', 'changePass', '2');
@@ -253,16 +254,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(40) NOT NULL,
   `hashedPass` varchar(40) NOT NULL,
   `college` varchar(50) NOT NULL,
+  `clubscreated` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `name`, `email`, `hashedPass`, `college`) VALUES
-(1, 'nakul', 'nakul', 'nakul@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', 'University of Michigan'),
-(2, 'gloom', '', 'gloom@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', '');
+INSERT INTO `users` (`id`, `username`, `name`, `email`, `hashedPass`, `college`, `clubscreated`) VALUES
+(1, 'nakul', 'nakul', 'nakul@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', 'University of Michigan', ''),
+(2, 'gloom', '', 'gloom@gmail.com', 'd54b76b2bad9d9946011ebc62a1d272f4122c7b5', '', ''),
+(4, 'chootad', '', 'chootmail@ghmfd', '5fa339bbbb1eeaced3b52e54f44576aaf0d77d96', '', ''),
+(5, 'amitkalay', 'Amit Kalay', 'amitkalay@yahoo.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'University of Michigan', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

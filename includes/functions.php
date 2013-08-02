@@ -354,7 +354,7 @@
         $to = "<" . $userInfo['email'] . ">";
 
         $body = "";
-        //$body = file_get_contents('./emailUpperHalf.html');
+        $body = file_get_contents('./emailUpperHalf.html');
         if($status == "forgot"){  //if you forgot your password
             
             $body .= "Hello {$userInfo['username']},
@@ -380,19 +380,24 @@
    
             $body .= "Hello {$userInfo['username']},
             \n Thank you for creating an account with us!
-            \n \t    -ClubStature";
+            \n \n \t    -ClubStature";
 
             $subject = "Account creation ";
         }
 
-        //$body .= file_get_contents('./emailLowerHalf.html');
+        $body .= file_get_contents('./emailLowerHalf.html');
 
         $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => "text/html; charset=ISO-8859-1",
         'From'    => $from,
         'To'      => $to,
         'Subject' => $subject
+        //$headers .= "MIME-Version: 1.0\r\n";
+        //Content-Type => text/html; charset=ISO-8859-1\r\n;
         );
-        $smtp = Mail::factory('smtp', array(
+        $smtp = Mail::factory('smtp', 
+         array(
         'host'     => $host,
         'port'     => $port,
         'auth'     => true,

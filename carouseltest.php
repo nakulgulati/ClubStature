@@ -4,40 +4,60 @@
 <?php include("includes/header.php"); ?>
 
 <?php
-  //generating suggestions for typeahead
-  
-  //list of club names
-  $clubList = "[";
-  $resultSet = getData("clubs","clubName");
-  
-  while($row = mysql_fetch_array($resultSet)){
-  $clubList .="'{$row['clubName']}',";
-  }
-  $clubList .="]";
-?>
-
-
-<?php
 //Prints nav bar
   $nav = printNav(true);
   echo $nav;
 ?>
-<?php
-  //search processing
-  if(isset($_GET['submit'])){
-    if($_GET['searchClub']!=NULL){
-      $clubSet = getData("clubs","*","clubName",$_GET['searchClub']);
-    }
-  }
-?>
+
+
+
 <div class="wrapper">
-    <div class="container">
-        <div class="row">
-        <div class="jumbotron">
-        <h1>Welcome to <?php echo NAME; ?>...</h1>
-        <p>Here you learn more about the extracurricular organizations you&#39;re interested in.!&nbsp;</p>
-    </div>
+  <div class="container">
+    <div class="hero-unit hidden-phone">
+      <!--body content here-->
+  
+      <div class="container">
+        <div class="well">
+          <h1 style="text-align:center"><b>Make the most of college!</b></h1>
         </div>
+        <div class="well">
+          <div id="carousel-example-generic" class="carousel slide">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
+  
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="img/SF.png"alt=""><!--put images here-->
+              <div class="carousel-caption">
+              </div>
+            </div>
+            <div class="item">
+              <img src="img/R.png" alt=""><!--put images here-->
+              <div class="carousel-caption">
+              </div>
+            </div>
+            <div class="item">
+              <img src="clubprofile.png" alt=""><!--put images here-->
+              <div class="carousel-caption">
+              </div>
+            </div>
+          </div>
+  
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="icon-prev"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="icon-next"></span>
+          </a>
+          </div>
+        </div>
+    </div>
     <div class="row">
         
     <div id="searchBox" class="well col-lg-7">
@@ -45,7 +65,7 @@
             <legend>Know the club name?</legend>
             <div class="col-lg-6">
                 <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
-                <span class="help-block">You can also use a more <a href="search.php">general search.</a></span>
+                <span class="help-block">Or for advanced search go to <a href="search.php">Search Clubs</a></span>
             </div>
             <button type="submit" class="btn btn-primary" name="submit" value="submit">Search <span class="glyphicon glyphicon-search"></span></button>
         </form>
@@ -91,12 +111,10 @@
     </div>
     </div>
     </div>
+           
+    </div>
+  </div>
 </div>
-
+            
+            
 <?php include("includes/footer.php"); ?>
-
-<script>
-    $('.club').typeahead({
-        local: <?php echo $clubList; ?>
-    });
-</script>

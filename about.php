@@ -17,12 +17,12 @@
   <div class="hero-unit">
  <div style = "text-align: center;">   <img src="logo.png" width= 400px alt="Club Stature"> </div>
     <br> <h3>
-    <p>Ever thought about getting more involved in college, but didn&#39;t know where to start? 
-	   Well do we have something awesome for you! ClubStature is the best way to browse and discuss clubs before you commit.  
-	   We try to help you make the best of your college experience by helping you choose the organization that is the right fit for you. 
+    <p> Looking for ways to make the most of your college or high school's extracurricular opportunities?
+    Well, look no further! Here at clubstature, we try to help you choose the organizations that are the right fit for you. 
 	</p>
 	<p>
-	Here, you can read and write reviews about various clubs on your campus and get a clearer picture of what they&#39;re about.
+	Here, you can read and write reviews about what other people are saying about the various clubs on your campus. 
+	We want to make sure you&#39;re well-informed before committing.
 	Happy hunting!
 	</p>  </h3>
     
