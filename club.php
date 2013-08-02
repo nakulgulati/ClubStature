@@ -97,7 +97,7 @@ if(isset($_POST['submit'])){
             </div>
         </div>
         <div id="rating">
-           <p class="score"><?php echo $clubDetails['overallRating']; ?></p>
+           <abbr title = "Overall Rating" class = "initialism"><p class="score"><?php echo $clubDetails['overallRating']; ?></p>
         </div>
 
         <div id="ratingForm">
