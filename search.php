@@ -45,12 +45,6 @@
   $clubList .="]";
 ?>
 
-
-<?php
-//Prints nav bar
-  $nav = printNav(true);
-  echo $nav;
-?>
 <?php
   //search processing
   if(isset($_GET['submit'])){
@@ -69,73 +63,75 @@
   }
 ?>
 <div class="wrapper">
-    <div class="container">
-        
-    <h1 class="page-header">Search Clubs</h1>
-    <form method="get" class="form-inline" action="search.php">
-      
-      <div class="col-lg-3" id="clubSearch">
-          <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
-      </div>      
-      
-      <div class="col-lg-3" id="collegeSearch">
-          <input class="form-control typeahead college" type="text" id="searchCollege" name="searchCollege" placeholder="Enter college name to search"/>
-      </div>
-      
-      <button type="submit" class="btn btn-primary" name="submit" value="submit">Search</button>
-      
-      <div class="col-lg-2">  
-      <select class="form-control" id="searchBy" name="searchBy">
-            <option value="clubs">Club</option>
-            <option value="colleges">College</option>
-        </select>
-      </div>
-      
-         
-    <div id="categorySelect">
     <?php
-         $output = "<div class=\"col-lg-3\">  
-                    <select class=\"form-control\" name =\"category\">";
-        $output.= "<option>(Optional)</option> ";
-        //geting the list of categories
-         $resultSet = getData("categoryname","category");
-         while($row = mysql_fetch_array($resultSet)){
-           $output .= "<option>{$row['category']}</option>";
-         }
-      
-        $output .= " </select>
-                    </div>";
-         echo $output;
+    //Prints nav bar
+        $nav = printNav(true);
+        echo $nav;
     ?>
-    </div>
-    </form>
-    
-    <?php
-    $output="";
-    if(isset($_GET['submit'])){
-      if($_GET['searchClub']!=NULL || $_GET['searchCollege']!=NULL ){
-        if(mysql_num_rows($clubSet)>0){
-          $output.="<br><table class=\"table table-striped results\">";
-          $output.="<tr><th>Club Name</th><th>College</th><th>Category</th><th>Overall Rating</th></tr>";
-            while($club = mysql_fetch_array($clubSet)){
-              $output.="<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['category']}</td><td>{$club['overallRating']}</td></tr>";
-          }
+    <div class="wrapper-content">
+        <div class="container">
+            <h1 class="page-header">Search Clubs</h1>
+            <form method="get" class="form-inline" action="search.php">
+                <div class="col-lg-3" id="clubSearch">
+                    <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>
+                </div>      
+                <div class="col-lg-3" id="collegeSearch">
+                  <input class="form-control typeahead college" type="text" id="searchCollege" name="searchCollege" placeholder="Enter college name to search"/>
+                </div>
+                <button type="submit" class="btn btn-primary" name="submit" value="submit">Search</button>
           
-          $output.="</table>";
-          echo $output;
-      }
-      else{
-        echo "No match found :(<br>
-              Hint: Use the suggestions on typing to search. :)";    
-      }
-    }
-      elseif($_GET['searchClub']==NULL && $_GET['searchCollege']==NULL){
-            echo "<br><div id=\"searchError\" class=\"alert alert-warning col-lg-5\">
-                Dawg you got to enter something to search!!!
-                </div>";
-        }
-    }  
-    ?>
+                <div class="col-lg-2">  
+                <select class="form-control" id="searchBy" name="searchBy">
+                      <option value="clubs">Club</option>
+                      <option value="colleges">College</option>
+                  </select>
+                </div>
+          
+             
+                <div id="categorySelect">
+                <?php
+                     $output = "<div class=\"col-lg-3\">  
+                                <select class=\"form-control\" name =\"category\">";
+                    $output.= "<option>(Optional)</option> ";
+                    //geting the list of categories
+                     $resultSet = getData("categoryname","category");
+                     while($row = mysql_fetch_array($resultSet)){
+                       $output .= "<option>{$row['category']}</option>";
+                     }
+                  
+                    $output .= " </select>
+                                </div>";
+                     echo $output;
+                ?>
+                </div>
+            </form>
+            <?php
+            $output="";
+            if(isset($_GET['submit'])){
+              if($_GET['searchClub']!=NULL || $_GET['searchCollege']!=NULL ){
+                if(mysql_num_rows($clubSet)>0){
+                  $output.="<br><table class=\"table table-striped results\">";
+                  $output.="<tr><th>Club Name</th><th>College</th><th>Category</th><th>Overall Rating</th></tr>";
+                    while($club = mysql_fetch_array($clubSet)){
+                      $output.="<tr><td><a href=\"club.php?clubID={$club['id']}\">".$club['clubName']."</a></td><td>{$club['college']}</td><td>{$club['category']}</td><td>{$club['overallRating']}</td></tr>";
+                  }
+                  
+                  $output.="</table>";
+                  echo $output;
+              }
+              else{
+                echo "No match found :(<br>
+                      Hint: Use the suggestions on typing to search. :)";    
+              }
+            }
+              elseif($_GET['searchClub']==NULL && $_GET['searchCollege']==NULL){
+                    echo "<br><div id=\"searchError\" class=\"alert alert-warning col-lg-5\">
+                        Dawg you got to enter something to search!!!
+                        </div>";
+                }
+            }  
+            ?>
+        </div>
     </div>
 </div>
 

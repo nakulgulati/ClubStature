@@ -1,24 +1,27 @@
-/*nav bar styles*/
+html,body{
+	height: 100%;
+}
+
+body{
+	background-color: #f5f5f5;
+}
+
+.wrapper{
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0px auto -50px;
+	padding: 0 0 50px;
+}
+
+.wrapper-content{
+	margin-top: 82px;
+}
+
 .navContent{
 	display: inline-block;
 	vertical-align: bottom;
 	min-width: 1000px;
-}
-
-.logo{
-	max-width: 200px;
-	margin-top: 10px;
-	margin-left: 20px;
-}
-
-/*body{
-	background-image: url('../img/back.png');
-	background-repeat: repeat-x;
-	background-position-y: 82px;
-}*/
-
-.jumbotron > H1{
-	font-family: 'Racing Sans One', cursive;
 }
 
 .main > li{
@@ -26,15 +29,6 @@
 	font-weight: bold;
 	font-size: 25px;
 	margin-right: 20px;
-}
-
-#myTabContent{
-	background: #fff;
-}
-
-#searchError{
-	margin-left: 15px;
-	width: 457px;
 }
 
 .navbar-nav>li>a{
@@ -49,12 +43,51 @@
 	margin-right: 0px;
 }
 
-#searchClub,#searchCollege{
-	width: 282px;
+.logo{
+	max-width: 200px;
+	margin-top: 10px;
+	margin-left: 20px;
 }
 
-.wrapper{
-	margin-top: 100px;
+.banner{
+	background-image: url('../img/texture.png');
+	background-repeat: repeat-x;
+	margin-bottom: 20px;
+	min-height: 190px;
+}
+
+.welcomeText{
+	font-family: 'armyrangers';
+	font-size: 80px;
+	display: inline-block;
+	color: #000;
+}
+
+.subText{
+	color: #fff;
+	font-family: 'bradley';
+	font-size: 30px;
+}
+
+.welcomeText-club{
+	color: #0099cc;
+}
+
+.welcomeText-stature{
+	color: #ff4444;
+}
+
+#myTabContent{
+	background: #fff;
+}
+
+#searchError{
+	margin-left: 15px;
+	width: 457px;
+}
+
+#searchClub,#searchCollege{
+	width: 282px;
 }
 
 .greeting{
@@ -251,3 +284,11 @@ abbr:hover{
 	cursor: pointer;
 }
 
+.footer{
+	background: #222;
+	height: 50px;      /* Height of the footer */
+	padding-top: 10px;
+	color: #000;
+	bottom: 0;
+	width: 100%;
+}

@@ -639,5 +639,25 @@
         
     }
     
+    function deleteAccount($username,$pass){
+	global $connection;
+	$userDetails = getData("users","*","username",$username);
+	$user = mysql_fetch_array($userDetails);
+	
+	$errors = array();
+	
+	if(sha1($pass) == $user['hashedPass']){
+	    $query="DELETE FROM users WHERE username='{$username}'";
+	    
+	    if(mysql_query($query, $connection)){
+		$errors['status'] = 1;
+		return $errors;
+	    }
+	}
+	else{
+	    $errors['status'] = 0;
+	    return $errors;
+	}
+    }
     
 ?>

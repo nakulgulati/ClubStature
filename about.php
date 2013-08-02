@@ -3,16 +3,14 @@
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-<?php
+
+
+<div class="wrapper">
+  <?php
 //Prints nav bar.
   $nav = printNav(true);
   echo $nav;
 ?>
-
-<html>
-<body>
-
-<div class="wrapper">
 <div class="container">
   <div class="hero-unit">
  <div style = "text-align: center;">   <img src="logo.png" width= 400px alt="Club Stature"> </div>
@@ -106,6 +104,4 @@
 
 </div>
 
-</body>
-</html>
 <?php include("includes/footer.php"); ?>

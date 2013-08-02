@@ -31,6 +31,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	    <link href="css/bootstrap-glyphicons.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	    <link rel="stylesheet" type="text/css" href="css/customFonts.css">
 	    <link rel="stylesheet" type="text/css" href="css/typeahead.js-bootstrap.css">
 		<link href='http://fonts.googleapis.com/css?family=Racing+Sans+One' rel='stylesheet' type='text/css'>
 			<link href='http://fonts.googleapis.com/css?family=Joti+One' rel='stylesheet' type='text/css'>
