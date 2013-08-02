@@ -33,19 +33,18 @@
       $nav = printNav(true);
       echo $nav;
     ?>
-    <div class="wrapper-content">
-
-        <div class="banner">
-            <div class="container">
-                <div class="row">
-                    <p class="welcomeText">Welcome to&nbsp;</p>
-                    <p class="welcomeText welcomeText-club">Club&nbsp;</p>
-                    <p class="welcomeText welcomeText-stature">Stature</p>
-                    <p class="subText">Here you can find the extracurricular organizations you're interested in.</p>
-                </div>
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <p class="welcomeText">Welcome to&nbsp;</p>
+                <p class="welcomeText welcomeText-club">Club&nbsp;</p>
+                <p class="welcomeText welcomeText-stature">Stature</p>
+                <p class="subText">Here you can find the extracurricular organizations you're interested in.</p>
             </div>
         </div>
+    </div>
     
+    <div class="wrapper-content-home">
         <div class="container">
             <div class="row">            
                 <div id="searchBox" class="well col-lg-7">

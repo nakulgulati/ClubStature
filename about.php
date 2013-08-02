@@ -6,36 +6,26 @@
 
 
 <div class="wrapper">
-  <?php
-//Prints nav bar.
-  $nav = printNav(true);
-  echo $nav;
-?>
-<div class="container">
-  <div class="hero-unit">
- <div style = "text-align: center;">   <img src="logo.png" width= 400px alt="Club Stature"> </div>
-    <br> <h3>
-    <p> Looking for ways to make the most of your college or high school's extracurricular opportunities?
-    Well, look no further! Here at clubstature, we try to help you choose the organizations that are the right fit for you. 
-	</p>
-	<p>
-	Here, you can read and write reviews about what other people are saying about the various clubs on your campus. 
-	We want to make sure you&#39;re well-informed before committing.
-	Happy hunting!
-	</p>  </h3>
-    
-	
-  </div>
-</div>
-
-<div style="text-align: center;">
-
-</div>
-<br>
-
-<!-- Button to trigger modal -->
-<p class = "text-center">
-  <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Contact Info</a>
+    <?php
+    //Prints nav bar.
+      $nav = printNav(true);
+      echo $nav;
+    ?>
+    <div class="wrapper-content">
+        <div class="container">
+            <h3>
+                <p>
+                Looking for ways to make the most of your college or high school's extracurricular opportunities?
+                Well, look no further! Here at clubstature, we try to help you choose the organizations that are the right fit for you. 
+                </p>
+                <p>
+                Here, you can read and write reviews about what other people are saying about the various clubs on your campus. 
+                We want to make sure you&#39;re well-informed before committing.
+                Happy hunting!
+                </p>
+            </h3>
+            
+             <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Contact Info</a>
 
   <!-- Modal -->
   <div class="modal" id="myModal">
@@ -52,6 +42,27 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 
+            
+        </div>
+    </div>
+  
+
+<div class="container">
+  <div class="hero-unit">
+    <br> 
+    
+	
+  </div>
+</div>
+
+<div style="text-align: center;">
+
+</div>
+<br>
+
+<!-- Button to trigger modal -->
+<p class = "text-center">
+ 
 </p>
 
 <!-- End of button -->    
