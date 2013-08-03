@@ -80,7 +80,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Contributors</th>
+      <th>Chief Contributors</th>
       <th>Facebook Page</th>
 	  <th> Email </th>
     </tr>
@@ -111,8 +111,7 @@
     </tr>
   </tbody>
 </table>
-<span class="label pull-right"><h4> Want to contribute? Fork us on <a href="https://github.com/nakulgulati/RateMyClub"> Github </a> </h4> </span>
-
 </div>
+
 
 <?php include("includes/footer.php"); ?>
