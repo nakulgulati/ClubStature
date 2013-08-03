@@ -4,11 +4,6 @@
 <?php include("includes/header.php"); ?>
 
 <?php
-//Prints nav bar
-  $nav = printNav(false);
-  echo $nav;
-?>
-<?php
 if(!isset($_POST['submit'])){
     
     if(strpos($_SERVER['HTTP_REFERER'],"signup.php")){
@@ -55,56 +50,63 @@ if(isset($_POST['submit'])){
 ?>
 
 <div class="wrapper">
-    <div class="container">
-	<div class = "row">
-	    <div class = "well col-offset-3 col-lg-6">
-		<!--form area-->
-		<form class="form-horizontal" method="post" action="login.php">
-		    <legend>Sign In
-			<span class="pull-right">(or <a href="signup.php">create account</a>)</span>
-		    </legend>
-		    <div class="form-group">
-			<label for="username" class="col-lg-2 control-label">Username</label>
-			<div class="col-lg-10">
-			    <input type="text" class="form-control" id="username" name="username" placeholder="Your username" required>
+    <?php
+    //Prints nav bar
+      $nav = printNav(false);
+      echo $nav;
+    ?>
+    <div class="wrapper-content">
+	<div class="container">
+	    <div class = "row">
+		<div class = "well col-offset-3 col-lg-6">
+		    <!--form area-->
+		    <form class="form-horizontal" method="post" action="login.php">
+			<legend>Sign In
+			    <span class="pull-right">(or <a href="signup.php">create account</a>)</span>
+			</legend>
+			<div class="form-group">
+			    <label for="username" class="col-lg-2 control-label">Username</label>
+			    <div class="col-lg-10">
+				<input type="text" class="form-control" id="username" name="username" placeholder="Your username" required>
+			    </div>
 			</div>
-		    </div>
-		    <div class="form-group">
-			<label for="password" class="col-lg-2 control-label">Password</label>
-			<div class="col-lg-10">
-			    <input type="password" id="password" class="form-control" name="password" placeholder="******" required>
-			    <br>
-			    <button type="submit" name="submit" class="btn btn-success">Sign in</button>
-			    <a href="forgotPassword.php" class="btn btn-primary">Forgot Password?</a>
+			<div class="form-group">
+			    <label for="password" class="col-lg-2 control-label">Password</label>
+			    <div class="col-lg-10">
+				<input type="password" id="password" class="form-control" name="password" placeholder="******" required>
+				<br>
+				<button type="submit" name="submit" class="btn btn-success">Sign in</button>
+				<a href="forgotPassword.php" class="btn btn-primary">Forgot Password?</a>
+			    </div>
 			</div>
-		    </div>
-		</form>
+		    </form>
+		    
+		    <?php
+		    if($status==1){
+			$output="<div class=\"alert alert-success\">
+				Login successful.
+				</div>";
+			$url = $_SESSION['url'];
+			$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL={$url}\">";
+			echo $output;
+			    
+		    }
+		    else if($status==0){
+			$output="<div class=\"alert alert-error\">
+				Login failed, check details and try again.
+				</div>";
+			echo $output;
+		    }
+		    else{
+			echo "";
+		    }
+		?>	
+		</div>
+	    </div>
 		
-		<?php
-		if($status==1){
-		    $output="<div class=\"alert alert-success\">
-			    Login successful.
-			    </div>";
-		    $url = $_SESSION['url'];
-		    $output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL={$url}\">";
-		    echo $output;
-			
-		}
-		else if($status==0){
-		    $output="<div class=\"alert alert-error\">
-			    Login failed, check details and try again.
-			    </div>";
-		    echo $output;
-		}
-		else{
-		    echo "";
-		}
-	    ?>	
 	    </div>
 	</div>
-	    
-	</div>
-    </div>
+    </div> 
 </div>
 
 

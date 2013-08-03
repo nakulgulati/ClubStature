@@ -32,7 +32,7 @@
         <div class="container">
            <div class="row">
             <div class="col-lg-10">
-              <div class="well" style="font-size: 24px">
+              <div class="well" style="background-color: #9c9a9e;font-size: 24px;text-align: justify">
                 <b>
                 <p>
                 Looking for ways to make the most of your college or high school's extracurricular opportunities?
@@ -57,9 +57,10 @@
             
         </div>
         </div>
+        <br/>
         <div class="container">
           <div class="row">
-        <div class="well" style="font-size: 24px">
+        <div class="well" style="background-color: #9c9a9e; font-size: 24px">
           <b>
           The only data we collect from you is your username and email address.  <br> <br>
           You may choose to submit your real name and institution you attend.  <br> <br>
@@ -73,20 +74,27 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-4">
-              <div class="well" style="">Nakul Gulati
+              <div class="well"><b>Nakul Gulati</b>
               <br/>
-                Nakul's data
+                Student at NIIT<br/>
+                email: nakul.behindthestrokes@gmail.com<br/>
+                Nakul's Facebook Page : <a href="https://www.facebook.com/nakul.gulati?fref=ts"> Nakul's page</a>
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="well" style="">Amit Kalay
+              <div class="well"Amit Kalay
               <br/>
-                Amit's data
+                <b>Amit Kalay</b><br/>
+                Student at University of Michigan<br/>
+                email: amitkal@umich.edu   <br/>
+                Amit's Facebook Page : <a href="https://www.facebook.com/amit.kalay.9?fref=ts">Amit's page</a>
               </div>
             </div>
             <div class="col-lg-4">
-              <div class="well" style="">Sudip Guha<br/>
-                Sudip's data
+              <div class="well"><b>Sudip Guha</b><br/>
+                Student at UC Berkeley.<br/>
+                email: sudipguha29@gmail.com<br/>
+                Sudip's Facebook Page : <a href="https://www.facebook.com/sudip.guha.524?fref=ts"> Sudip's page </a>
               </div>
             </div>
           </div>
