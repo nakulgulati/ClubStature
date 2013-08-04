@@ -64,28 +64,23 @@
 			$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
 			$defResults = mysql_query($defaultQuery, $connection);
 			$rowDefault = mysql_fetch_array($defResults);
-			echo $rowDefault['clubName'];
+			echo $rowDefault['description'];
 
 			//New Club Name			
 			echo "<div class=\"form-group\">
 		    <label for=\"newClubName\" class=\"col-lg-2 control-label\"> New Name of Your Club </label>
 		    <div class=\"col-lg-6\">
-			<input type=\"text\" value = \"o teri bhen di\"class=\"form-control\" id=\"newClubName\" name=\"newClubName\" placeholder= \"Club name\" required>
+			<input type=\"text\" value = '{$rowDefault['clubName']}' class=\"form-control\" id=\"newClubName\" name=\"newClubName\" required>
 		    </div> <br>
 			</div> <br>";
 
 			//New Club Category
-			echo "<div class=\"form-group\">
-		    <label for=\"newCategory\" class=\"col-lg-2 control-label\"> New Category </label>
-		    <div class=\"col-lg-6\">
-			<input type=\"text\" class=\"form-control\" id=\"newCategory\" name=\"newCategory\" placeholder= \"The category\" required>
-		    </div> <br>
-			</div> <br>";
+			
 
-			/*<?php
+			
 			    $output = "<select class=\"form-control\" name =\"newCollege\">";
 			    $query = "SELECT name FROM colleges ORDER BY name";
-			    //$output.= "<option></option>";
+			    $output.= "<option>'{$rowDefault['category']}'</option>";
 			    //getting the list of colleges
 			    $resultset = mysql_query($query, $connection);
 			    //$resultSet = getData("colleges","name");
@@ -95,7 +90,7 @@
 			
 			    $output .= " </select>";
 			    echo $output;
-			?> */
+			
 
 			//New Club College
 			echo "<div class=\"form-group\">
@@ -109,7 +104,7 @@
 			echo "<div class=\"form-group\">
 		    <label for=\"newUrl\" class=\"col-lg-2 control-label\"> New Url </label>
 		    <div class=\"col-lg-6\">
-			<input type=\"text\" class=\"form-control\" id=\"newUrl\" name=\"newUrl\" placeholder= \"The new link to your club\" required>
+			<input type=\"text\" value = '{$rowDefault['url']}' class=\"form-control\" id=\"newUrl\" name=\"newUrl\" required>
 		    </div> <br>
 			</div> <br>";
 
@@ -117,7 +112,7 @@
 			echo "<div class=\"form-group\">
 		    <label for=\"newDesc\" class=\"col-lg-2 control-label\"> New Club Description </label>
 		    <div class=\"col-lg-6\">
-			<textarea class=\"form-control\" name=\"newDesc\" class=\"input-block-level\" placeholder = \"Your updated description\"></textarea><br>
+			<textarea class=\"form-control\" name=\"newDesc\" class=\"input-block-level\">{$rowDefault['description']}</textarea><br>
 		    </div> <br>
 			</div> <br>";
 
