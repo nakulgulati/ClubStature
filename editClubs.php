@@ -45,18 +45,82 @@
 		    </div>
 		</div>
 		    
-		    </div>
-		</form>
-		</div>
+	</div>
+	</form>
+
+</div>
 
 
 	</div>
 
 <center>
-	<?php 
-	if (isset($_GET['editMyClubs'])){
-		echo "The form will appear here";
-	}
+
+	<?php
+		if (isset($_GET['editMyClubs'])) {
+			$query = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' ";
+
+
+			//New Club Name			
+			echo "<div class=\"form-group\">
+		    <label for=\"newClubName\" class=\"col-lg-2 control-label\"> New Name of Your Club </label>
+		    <div class=\"col-lg-6\">
+			<input type=\"text\" value = \"o teri bhen di\"class=\"form-control\" id=\"newClubName\" name=\"newClubName\" placeholder= \"Club name\" required>
+		    </div> <br>
+			</div> <br>";
+
+			//New Club Category
+			echo "<div class=\"form-group\">
+		    <label for=\"newCategory\" class=\"col-lg-2 control-label\"> New Category </label>
+		    <div class=\"col-lg-6\">
+			<input type=\"text\" class=\"form-control\" id=\"newCategory\" name=\"newCategory\" placeholder= \"The category\" required>
+		    </div> <br>
+			</div> <br>";
+
+			<?php /*
+			    $output = "<select class=\"form-control\" name =\"newCollege\">";
+			    $query = "SELECT name FROM colleges ORDER BY name";
+			    //$output.= "<option></option>";
+			    //getting the list of colleges
+			    $resultset = mysql_query($query, $connection);
+			    //$resultSet = getData("colleges","name");
+			    while($row = mysql_fetch_array($resultset)){
+				$output .= "<option>{$row['name']}</option>";
+			    }
+			
+			    $output .= " </select>";
+			    echo $output;
+			*/?>
+
+			//New Club College
+			echo "<div class=\"form-group\">
+		    <label for=\"newCollege\" class=\"col-lg-2 control-label\"> New College </label>
+		    <div class=\"col-lg-6\">
+			<input type=\"text\" class=\"form-control\" id=\"newCollege\" name=\"newCollege\" placeholder= \"The new college\" required>
+		    </div> <br>
+			</div> <br>";
+
+			//New Club Url
+			echo "<div class=\"form-group\">
+		    <label for=\"newUrl\" class=\"col-lg-2 control-label\"> New Url </label>
+		    <div class=\"col-lg-6\">
+			<input type=\"text\" class=\"form-control\" id=\"newUrl\" name=\"newUrl\" placeholder= \"The new link to your club\" required>
+		    </div> <br>
+			</div> <br>";
+
+			//New Club Description
+			echo "<div class=\"form-group\">
+		    <label for=\"newDesc\" class=\"col-lg-2 control-label\"> New Club Description </label>
+		    <div class=\"col-lg-6\">
+			<textarea class=\"form-control\" name=\"newDesc\" class=\"input-block-level\" placeholder = \"Your updated description\"></textarea><br>
+		    </div> <br>
+			</div> <br>";
+
+
+
+
+		
+
+		}
 	?>
 		
 </center>

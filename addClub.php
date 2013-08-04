@@ -43,8 +43,8 @@
 			<?php
 			    $output = "<select class=\"form-control\" name =\"college\">";
 			    $query = "SELECT name FROM colleges ORDER BY name";
-			    $output.= "<option></option> ";
-			    //geting the list of colleges
+			    //$output.= "<option></option>";
+			    //getting the list of colleges
 			    $resultset = mysql_query($query, $connection);
 			    //$resultSet = getData("colleges","name");
 			    while($row = mysql_fetch_array($resultset)){

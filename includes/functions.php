@@ -271,7 +271,7 @@
 		&& ($_FILES["file"]["size"] < 1000000) //file size less than 1000 kB or 1 MB
 		&& in_array($extension, $allowedExts)) {
 			if($_FILES["file"]["error"] > 0){
-				echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+				echo "Return Code: " . $_FILES["file"]["error"] . "<br>";//I think this is 4 when no file is submitted
 			}
 			else {
 				echo "Upload: " . $_FILES["file"]["name"] . "<br>";
