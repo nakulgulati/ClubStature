@@ -6,6 +6,9 @@
 //Prints nav bar
   $nav = printNav(true);
   echo $nav;
+  if(!loggedIn()) {
+  	redirect_to("login.php");
+  }
 ?>
 
 <br><br><br><br><br>
@@ -19,26 +22,34 @@
 		<div class="form-group">
 		    <div class="col-lg-6">	
 			<?php
-			    $output = "<select class=\"form-control\" name =\"clubToEdit\">";
+			    
 			    $query = "SELECT clubName FROM clubs WHERE creator = '{$_SESSION['username']}' ORDER BY clubName";
-			    $output.= "";
-			    //geting the list of colleges
 			    $resultset = mysql_query($query, $connection);
-			    //$resultSet = getData("colleges","name");
-			    while($row = mysql_fetch_array($resultset)){
-				$output .= "<option>{$row['clubName']}</option>";
+			    //echo "You can edit " . mysql_num_rows($resultset) . " organizations";
+			    if(mysql_num_rows($resultset)==0){
+			    	echo "You haven't created any organizations!";
 			    }
+			    else{
+			    	$output = "<select class=\"form-control\" name =\"clubToEdit\">";
+			    	//$output.= "";
+			    	while($row = mysql_fetch_array($resultset)){
+						$output .= "<option>{$row['clubName']}</option>";
+			    	}
 			
-			    $output .= " </select>";
-			    echo $output;
+			    	$output .= " </select>";
+			    	echo $output; echo "<br>";
+			    	echo "<button type=\"submit\" name=\"editMyClubs\" class=\"btn btn-success\">Edit This Club </button>";
+				}
 			?>
 
 		    </div>
 		</div>
-		    <button type="submit" name="editMyClubs" class="btn btn-success">Edit This Club </button>
+		    
 		    </div>
 		</form>
 		</div>
+
+
 	</div>
 
 <center>
