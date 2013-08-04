@@ -75,20 +75,23 @@
 			</div> <br>";
 
 			//New Club Category
-			
-
-			
-			    $categoryOutput = "<select class=\"form-control\" name =\"newCollege\">";
-			    $categoryOutput.= "<option>'{$rowDefault['category']}'</option>";
+				
+				echo "<div class=\"form-group\">
+		    		<label for=\"newCategory\" class=\"col-lg-2 control-label\"> Updated Category </label>
+		    		<div class=\"col-lg-6\">";
+				$categoryOutput = "<select class=\"form-control\" name =\"newCategory\">";
+			    $categoryOutput .= "<option> {$rowDefault['category']} </option>";
 			    //getting the list of category names
 			  	//$resultSet = getData("colleges","name");
 			    $resultSet = getData("categoryname","category");
-			    while($categoryRow = mysql_fetch_array($resultSet)){
-				$categoryOutput .= "<option>{$categoryRow['categoryname']}</option>";
+			    while ($categoryRow = mysql_fetch_array($resultSet)){
+				$categoryOutput .= "<option>{$categoryRow['category']}</option>";
 			    }
 			
 			    $categoryOutput .= " </select>";
 			    echo $categoryOutput;
+
+			    echo "</div> <br> </div> <br>";
 			
 
 			//New Club College
