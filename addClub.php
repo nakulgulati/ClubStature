@@ -4,11 +4,13 @@
 <?php include("includes/header.php"); ?>
 
 <div class="wrapper">
+    
     <?php
     //Prints nav bar
       $nav = printNav(true);
       echo $nav;
     ?>
+
     <div class="wrapper-content">
 	<div class="container">
 	    <h1 class="page-header">Add a Club</h1>
@@ -16,7 +18,7 @@
 		<div class="form-group">
 		    <label for="clubName" class="col-lg-2 control-label">Name of Club</label>
 		    <div class="col-lg-6">
-			<input type="text" class="form-control" id="clubName" name="clubName" placeholder="Club name">
+			<input type="text" class="form-control" id="clubName" name="clubName" placeholder="Club name" required>
 		    </div>
 		</div>
 		<div class="form-group">
@@ -24,7 +26,7 @@
 		    <div class="col-lg-6">
 		    <?php
 			$output = "<select class=\"form-control\" name =\"category\">";
-			$output.= "<option></option> ";
+			//$output.= "<option></option> ";
 			//getting the list of categories
 			$resultSet = getData("categoryname","category");
 			while($row = mysql_fetch_array($resultSet)){
@@ -59,7 +61,7 @@
 		<div class="form-group">
 		    <label for="url" class="col-lg-2 control-label">Club Url</label>
 		    <div class="col-lg-6">
-			<input type="url" class="form-control" id="url" name="url" placeholder="club url">
+			<input type="url" class="form-control" id="url" name="url" placeholder="club url" required>
 		    </div>
 		</div>
 		
@@ -73,7 +75,7 @@
 		<div class="form-group">
 		    <label for="file" class="col-lg-2 control-label">Description</label>
 		    <div class="col-lg-6">
-			<textarea class="form-control" name="description" class="input-block-level"></textarea><br>
+			<textarea class="form-control" name="description" class="input-block-level" required></textarea><br>
 			<button type="submit" class="btn btn-primary" value="Create Club" name="addClub">Create Club</button>
 		    </div>
 		</div>
