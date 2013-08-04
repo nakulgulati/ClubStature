@@ -28,6 +28,9 @@
 			    //echo "You can edit " . mysql_num_rows($resultset) . " organizations";
 			    if(mysql_num_rows($resultset)==0){
 			    	echo "You haven't created any organizations!";
+
+			    	//put a 5-second timer here
+			    	redirect_to("index.php");
 			    }
 			    else{
 			    	$output = "<select class=\"form-control\" name =\"clubToEdit\">";
@@ -56,9 +59,12 @@
 <center>
 
 	<?php
+		global $connection;
 		if (isset($_GET['editMyClubs'])) {
-			$query = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' ";
-
+			$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
+			$defResults = mysql_query($defaultQuery, $connection);
+			$rowDefault = mysql_fetch_array($defResults);
+			echo $rowDefault['clubName'];
 
 			//New Club Name			
 			echo "<div class=\"form-group\">
@@ -76,7 +82,7 @@
 		    </div> <br>
 			</div> <br>";
 
-			<?php /*
+			/*<?php
 			    $output = "<select class=\"form-control\" name =\"newCollege\">";
 			    $query = "SELECT name FROM colleges ORDER BY name";
 			    //$output.= "<option></option>";
@@ -89,7 +95,7 @@
 			
 			    $output .= " </select>";
 			    echo $output;
-			*/?>
+			?> */
 
 			//New Club College
 			echo "<div class=\"form-group\">
