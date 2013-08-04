@@ -81,8 +81,6 @@
 		    		<div class=\"col-lg-6\">";
 				$categoryOutput = "<select class=\"form-control\" name =\"newCategory\">";
 			    $categoryOutput .= "<option> {$rowDefault['category']} </option>";
-			    //getting the list of category names
-			  	//$resultSet = getData("colleges","name");
 			    $resultSet = getData("categoryname","category");
 			    while ($categoryRow = mysql_fetch_array($resultSet)){
 				$categoryOutput .= "<option>{$categoryRow['category']}</option>";
@@ -95,12 +93,26 @@
 			
 
 			//New Club College
+			
+			//getting the list of category names
+			//$resultSet = getData("colleges","name");
 			echo "<div class=\"form-group\">
 		    <label for=\"newCollege\" class=\"col-lg-2 control-label\"> New College </label>
-		    <div class=\"col-lg-6\">
-			<input type=\"text\" class=\"form-control\" id=\"newCollege\" name=\"newCollege\" placeholder= \"The new college\" required>
-		    </div> <br>
-			</div> <br>";
+		    <div class=\"col-lg-6\">";
+
+		    	$collegeOutput = "<select class=\"form-control\" name =\"newCollege\">";
+			    $collegeOutput .= "<option> {$rowDefault['college']} </option>";
+			    $collegeResultSet = getData("colleges", "name");
+			    while ($collegeRow = mysql_fetch_array($collegeResultSet)){
+				$collegeOutput .= "<option>{$collegeRow['name']}</option>";
+			    }
+			
+			    $collegeOutput .= " </select>";
+			    echo $collegeOutput;
+
+		    echo "</div> <br> </div> <br>";
+
+			
 
 			//New Club Url
 			echo "<div class=\"form-group\">
