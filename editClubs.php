@@ -64,7 +64,7 @@
 			$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
 			$defResults = mysql_query($defaultQuery, $connection);
 			$rowDefault = mysql_fetch_array($defResults);
-			echo $rowDefault['description'];
+			//echo $rowDefault['description'];
 
 			//New Club Name			
 			echo "<div class=\"form-group\">
@@ -78,18 +78,17 @@
 			
 
 			
-			    $output = "<select class=\"form-control\" name =\"newCollege\">";
-			    $query = "SELECT name FROM colleges ORDER BY name";
-			    $output.= "<option>'{$rowDefault['category']}'</option>";
-			    //getting the list of colleges
-			    $resultset = mysql_query($query, $connection);
-			    //$resultSet = getData("colleges","name");
-			    while($row = mysql_fetch_array($resultset)){
-				$output .= "<option>{$row['name']}</option>";
+			    $categoryOutput = "<select class=\"form-control\" name =\"newCollege\">";
+			    $categoryOutput.= "<option>'{$rowDefault['category']}'</option>";
+			    //getting the list of category names
+			  	//$resultSet = getData("colleges","name");
+			    $resultSet = getData("categoryname","category");
+			    while($categoryRow = mysql_fetch_array($resultSet)){
+				$categoryOutput .= "<option>{$categoryRow['categoryname']}</option>";
 			    }
 			
-			    $output .= " </select>";
-			    echo $output;
+			    $categoryOutput .= " </select>";
+			    echo $categoryOutput;
 			
 
 			//New Club College
