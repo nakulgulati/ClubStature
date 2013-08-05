@@ -45,6 +45,7 @@
 			    	$output .= " </select>";
 			    	echo $output; echo "<br>";
 			    	echo "<button type=\"submit\" name=\"editMyClubs\" class=\"btn btn-success\">Edit This Club </button>";
+			    	echo "<button type=\"submit\" name=\"transfer\" class=\"btn btn-success\"> Transfer Ownership </button>";
 							}
 						?>
 
@@ -54,10 +55,21 @@
 			</div>
 	</form>  <!-- The pull dropdowns thing -->
 
+  </div>
 </div>
 
+<center>
+<form method = "post" name = "transferOther">
+	<?php
+		if (isset($_GET['transfer'])){
+			echo "Write the username of the person whom you want to transfer the club to. <br>";
+			echo "<input type = \"text\" name = \"transfer\">";
+		}
+	?>
 
-	</div>
+</form>
+</center>
+
 
 <center>
 <form method = "post" name = "makeChanges">
