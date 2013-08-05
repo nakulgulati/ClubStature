@@ -27,9 +27,14 @@
 			    		$resultset = mysql_query($query, $connection);
 			    		//echo "You can edit " . mysql_num_rows($resultset) . " organizations";
 			    		if(mysql_num_rows($resultset)==0){
-			    			echo "You haven't created any organizations!";
-							//put a 5-second timer here
-			    			redirect_to("index.php");
+							//put a 3-second timer here
+							$output="<div class=\"alert alert-error\">
+							You don't have permissions to edit any organizations!.
+							</div>";
+							$url = "index.php";	//change this as per requirement
+							$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL={$url}\">";
+							echo $output;
+			    			//redirect_to("index.php");
 			    		}
 			    		else{
 			    			$output = "<select class=\"form-control\" name =\"clubToEdit\">";
