@@ -3,18 +3,35 @@
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
+<script language="JavaScript">
+<!--
+function codename()
+{
+    if(document.inp.tick.checked)
+    {
+	document.inp.college.disabled=true;
+	document.inp.custom_college.disabled=false;
+    }
+    else
+    {
+	document.inp.college.disabled=false;
+	document.inp.custom_college.disabled=true;
+    }
+}
+//-->
+</script>
+
+<!--HTML Stuff with php-->
 <div class="wrapper">
-    
     <?php
     //Prints nav bar
       $nav = printNav(true);
       echo $nav;
     ?>
-
     <div class="wrapper-content">
 	<div class="container">
 	    <h1 class="page-header">Add a Club</h1>
-	    <form class="form-horizontal" method="post" action="addClub.php" enctype="multipart/form-data">
+	    <form name="inp" class="form-horizontal" method="post" action="addClub.php" enctype="multipart/form-data">
 		<div class="form-group">
 		    <label for="clubName" class="col-lg-2 control-label">Name of Club</label>
 		    <div class="col-lg-6">
@@ -25,8 +42,8 @@
 		    <label for="category" class="col-lg-2 control-label">Category</label>
 		    <div class="col-lg-6">
 		    <?php
-			$output = "<select class=\"form-control\" name =\"category\">";
-			//$output.= "<option></option> ";
+			$output = "<select class=\"form-control\" name =\"category\" required>";
+			$output.= "<option></option> ";
 			//getting the list of categories
 			$resultSet = getData("categoryname","category");
 			while($row = mysql_fetch_array($resultSet)){
@@ -43,7 +60,7 @@
 		    <label for="college" class="col-lg-2 control-label">College</label>
 		    <div class="col-lg-6">
 			<?php
-			    $output = "<select class=\"form-control\" name =\"college\">";
+			    $output = "<select class=\"form-control\" name =\"college\" required>";
 			    $query = "SELECT name FROM colleges ORDER BY name";
 			    //$output.= "<option></option>";
 			    //getting the list of colleges
@@ -56,6 +73,9 @@
 			    $output .= " </select>";
 			    echo $output;
 			?>
+			<label for="tick">can't find my college here...</label>
+			<input type="checkbox" onclick="codename()" name="tick" value="ticked"/>
+			<input type="text" name="custom_college"  required disabled/>
 		    </div>
 		</div>
 		<div class="form-group">
@@ -90,7 +110,14 @@
 <?php
     if(isset($_POST['addClub'])){
       $clubName=$_POST['clubName'];
-      $college=$_POST['college'];
+      if(isset($_POST['tick']))
+      {
+	$college=$_POST['custom_college'];
+      }
+      else
+      {
+	$college=$_POST['college'];
+      }
       $category=$_POST['category'];
       $url=$_POST['url'];
       $description=$_POST['description'];
@@ -119,5 +146,6 @@
     }
 }
 ?>
+
     
 <?php include("includes/footer.php"); ?>
