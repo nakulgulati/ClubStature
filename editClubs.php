@@ -33,7 +33,6 @@
 			    		}
 			    		else{
 			    			$output = "<select class=\"form-control\" name =\"clubToEdit\">";
-			    	//$output.= "";
 			    				while($row = mysql_fetch_array($resultset)){
 									$output .= "<option>{$row['clubName']}</option>";
 					    		}
@@ -91,7 +90,7 @@
 			    echo "</div> <br> </div> <br>";
 			
 
-			//New Club College
+			/*New Club College
 			
 			//getting the list of category names
 			//$resultSet = getData("colleges","name");
@@ -109,7 +108,7 @@
 			    $collegeOutput .= " </select>";
 			    echo $collegeOutput;
 
-		    echo "</div> <br> </div> <br>";
+		    echo "</div> <br> </div> <br>"; */
 
 			
 
@@ -138,7 +137,6 @@
 		if (isset($_POST['makeClubChanges']))
 		{
 		  $newClubName=$_POST['newClubName'];
-		  $newcollege=$_POST['newCollege'];
 		  $newCategory=$_POST['newCategory'];
 		  $newUrl=$_POST['newUrl'];
 		  $newDescription=$_POST['newDesc'];
@@ -148,7 +146,7 @@
 		  $defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
 		  $defResults = mysql_query($defaultQuery, $connection);
 		  $rowDefault = mysql_fetch_array($defResults);
-		  $updateQuery = "UPDATE clubs SET clubName = '{$newClubName}', description = '{$newDescription}', url = '{$newUrl}',college='{$newcollege}',category='{$newCategory}' WHERE id = {$rowDefault['id']}";
+		  $updateQuery = "UPDATE clubs SET clubName = '{$newClubName}', description = '{$newDescription}', url = '{$newUrl}', category='{$newCategory}' WHERE id = {$rowDefault['id']}";
 		  if(mysql_query($updateQuery, $connection))
 		  {
 			$output="<div class=\"alert alert-success\">

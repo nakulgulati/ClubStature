@@ -30,7 +30,7 @@
     <div class="wrapper-content">
       <div class="well">
         <form method="get" action="addcollege.php">
-            <input type="text" name="college"/>
+            <input type="text" name="college" required>
             <input type="submit" name="submit"/>
         </form>
         <div>
