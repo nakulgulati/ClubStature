@@ -39,7 +39,7 @@
                 <p class="welcomeText">Welcome to&nbsp;</p>
                 <p class="welcomeText welcomeText-club">Club&nbsp;</p>
                 <p class="welcomeText welcomeText-stature">Stature</p>
-                <p class="subText">Here you can find the extracurricular organizations you're interested in.</p>
+                <p class="subText">Find the extracurricular organizations you're interested in.</p>
             </div>
         </div>
     </div>
