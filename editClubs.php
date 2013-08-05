@@ -78,7 +78,7 @@
 				echo "<div class=\"form-group\">
 		    		<label for=\"newCategory\" class=\"col-lg-2 control-label\"> Updated Category </label>
 		    		<div class=\"col-lg-6\">";
-					$categoryOutput = "<select class=\"form-control\" name =\"newCategory\">";
+					$categoryOutput = "<select class=\"form-control\" name =\"newCategory\" required>";
 			    	$categoryOutput .= "<option> {$rowDefault['category']} </option>";
 			    	$resultSet = getData("categoryname","category");
 			    	while ($categoryRow = mysql_fetch_array($resultSet)){
@@ -99,7 +99,7 @@
 		    <label for=\"newCollege\" class=\"col-lg-2 control-label\"> New College </label>
 		    <div class=\"col-lg-6\">";
 
-		    	$collegeOutput = "<select class=\"form-control\" name =\"newCollege\">";
+		    	$collegeOutput = "<select class=\"form-control\" name =\"newCollege\" required>";
 			    $collegeOutput .= "<option> {$rowDefault['college']} </option>";
 			    $collegeResultSet = getData("colleges", "name");
 			    while ($collegeRow = mysql_fetch_array($collegeResultSet)){
@@ -125,7 +125,7 @@
 			echo "<div class=\"form-group\">
 		    <label for=\"newDesc\" class=\"col-lg-2 control-label\"> New Club Description </label>
 		    <div class=\"col-lg-6\">
-			<textarea class=\"form-control\" name=\"newDesc\" class=\"input-block-level\">{$rowDefault['description']}</textarea><br>
+			<textarea class=\"form-control\" name=\"newDesc\" class=\"input-block-level\" required>{$rowDefault['description']}</textarea><br>
 		    </div> <br>
 			</div> <br>";
 
@@ -151,16 +151,19 @@
 		  $updateQuery = "UPDATE clubs SET clubName = '{$newClubName}', description = '{$newDescription}', url = '{$newUrl}',college='{$newcollege}',category='{$newCategory}' WHERE id = {$rowDefault['id']}";
 		  if(mysql_query($updateQuery, $connection))
 		  {
-			echo "<br> Your club has been successfully updated...";
-			//wait a bit here like 2 seconds
-			//redirect to the user profile
-			$location="editclubs.php?clubToEdit={$newClubName}&editMyClubs=";
-			usleep(2000000);
-			redirect_to($location);
+			$output="<div class=\"alert alert-success\">
+				Edit successful.
+				</div>";
+			$url = "index.php";//change this as per requirement
+			$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL={$url}\">";
+			echo $output;
 		  }
 		  else
 		  {
-			echo "sorry, but the update did not work";
+			$output="<div class=\"alert alert-error\">
+				update failed, check details and try again.
+				</div>";
+			echo $output;
 		  }
 		}
 	?>	
