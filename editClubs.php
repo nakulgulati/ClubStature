@@ -135,23 +135,33 @@
 	?>
 	</form>
 	<?php
-		if (isset($_POST['makeClubChanges'])){
-			echo "<br> Your club has been updated!";
-			$newClubName=$_POST['newClubName'];
-      		$newcollege=$_POST['newCollege'];
-      		$newCategory=$_POST['newCategory'];
-      		$newUrl=$_POST['newUrl'];
-      		$newDescription=$_POST['newDesc'];
-      		//global $rowDefault;
-      		global $connection;
-
-      		$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
-			$defResults = mysql_query($defaultQuery, $connection);
-			$rowDefault = mysql_fetch_array($defResults);
-			
-			$updateQuery = "UPDATE clubs SET clubName = '{$newClubName}' description = {$newDescription}
-			WHERE id = {$rowDefault['id']}";
-			mysql_query($updateQuery, $connection); 
+		if (isset($_POST['makeClubChanges']))
+		{
+		  $newClubName=$_POST['newClubName'];
+		  $newcollege=$_POST['newCollege'];
+		  $newCategory=$_POST['newCategory'];
+		  $newUrl=$_POST['newUrl'];
+		  $newDescription=$_POST['newDesc'];
+		  //global $rowDefault;
+		  global $connection;
+      
+		  $defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
+		  $defResults = mysql_query($defaultQuery, $connection);
+		  $rowDefault = mysql_fetch_array($defResults);
+		  $updateQuery = "UPDATE clubs SET clubName = '{$newClubName}', description = '{$newDescription}', url = '{$newUrl}',college='{$newcollege}',category='{$newCategory}' WHERE id = {$rowDefault['id']}";
+		  if(mysql_query($updateQuery, $connection))
+		  {
+			echo "<br> Your club has been successfully updated...";
+			//wait a bit here like 2 seconds
+			//redirect to the user profile
+			$location="editclubs.php?clubToEdit={$newClubName}&editMyClubs=";
+			usleep(2000000);
+			redirect_to($location);
+		  }
+		  else
+		  {
+			echo "sorry, but the update did not work";
+		  }
 		}
 	?>	
 </center>
