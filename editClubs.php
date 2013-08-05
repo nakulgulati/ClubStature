@@ -2,8 +2,8 @@
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
+
 <?php
-//Prints nav bar
   $nav = printNav(true);
   echo $nav;
   if(!loggedIn()) {
@@ -18,38 +18,37 @@
 	    	<div class = "well col-offset-3 col-lg-6">
 		<!--form area--> 
 
-		<form method = "get">
-		<div class="form-group">
-		    <div class="col-lg-6">	
-			<?php
+				<form method = "get" name = "getDropdowns">
+					<div class="form-group">
+		    			<div class="col-lg-6">	
+						<?php
 			    
-			    $query = "SELECT clubName FROM clubs WHERE creator = '{$_SESSION['username']}' ORDER BY clubName";
-			    $resultset = mysql_query($query, $connection);
-			    //echo "You can edit " . mysql_num_rows($resultset) . " organizations";
-			    if(mysql_num_rows($resultset)==0){
-			    	echo "You haven't created any organizations!";
-
-			    	//put a 5-second timer here
-			    	redirect_to("index.php");
-			    }
-			    else{
-			    	$output = "<select class=\"form-control\" name =\"clubToEdit\">";
+			    		$query = "SELECT clubName FROM clubs WHERE creator = '{$_SESSION['username']}' ORDER BY clubName";
+			    		$resultset = mysql_query($query, $connection);
+			    		//echo "You can edit " . mysql_num_rows($resultset) . " organizations";
+			    		if(mysql_num_rows($resultset)==0){
+			    			echo "You haven't created any organizations!";
+							//put a 5-second timer here
+			    			redirect_to("index.php");
+			    		}
+			    		else{
+			    			$output = "<select class=\"form-control\" name =\"clubToEdit\">";
 			    	//$output.= "";
-			    	while($row = mysql_fetch_array($resultset)){
-						$output .= "<option>{$row['clubName']}</option>";
-			    	}
+			    				while($row = mysql_fetch_array($resultset)){
+									$output .= "<option>{$row['clubName']}</option>";
+					    		}
 			
 			    	$output .= " </select>";
 			    	echo $output; echo "<br>";
 			    	echo "<button type=\"submit\" name=\"editMyClubs\" class=\"btn btn-success\">Edit This Club </button>";
-				}
-			?>
+							}
+						?>
 
-		    </div>
-		</div>
+		    			</div>
+				</div>
 		    
-	</div>
-	</form>
+			</div>
+	</form>  <!-- The pull dropdowns thing -->
 
 </div>
 
@@ -57,14 +56,14 @@
 	</div>
 
 <center>
-
+<form method = "post" name = "makeChanges">
 	<?php
 		global $connection;
 		if (isset($_GET['editMyClubs'])) {
 			$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
 			$defResults = mysql_query($defaultQuery, $connection);
 			$rowDefault = mysql_fetch_array($defResults);
-			//echo $rowDefault['description'];
+			//echo $rowDefault['id'];
 
 			//New Club Name			
 			echo "<div class=\"form-group\">
@@ -79,12 +78,12 @@
 				echo "<div class=\"form-group\">
 		    		<label for=\"newCategory\" class=\"col-lg-2 control-label\"> Updated Category </label>
 		    		<div class=\"col-lg-6\">";
-				$categoryOutput = "<select class=\"form-control\" name =\"newCategory\">";
-			    $categoryOutput .= "<option> {$rowDefault['category']} </option>";
-			    $resultSet = getData("categoryname","category");
-			    while ($categoryRow = mysql_fetch_array($resultSet)){
-				$categoryOutput .= "<option>{$categoryRow['category']}</option>";
-			    }
+					$categoryOutput = "<select class=\"form-control\" name =\"newCategory\">";
+			    	$categoryOutput .= "<option> {$rowDefault['category']} </option>";
+			    	$resultSet = getData("categoryname","category");
+			    	while ($categoryRow = mysql_fetch_array($resultSet)){
+						$categoryOutput .= "<option>{$categoryRow['category']}</option>";
+			    	}
 			
 			    $categoryOutput .= " </select>";
 			    echo $categoryOutput;
@@ -130,14 +129,31 @@
 		    </div> <br>
 			</div> <br>";
 
-
-
-
-		
-
-		}
+			echo "<br>";
+			echo "<button type=\"submit\" name=\"makeClubChanges\" class=\"btn btn-success\"> Submit Changes </button>";
+			}
 	?>
-		
+	</form>
+	<?php
+		if (isset($_POST['makeClubChanges'])){
+			echo "<br> Your club has been updated!";
+			$newClubName=$_POST['newClubName'];
+      		$newcollege=$_POST['newCollege'];
+      		$newCategory=$_POST['newCategory'];
+      		$newUrl=$_POST['newUrl'];
+      		$newDescription=$_POST['newDesc'];
+      		//global $rowDefault;
+      		global $connection;
+
+      		$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
+			$defResults = mysql_query($defaultQuery, $connection);
+			$rowDefault = mysql_fetch_array($defResults);
+			
+			$updateQuery = "UPDATE clubs SET clubName = '{$newClubName}' description = {$newDescription}
+			WHERE id = {$rowDefault['id']}";
+			mysql_query($updateQuery, $connection); 
+		}
+	?>	
 </center>
 </div>
 
