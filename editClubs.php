@@ -151,12 +151,12 @@
 		  $updateQuery = "UPDATE clubs SET clubName = '{$newClubName}', description = '{$newDescription}', url = '{$newUrl}',college='{$newcollege}',category='{$newCategory}' WHERE id = {$rowDefault['id']}";
 		  if(mysql_query($updateQuery, $connection))
 		  {
-			echo "<br> Your club has been successfully updated...";
-			//wait a bit here like 2 seconds
-			//redirect to the user profile
-			$location="editclubs.php?clubToEdit={$newClubName}&editMyClubs=";
-			usleep(2000000);
-			redirect_to($location);
+			$output="<div class=\"alert alert-success\">
+				Club Edit Was Successful!
+				</div>";
+			$location="editclubs.php";
+			$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL={$location}\">";
+			echo $output;
 		  }
 		  else
 		  {
