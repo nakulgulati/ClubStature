@@ -61,19 +61,21 @@
 
 <!-- The transfer ownership thing starts here  -->
 <center>
-<form method = "get" name = "transferOther">
+<form method = "post">
 	<?php
 		if (isset($_GET['transfer'])){
 			echo "Write the username of the person you want to transfer the club to: <br>";
-			echo "<input type = \"text\" name = \"transferTo\" required>";
-			echo "<input type = \"submit\" value = \"submit\" name = \"transferTo\" ";
+			echo "<input type = \"text\" name = \"transferName\" required>";
+			echo "<button type=\"submit\" name=\"transferTo\" class=\"btn btn-success\"> Initiate transfer </button>";
 		}
 	?>
 </form>
 
 <?php
-	if (isset($_GET['transferTo'])) {
+	if (isset($_POST['transferTo'])) {
 		echo "This is what would happen if you actually typed something! <br>";
+		$newClubCreator = $_POST['transferName'];
+		echo $newClubCreator;
 	}
 ?>
 
