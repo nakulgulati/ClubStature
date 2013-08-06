@@ -73,9 +73,27 @@
 
 <?php
 	if (isset($_POST['transferTo'])) {
+		global $connection;
 		echo "This is what would happen if you actually typed something! <br>";
-		$newClubCreator = $_POST['transferName'];
-		echo $newClubCreator;
+		$newClubCreator = $_POST['transferName'];  //the person you're transferring ownership to
+		echo "The club you're gonna change is: " . $_GET['clubToEdit'];
+		
+		//getting club id here
+		$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
+		$defResults = mysql_query($defaultQuery, $connection);
+		$rowDefault = mysql_fetch_array($defResults);  // I have all the default club information now
+
+		$checkExistQuery = "SELECT * FROM users WHERE username = '{$newClubCreator}'";
+		$resultsssssss = mysql_query($checkExistQuery, $connection);
+		if (mysql_num_rows($resultsssssss) == 0){
+			echo "<br>That username does not exist.<br>";
+		} 
+		else{
+		
+		$changeQuery = "UPDATE clubs SET creator = '{$newClubCreator}' WHERE id = {$rowDefault['id']}";
+		mysql_query($changeQuery, $connection);
+		echo "Club transferred successfully!";
+		}//echo $rowDefault['id'];
 	}
 ?>
 
