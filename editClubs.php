@@ -29,7 +29,7 @@
 			    		if(mysql_num_rows($resultset)==0){
 							//put a 3-second timer here
 							$output="<div class=\"alert alert-error\">
-							You don't have permissions to edit any organizations!.
+							You don't have permissions to edit or transfer any organizations!.
 							</div>";
 							$url = "index.php";	//change this as per requirement
 							$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL={$url}\">";
@@ -45,32 +45,42 @@
 			    	$output .= " </select>";
 			    	echo $output; echo "<br>";
 			    	echo "<button type=\"submit\" name=\"editMyClubs\" class=\"btn btn-success\">Edit This Club </button>";
+			    	echo "<br><h3> OR </h3> <br>"; 
 			    	echo "<button type=\"submit\" name=\"transfer\" class=\"btn btn-success\"> Transfer Ownership </button>";
 							}
 						?>
 
-		    			</div>
-				</div>
-		    
+		    		</div>
 			</div>
-	</form>  <!-- The pull dropdowns thing -->
+		    
+		</div>
+	</form>  <!-- The pull dropdowns thing end here -->
 
   </div>
 </div>
 
+<!-- The transfer ownership thing starts here  -->
 <center>
-<form method = "post" name = "transferOther">
+<form method = "get" name = "transferOther">
 	<?php
 		if (isset($_GET['transfer'])){
-			echo "Write the username of the person whom you want to transfer the club to. <br>";
-			echo "<input type = \"text\" name = \"transfer\">";
+			echo "Write the username of the person you want to transfer the club to: <br>";
+			echo "<input type = \"text\" name = \"transferTo\" required>";
+			echo "<input type = \"submit\" value = \"submit\" name = \"transferTo\" ";
 		}
 	?>
-
 </form>
+
+<?php
+	if (isset($_GET['transferTo'])) {
+		echo "This is what would happen if you actually typed something! <br>";
+	}
+?>
+
 </center>
 
 
+<!-- The club editing thing starts here -->
 <center>
 <form method = "post" name = "makeChanges">
 	<?php
