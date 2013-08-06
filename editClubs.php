@@ -27,13 +27,17 @@
 			    		$resultset = mysql_query($query, $connection);
 			    		//echo "You can edit " . mysql_num_rows($resultset) . " organizations";
 			    		if(mysql_num_rows($resultset)==0){
-			    			echo "You haven't created any organizations!";
-							//put a 5-second timer here
-			    			redirect_to("index.php");
+							//put a 3-second timer here
+							$output="<div class=\"alert alert-error\">
+							You don't have permissions to edit or transfer any organizations!.
+							</div>";
+							$url = "index.php";	//change this as per requirement
+							$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"3;URL={$url}\">";
+							echo $output;
+			    			//redirect_to("index.php");
 			    		}
 			    		else{
 			    			$output = "<select class=\"form-control\" name =\"clubToEdit\">";
-			    	//$output.= "";
 			    				while($row = mysql_fetch_array($resultset)){
 									$output .= "<option>{$row['clubName']}</option>";
 					    		}
@@ -41,20 +45,62 @@
 			    	$output .= " </select>";
 			    	echo $output; echo "<br>";
 			    	echo "<button type=\"submit\" name=\"editMyClubs\" class=\"btn btn-success\">Edit This Club </button>";
+			    	echo "<br><h3> OR </h3> <br>"; 
+			    	echo "<button type=\"submit\" name=\"transfer\" class=\"btn btn-success\"> Transfer Ownership </button>";
 							}
 						?>
 
-		    			</div>
-				</div>
-		    
+		    		</div>
 			</div>
-	</form>  <!-- The pull dropdowns thing -->
+		    
+		</div>
+	</form>  <!-- The pull dropdowns thing end here -->
 
+  </div>
 </div>
 
+<!-- The transfer ownership thing starts here  -->
+<center>
+<form method = "post">
+	<?php
+		if (isset($_GET['transfer'])){
+			echo "Write the username of the person you want to transfer the club to: <br>";
+			echo "<input type = \"text\" name = \"transferName\" required>";
+			echo "<button type=\"submit\" name=\"transferTo\" class=\"btn btn-success\"> Initiate transfer </button>";
+		}
+	?>
+</form>
 
-	</div>
+<?php
+	if (isset($_POST['transferTo'])) {
+		global $connection;
+		echo "This is what would happen if you actually typed something! <br>";
+		$newClubCreator = $_POST['transferName'];  //the person you're transferring ownership to
+		echo "The club you're gonna change is: " . $_GET['clubToEdit'];
+		
+		//getting club id here
+		$defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
+		$defResults = mysql_query($defaultQuery, $connection);
+		$rowDefault = mysql_fetch_array($defResults);  // I have all the default club information now
 
+		$checkExistQuery = "SELECT * FROM users WHERE username = '{$newClubCreator}'";
+		$resultsssssss = mysql_query($checkExistQuery, $connection);
+		if (mysql_num_rows($resultsssssss) == 0){
+			echo "<br>That username does not exist.<br>";
+		} 
+		else{
+		
+		$changeQuery = "UPDATE clubs SET creator = '{$newClubCreator}' WHERE id = {$rowDefault['id']}";
+		mysql_query($changeQuery, $connection);
+		echo "Club transferred successfully!";
+		}//echo $rowDefault['id'];
+	}
+?>
+
+</center>
+
+
+<!-- The club editing thing starts here -->
 <center>
 <form method = "post" name = "makeChanges">
 	<?php
@@ -91,7 +137,7 @@
 			    echo "</div> <br> </div> <br>";
 			
 
-			//New Club College
+			/*New Club College
 			
 			//getting the list of category names
 			//$resultSet = getData("colleges","name");
@@ -109,7 +155,7 @@
 			    $collegeOutput .= " </select>";
 			    echo $collegeOutput;
 
-		    echo "</div> <br> </div> <br>";
+		    echo "</div> <br> </div> <br>"; */
 
 			
 
@@ -138,7 +184,6 @@
 		if (isset($_POST['makeClubChanges']))
 		{
 		  $newClubName=$_POST['newClubName'];
-		  $newcollege=$_POST['newCollege'];
 		  $newCategory=$_POST['newCategory'];
 		  $newUrl=$_POST['newUrl'];
 		  $newDescription=$_POST['newDesc'];
@@ -148,7 +193,7 @@
 		  $defaultQuery = "SELECT * FROM clubs WHERE creator = '{$_SESSION['username']}' AND clubName = '{$_GET['clubToEdit']}' LIMIT 1";
 		  $defResults = mysql_query($defaultQuery, $connection);
 		  $rowDefault = mysql_fetch_array($defResults);
-		  $updateQuery = "UPDATE clubs SET clubName = '{$newClubName}', description = '{$newDescription}', url = '{$newUrl}',college='{$newcollege}',category='{$newCategory}' WHERE id = {$rowDefault['id']}";
+		  $updateQuery = "UPDATE clubs SET clubName = '{$newClubName}', description = '{$newDescription}', url = '{$newUrl}', category='{$newCategory}' WHERE id = {$rowDefault['id']}";
 		  if(mysql_query($updateQuery, $connection))
 		  {
 			$output="<div class=\"alert alert-success\">

@@ -3,24 +3,6 @@
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-<script language="JavaScript">
-<!--
-function codename()
-{
-    if(document.inp.tick.checked)
-    {
-	document.inp.college.disabled=true;
-	document.inp.custom_college.disabled=false;
-    }
-    else
-    {
-	document.inp.college.disabled=false;
-	document.inp.custom_college.disabled=true;
-    }
-}
-//-->
-</script>
-
 <!--HTML Stuff with php-->
 <div class="wrapper">
     <?php
@@ -60,22 +42,13 @@ function codename()
 		    <label for="college" class="col-lg-2 control-label">College</label>
 		    <div class="col-lg-6">
 			<?php
-			    $output = "<select class=\"form-control\" name =\"college\" required>";
-			    $query = "SELECT name FROM colleges ORDER BY name";
-			    //$output.= "<option></option>";
-			    //getting the list of colleges
+			    global $connection;
+			    $query = "SELECT * FROM users WHERE username='{$_SESSION['username']}'";
 			    $resultset = mysql_query($query, $connection);
-			    //$resultSet = getData("colleges","name");
-			    while($row = mysql_fetch_array($resultset)){
-				$output .= "<option>{$row['name']}</option>";
-			    }
-			
-			    $output .= " </select>";
+			    $row=mysql_fetch_array($resultset);
+			    $output = "<input type=\"text\" class=\"form-control\" name =\"college\" value=\"{$row['college']}\" disabled>";
 			    echo $output;
 			?>
-			<label for="tick">can't find my college here...</label>
-			<input type="checkbox" onclick="codename()" name="tick" value="ticked"/>
-			<input type="text" name="custom_college"  required disabled/>
 		    </div>
 		</div>
 		<div class="form-group">
