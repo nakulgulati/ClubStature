@@ -1,21 +1,66 @@
 <?php require_once("includes/sessions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
-<?php require_once "Mail.php"; ?>
+<?php require_once("Mail.php"); ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
+<script language="JavaScript">
+<!--
+function codename()
+{
+    if(document.inp.tick.checked)
+    {
+	document.inp.college.disabled=true;
+	document.inp.custom_college.disabled=false;
+    }
+    else
+    {
+	document.inp.college.disabled=false;
+	document.inp.custom_college.disabled=true;
+    }
+}
+//-->
+</script>
+
 <?php
 //Form processing
-
+    
+    function addCollege($college)
+    {
+	global $connection;
+	$query="INSERT INTO colleges(name) VALUES('{$college}')";
+	if(mysql_query($query,$connection))
+	{
+	    return true;
+	}
+	else
+	{
+	    return false;
+	}
+    }
 if(isset($_POST['submit'])){
     //Form submitted
-    
+    global $connection;
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = sha1($_POST['password']);
     $verifyPassword = sha1($_POST['verifyPassword']);
-    
-    $errors = addUser($username,$password,$verifyPassword,$email);   
+    $college="";
+    if(isset($_POST['tick']))
+    {
+	$college=$_POST['custom_college'];
+	$query="SELECT * FROM colleges WHERE name='{$college}'";
+	$res=mysql_query($query,$connection);
+	if(mysql_num_rows($res)==0)
+	{
+	    addCollege($college);
+	}
+    }
+    else
+    {
+	$college=$_POST['college'];
+    }
+    $errors = addUser($username,$college,$password,$verifyPassword,$email);   
 	
     
     if($errors['status']==1){  //if there were no errors
@@ -41,7 +86,7 @@ if(isset($_POST['submit'])){
 	    <div class = "row">
 		<div class = "well col-offset-3 col-lg-6">
 		<!--form area-->
-		    <form class="form-horizontal" method="post" action="signup.php">
+		    <form class="form-horizontal" method="post" action="signup.php" name="inp">
 			<legend>Sign Up
 			    <span class="pull-right">(or <a href="login.php">Sign in</a>)</span>
 			</legend>
@@ -61,6 +106,29 @@ if(isset($_POST['submit'])){
 			    <label for="password" class="col-lg-2 control-label">Password</label>
 			    <div class="col-lg-10">
 				<input type="password" id="password" class="form-control" name="password" placeholder="******" required>
+			    </div>
+			</div>
+			<div class="form-group">
+			    <label for="college" class="col-lg-2 control-label">College</label>
+			    <div class="col-lg-10">
+				<?php
+				    $output = "<select class=\"form-control\" name =\"college\" required>";
+				    $query = "SELECT name FROM colleges ORDER BY name";
+				    //$output.= "<option></option>";
+				    //getting the list of colleges
+				    $resultset = mysql_query($query, $connection);
+				    //$resultSet = getData("colleges","name");
+				    while($row = mysql_fetch_array($resultset)){
+				    $output .= "<option>{$row['name']}</option>";
+				    }
+			
+				    $output .= " </select>";
+				    echo $output;
+				?>
+				<br/>
+				<label for="tick">can't find my college here...</label>
+				<input type="checkbox" onclick="codename()" name="tick" value="ticked"/>
+				<input type="text" name="custom_college" placeholder="My College is ..." required disabled/>
 			    </div>
 			</div>
 			<div class="form-group">
