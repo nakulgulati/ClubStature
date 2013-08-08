@@ -5,7 +5,7 @@
 <?php include("includes/header.php"); ?>
 
 <script language="JavaScript">
-<!--
+
 function codename()
 {
     if(document.inp.tick.checked)
@@ -19,7 +19,7 @@ function codename()
 	document.inp.custom_college.disabled=true;
     }
 }
-//-->
+
 </script>
 
 <?php
@@ -128,7 +128,7 @@ if(isset($_POST['submit'])){
 				<br/>
 				<label for="tick">can't find my college here...</label>
 				<input type="checkbox" onclick="codename()" name="tick" value="ticked"/>
-				<input type="text" name="custom_college" placeholder="My College is ..." required disabled/>
+				<input type="text" name="custom_college" placeholder="Enter Official College Name..." required disabled/>
 			    </div>
 			</div>
 			<div class="form-group">
