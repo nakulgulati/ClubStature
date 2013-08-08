@@ -86,13 +86,19 @@
 		$checkExistQuery = "SELECT * FROM users WHERE username = '{$newClubCreator}'";
 		$resultsssssss = mysql_query($checkExistQuery, $connection);
 		if (mysql_num_rows($resultsssssss) == 0){
+			echo "<div class=\"alert alert-error\">
+				That username does not exist.
+				</div>";
+
 			echo "<br>That username does not exist.<br>";
 		} 
 		else{
 		
 		$changeQuery = "UPDATE clubs SET creator = '{$newClubCreator}' WHERE id = {$rowDefault['id']}";
 		mysql_query($changeQuery, $connection);
-		echo "Club transferred successfully!";
+		echo "<div class=\"alert alert-success\">
+				Club transferred successfully.
+				</div>";
 		}//echo $rowDefault['id'];
 	}
 ?>
@@ -136,26 +142,6 @@
 
 			    echo "</div> <br> </div> <br>";
 			
-
-			/*New Club College
-			
-			//getting the list of category names
-			//$resultSet = getData("colleges","name");
-			echo "<div class=\"form-group\">
-		    <label for=\"newCollege\" class=\"col-lg-2 control-label\"> New College </label>
-		    <div class=\"col-lg-6\">";
-
-		    	$collegeOutput = "<select class=\"form-control\" name =\"newCollege\" required>";
-			    $collegeOutput .= "<option> {$rowDefault['college']} </option>";
-			    $collegeResultSet = getData("colleges", "name");
-			    while ($collegeRow = mysql_fetch_array($collegeResultSet)){
-				$collegeOutput .= "<option>{$collegeRow['name']}</option>";
-			    }
-			
-			    $collegeOutput .= " </select>";
-			    echo $collegeOutput;
-
-		    echo "</div> <br> </div> <br>"; */
 
 			
 
@@ -206,7 +192,7 @@
 		  else
 		  {
 			$output="<div class=\"alert alert-error\">
-				update failed, check details and try again.
+				update failed; check details and try again.
 				</div>";
 			echo $output;
 		  }
@@ -216,9 +202,3 @@
 </div>
 
 <?php include("includes/footer.php"); ?>
-
-		<!--	<div class="form-group">
-			<label for="username" class="col-lg-2 control-label">Username</label>
-			<div class="col-lg-10">
-			    <input type="text" class="form-control" id="username" name="username" placeholder="Your username" required>
-			</div>
