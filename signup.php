@@ -1,25 +1,33 @@
 <?php require_once("includes/sessions.php"); ?>
 <?php require_once("includes/connection.php"); ?>
-<?php require_once("Mail.php"); ?>
+<?php //require_once("Mail.php"); ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
 <script language="JavaScript">
 
-function codename()
+function prepSignUp()
 {
     if(document.inp.tick.checked)
     {
-	document.inp.college.disabled=true;
-	document.inp.custom_college.disabled=false;
+	document.getElementById('newCollege').style.display = 'block';
+        document.getElementById('college').style.display = 'none';
     }
     else
     {
-	document.inp.college.disabled=false;
-	document.inp.custom_college.disabled=true;
+	document.getElementById('newCollege').style.display = 'none';
+        document.getElementById('college').style.display = 'block';
     }
 }
 
+</script>
+
+
+<script>
+  window.onload = function(){
+    prepSignUp();
+    document.getElementById('newCollege').style.display = 'none'; //custom college text field hidden
+  }
 </script>
 
 <?php
@@ -44,11 +52,11 @@ if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = sha1($_POST['password']);
-    $verifyPassword = sha1($_POST['verifyPassword']);
     $college="";
+    
     if(isset($_POST['tick']))
     {
-	$college=$_POST['custom_college'];
+	$college=$_POST['newCollege'];
 	$query="SELECT * FROM colleges WHERE name='{$college}'";
 	$res=mysql_query($query,$connection);
 	if(mysql_num_rows($res)==0)
@@ -60,14 +68,15 @@ if(isset($_POST['submit'])){
     {
 	$college=$_POST['college'];
     }
-    $errors = addUser($username,$college,$password,$verifyPassword,$email);   
+    
+    $errors = addUser($username,$college,$password,$email);   
 	
     
     if($errors['status']==1){  //if there were no errors
 	$userDetails = getData("users","*","username",$username);
 	$user = mysql_fetch_array($userDetails);
 	
-	sendMail($user['id'],"create");
+	//sendMail($user['id'],"create");
 	
     }
     
@@ -78,7 +87,7 @@ if(isset($_POST['submit'])){
 <div class="wrapper">
     <?php
     //Prints nav bar
-      $nav = printNav(true);
+      $nav = printNav(false);
       echo $nav;
     ?>
     <div class="wrapper-content">
@@ -112,31 +121,25 @@ if(isset($_POST['submit'])){
 			    <label for="college" class="col-lg-2 control-label">College</label>
 			    <div class="col-lg-10">
 				<?php
-				    $output = "<select class=\"form-control\" name =\"college\" required>";
+				    $output = "<select class=\"form-control\" name =\"college\" id =\"college\" required>";
 				    $query = "SELECT name FROM colleges ORDER BY name";
-				    //$output.= "<option></option>";
 				    //getting the list of colleges
 				    $resultset = mysql_query($query, $connection);
 				    //$resultSet = getData("colleges","name");
 				    while($row = mysql_fetch_array($resultset)){
 				    $output .= "<option>{$row['name']}</option>";
 				    }
-			
+			    	    $output.= "<option>Other</option>";
 				    $output .= " </select>";
 				    echo $output;
 				?>
-				<br/>
-				<label for="tick">can't find my college here...</label>
-				<input type="checkbox" onclick="codename()" name="tick" value="ticked"/>
-				<input type="text" name="custom_college" placeholder="Enter Official College Name..." required disabled/>
+			    <input type="text" class="form-control" name="newCollege" id="newCollege" placeholder="Enter Official College Name"/>
+			    <span class="help-block"><input type="checkbox" onclick="prepSignUp()" name="tick" value="ticked"/>&nbsp;College not listed?</span>
+			    
 			    </div>
 			</div>
 			<div class="form-group">
-			    <label for="password" class="col-lg-2 control-label">Verify Password</label>
 			    <div class="col-lg-10">
-				<input type="password" id="verifyPassword" class="form-control" name="verifyPassword" placeholder="******" required>
-				
-
 				<div class="checkbox">
 				    <label>
 					<input type="checkbox" required> I accept the  <a data-toggle="modal" href="#tc">Terms and Conditions.  </a>

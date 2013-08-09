@@ -2,27 +2,7 @@
 <?php require_once("includes/connection.php"); ?>
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
-<script>
-    function prepForm() {
-    var select = document.getElementById('searchBy');
-    select.onchange = function(){
-      if (select.value == "colleges") {
-        document.getElementById('collegeSearch').style.display = 'inline';
-        document.getElementById('categorySelect').style.display = 'inline';
-        document.getElementById('clubSearch').style.display = 'none';
-      }else if (select.value == "clubs") {
-        document.getElementById('collegeSearch').style.display = 'none';
-        document.getElementById('categorySelect').style.display = 'none';
-        document.getElementById('clubSearch').style.display = 'inline';
-      }
-    }
-  }
-  window.onload = function(){
-    prepForm();
-    document.getElementById('categorySelect').style.display = 'none'; //category dropdown hidden
-        document.getElementById('collegeSearch').style.display = 'none'; //searchCollege filed hidden
-  }
-</script>
+
 <?php
   //generating suggestions for typeahead
   
@@ -136,6 +116,28 @@
 </div>
 
 <?php include("includes/footer.php"); ?>
+
+<script>
+    function prepForm() {
+    var select = document.getElementById('searchBy');
+    select.onchange = function(){
+      if (select.value == "colleges") {
+        document.getElementById('collegeSearch').style.display = 'inline';
+        document.getElementById('categorySelect').style.display = 'inline';
+        document.getElementById('clubSearch').style.display = 'none';
+      }else if (select.value == "clubs") {
+        document.getElementById('collegeSearch').style.display = 'none';
+        document.getElementById('categorySelect').style.display = 'none';
+        document.getElementById('clubSearch').style.display = 'inline';
+      }
+    }
+  }
+  window.onload = function(){
+    prepForm();
+    document.getElementById('categorySelect').style.display = 'none'; //category dropdown hidden
+        document.getElementById('collegeSearch').style.display = 'none'; //searchCollege filed hidden
+  }
+</script>
 
 <script>
     $('.club').typeahead({
