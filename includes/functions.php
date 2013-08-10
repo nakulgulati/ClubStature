@@ -79,7 +79,7 @@
         
     }
     
-    function addUser($username,$password,$verifyPassword,$email){
+    function addUser($username,$college,$password,$email){
 	global $connection;
         $errors = array("status" => 0);
         if(!isUnique("users","username",$username)){
@@ -96,17 +96,12 @@
 	    array_push($errors,"Username cannot contain special characters.");
 	}
     
-	if(strlen($password)>=6){
-	    if($password != $verifyPassword){
-	        array_push($errors,"Passwords don't match.");
-	    }
-	}
-	else{
+	if(strlen($password)<6){
 	    array_push($errors,"Password should be minimum 6 characters.");
 	}
         
         if(count($errors)==1){
-            $query = "INSERT INTO `users`(`username`, `email`, `hashedPass`) VALUES ('{$username}','{$email}','{$password}');";
+            $query = "INSERT INTO `users`(`username`, `email`, `hashedPass`, `college`) VALUES ('{$username}','{$email}','{$password}','{$college}');";
 	
             if(mysql_query($query,$connection)){
                 $errors['status'] = 1;

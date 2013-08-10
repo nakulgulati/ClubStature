@@ -2,7 +2,12 @@
     session_start();
 
     function loggedIn(){
-        return isset($_SESSION['userId']);
+        if(isset($_SESSION['fb_627888060569403_user_id']) || isset($_SESSION['userId'])){
+            return true;
+        }
+        else{
+            return false;   
+        }
     }
     
     function confirmLoggedIn() {
