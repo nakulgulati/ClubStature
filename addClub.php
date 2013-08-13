@@ -3,7 +3,26 @@
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-<!--HTML Stuff with php-->
+<?php
+    $user = getUserInfo($_SESSION['userId']);
+    if(isset($_POST['addClub'])){
+        $fileName = uploadFile($_FILES["file"]["name"],$_POST['clubName']);
+        if(isCombinationUnique("clubs","college","clubName",$user['college'],$_POST['clubName'])){
+            $query="INSERT INTO clubs(clubName,college,category,url,description,image,creator)   
+            VALUES('{$_POST['clubName']}','{$user['college']}','{$_POST['category']}','{$_POST['url']}','{$_POST['description']}','{$fileName}','{$user['username']}')";
+            if(mysql_query($query)){
+                //$output="<div class=\"alert alert-success\">
+                //        Club Creation successful!
+                //        </div>";
+                //echo $output;
+                echo "<script>alert(\"Club Created\");</script>";
+            }
+        }
+    }
+
+?>
+
+
 <div class="wrapper">
     <?php
     //Prints nav bar
@@ -25,7 +44,6 @@
 		    <div class="col-lg-6">
 		    <?php
 			$output = "<select class=\"form-control\" name =\"category\" required>";
-			$output.= "<option></option> ";
 			//getting the list of categories
 			$resultSet = getData("categoryname","category");
 			while($row = mysql_fetch_array($resultSet)){
@@ -46,7 +64,7 @@
 			    $query = "SELECT * FROM users WHERE username='{$_SESSION['username']}'";
 			    $resultset = mysql_query($query, $connection);
 			    $row=mysql_fetch_array($resultset);
-			    $output = "<input type=\"text\" class=\"form-control\" name =\"college\" value=\"{$row['college']}\" disabled>";
+			    $output = "<input type=\"text\" class=\"form-control\" name =\"college\" value=\"{$user['college']}\" disabled>";
 			    echo $output;
 			?>
 		    </div>
@@ -54,7 +72,7 @@
 		<div class="form-group">
 		    <label for="url" class="col-lg-2 control-label">Club Url</label>
 		    <div class="col-lg-6">
-			<input type="url" class="form-control" id="url" name="url" placeholder="club url" required>
+			<input type="text" class="form-control" id="url" name="url" placeholder="club url">
 		    </div>
 		</div>
 		
@@ -76,49 +94,5 @@
 	</div>
     </div>
 </div>
-
-
-
-
-<?php
-    if(isset($_POST['addClub'])){
-      $clubName=$_POST['clubName'];
-      if(isset($_POST['tick']))
-      {
-	$college=$_POST['custom_college'];
-      }
-      else
-      {
-	$college=$_POST['college'];
-      }
-      $category=$_POST['category'];
-      $url=$_POST['url'];
-      $description=$_POST['description'];
-      $fileName = $_FILES["file"]["name"];
-      $userInformation = getUserInfo($_SESSION['userId']);
-      $creatorName = $userInformation['username'];
-    
-      $fileName = uploadFile($fileName,$clubName);
-
-          if (isCombinationUnique("clubs","college","clubName",$college,$clubName) and (loggedIn())  ){
-            $query="INSERT INTO clubs(clubName,college,category,url,description,image,creator)   
-            VALUES('{$clubName}','{$college}','{$category}','{$url}','{$description}','{$fileName}','{$creatorName}')";
-            mysql_query($query,$connection);
-            $output="<div class=\"alert alert-success\">
-            Club Creation successful!
-            </div>";
-            echo $output;
-            }
-
-    else{
-          $output="<div class=\"alert alert-error\">
-          Club addition failed: You are either not logged in, or a duplicate organization exists.
-          </div>";
-          echo $output;
-      //echo "You've entered a duplicate club";
-    }
-}
-?>
-
     
 <?php include("includes/footer.php"); ?>
