@@ -52,6 +52,7 @@
                 $output .= "<div class=\"btn-group pull-right\">
                             <p class=\"navbar-text greeting\" >Greetings,</p><p class=\"navbar-text user dopdown-toggle\" data-toggle=\"dropdown\"> {$userDetails['username']}</p>
                             <ul class=\"dropdown-menu\">
+                            <li><a href=\"addClub.php\"><span class=\"glyphicon glyphicon-pencil\"></span> Add Club</a></li>
                             <li><a href=\"user.php?option=profile\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
@@ -526,7 +527,7 @@
     }
     
     function printUserNav($selectedOpt){
-	$output = "<ul class=\"nav nav-pills nav-stacked\">";
+	$output = "<ul class=\"nav nav-pills nav-stacked userNavPills\">";
 	
 	$resultSet = getData("userNav","*","heading","1");
 	$output.="<legend>Information</legend>";

@@ -47,6 +47,13 @@ body{
 	margin-right: 0px;
 }
 
+.userNavPills{
+}
+
+.userNavPills>li>a{
+	padding: 5px 15px;
+}
+
 .logo{
 	max-width: 200px;
 	margin-top: 10px;
