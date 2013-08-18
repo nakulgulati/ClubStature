@@ -305,3 +305,11 @@ abbr:hover{
 	width: 100%;
 	text-align: center;
 }
+
+#newImg{
+	display: inline-block;
+}
+
+#updateForm{
+	display: inline-block;
+}

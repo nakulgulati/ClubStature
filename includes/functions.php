@@ -554,6 +554,17 @@
 	}
         
         $resultSet = getData("userNav","*","heading","3");
+        $output.="<legend>Club Settings</legend>";
+        while($row = mysql_fetch_array($resultSet)){
+	    $output.="<li";
+	    if($row['option']==$selectedOpt){
+		$output.=" class=\"active\" ";
+	    }
+	    
+	    $output.="><a href=\"user.php?option={$row['option']}\">{$row['menu']}</a></li>";   
+	}
+            
+        $resultSet = getData("userNav","*","heading","4");
 	$output.="<legend>Log Out</legend>";
 	
 	while($row = mysql_fetch_array($resultSet)){

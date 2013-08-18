@@ -3,16 +3,14 @@
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-<?php
+
+
+<div class="wrapper">
+  <?php
   $nav = printNav(true);
   echo $nav;
-  if(!loggedIn()) {
-  	redirect_to("login.php");
-  }
 ?>
-
-<br><br><br><br><br>
-<div class="wrapper">
+<div class="wrapper-content">
     <div class="container">
 		<div class = "row">
 	    	<div class = "well col-offset-3 col-lg-6">
@@ -59,6 +57,7 @@
   </div>
 </div>
 
+</div>
 <!-- The transfer ownership thing starts here  -->
 <center>
 <form method = "post">

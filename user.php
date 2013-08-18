@@ -16,6 +16,18 @@
     
     //getting list of colleges
     $collegeSet = getData("colleges","name");
+    
+    //getting list of category
+    $categorySet = getData("categoryname","category");
+    
+    //getting list of user made clubs
+    $userClubSet = getData("clubs","*","creator",$_SESSION['username']);
+    
+    if(isset($_POST['transfer']) || isset($_POST['edit'])){
+	$editClubSet = getData("clubs","*","clubName",$_POST['clubSelect']);
+	$_SESSION['selectedClub'] = $_POST['clubSelect'];
+	$club = mysql_fetch_array($editClubSet);
+    }
 ?>
 <?php
     if(isset($_POST['updateDetails'])){
@@ -34,6 +46,28 @@
 	$errors = deleteAccount($_SESSION['username'],$_POST['pass']);
 	//show message
 	//redirect
+    }
+    
+    function updateClub($clubName,$creator,$newClubName,$newCategory,$newUrl,$newDesc){
+	global $connection;
+	$updates = 0;
+	
+	$userClubSet = getData("clubs","*","clubName",$_SESSION['selectedClub']);
+	$club = mysql_fetch_array($userClubSet);
+	
+	if(($newClubName!=$club['clubName']) || ($newCategory!=$club['category']) || ($newUrl!=$club['url']) || ($newDesc!=$club['description'])){
+	    $updates++;
+	}
+	
+	if($updates!=0){
+	    $query = "UPDATE clubs SET clubName = '{$newClubName}', category = '{$newCategory}', url = '{$newUrl}', description = '{$newDesc}';";
+	    mysql_query($query,$connection);
+	}
+	return $updates;
+    }
+    
+    if(isset($_POST['updateClub'])){
+	$update = updateClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['newClubName'],$_POST['newCategory'],$_POST['newUrl'],$_POST['newDesc']);
     }
 ?>
 
@@ -99,8 +133,7 @@
 				$output.="<div class=\"form-group\">
 					<label for=\"collegeList\" class=\"col-lg-2 control-label\">College</label>
 					<div class=\"col-lg-6\">
-					<select class=\"form-control\" id=\"collegeList\" name=\"newCollege\">
-					<option></option>";
+					<select class=\"form-control\" id=\"collegeList\" name=\"newCollege\">";
 					
 				while($college=mysql_fetch_array($collegeSet)){
 				    $output.="<option";
@@ -208,6 +241,99 @@
 				       </div>
 				       </form>";
 				echo $output;
+			    }
+			    elseif($_GET['option']=="joinClubs"){
+				echo "<h3>Join Clubs</h3>";
+				$output="";
+			    }
+			    elseif($_GET['option']=="editClubs"){
+				echo "<h3>Edit Club Details</h3>";
+				
+				if(isset($_POST['transfer'])){
+				    echo "transfer";				    
+				}
+				elseif(isset($_POST['edit'])){
+								    
+				    $output="<div class=\"col-lg-4\" id=\"newImg\">
+					    <img src=\"img/no-image.gif\">
+					    </div>
+					    <div class=\"col-lg-8\" id=\"updateForm\">
+					    <form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
+					    <div class=\"form-group\">
+					    <label for=\"newClubName\" class=\"col-lg-2 control-label\">Club Name</label>
+					    <div class=\"col-lg-9\">
+					    <input type=\"text\" class=\"form-control\" id=\"newClubName\" name=\"newClubName\" placeholder=\"Club Name\" value=\"{$club['clubName']}\">
+					    </div>
+					    </div>";
+					    //category
+					    
+				    $output.="<div class=\"form-group\">
+					    <label for=\"newCategory\" class=\"col-lg-2 control-label\">Category</label>
+					    <div class=\"col-lg-9\">
+					    <select class=\"form-control\" id=\"newCategory\" name=\"newCategory\">";
+					    
+				    while($category=mysql_fetch_array($categorySet)){
+					$output.="<option";
+					if($club['category']==$category['category']){
+					    $output.=" selected=\"selected\"";
+					}
+					$output.=">{$category['category']}</option>";
+				    }
+				
+				    $output.="</select>
+					    </div>
+					    </div>
+					    <div class=\"form-group\">
+					    <label for=\"newUrl\" class=\"col-lg-2 control-label\">Url</label>
+					    <div class=\"col-lg-9\">
+					    <input type=\"text\" class=\"form-control\" id=\"newUrl\" name=\"newUrl\" placeholder=\"Club Url/Facebook Page\" value=\"{$club['url']}\">
+					    </div>
+					    </div>";
+					    
+				    $output.="<div class=\"form-group\">
+					    <label for=\"newDesc\" class=\"col-lg-2 control-label\">Description</label>
+					    <div class=\"col-lg-9\">
+					    <textarea class=\"form-control\" name=\"newDesc\" placeholder=\"Club Description\" required>{$club['description']}</textarea>
+					    </div>
+					    </div>";
+					    
+				    
+				    $output.="<div class=\"form-group\">
+					    <div class=\"col-lg-9 col-offset-2\">
+					    <button type=\"submit\" name=\"updateClub\" class=\"btn btn-default\">Update</button>
+					    </div>
+					    </div>
+					    </form>
+					    </div>";
+				    
+				    echo $output;
+				}
+				else{
+				    $output="<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
+				       <div class=\"form-group\">
+				       <label for=\"clubSelect\" class=\"col-lg-2 control-label\">Select a Club</label>
+				       <div class=\"col-lg-6\">
+				       <select class=\"form-control\" id=\"clubSelect\" name=\"clubSelect\">";
+					
+				    while($userClub=mysql_fetch_array($userClubSet)){
+					$output.="<option>{$userClub['clubName']}</option>";
+				    }
+				
+				    $output.="</select> 
+					    <br>
+					    <button type=\"submit\" name=\"edit\" class=\"btn btn-primary\">Edit CLub</button>
+					    <button type=\"submit\" name=\"transfer\" class=\"btn btn-warning\">Transfer Club</button>
+					    </div>
+					    </div>
+					    </form>";
+				    echo $output;    
+				}
+				
+				
+				
+			    }
+			    elseif($_GET['option']=="deleteClubs"){
+				echo "<h3>Delete Clubs</h3>";
 			    }
 			}
 		    ?>

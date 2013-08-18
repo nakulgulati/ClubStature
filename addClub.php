@@ -6,16 +6,13 @@
 <?php
     $user = getUserInfo($_SESSION['userId']);
     if(isset($_POST['addClub'])){
+        $status = 0;
         $fileName = uploadFile($_FILES["file"]["name"],$_POST['clubName']);
         if(isCombinationUnique("clubs","college","clubName",$user['college'],$_POST['clubName'])){
             $query="INSERT INTO clubs(clubName,college,category,url,description,image,creator)   
             VALUES('{$_POST['clubName']}','{$user['college']}','{$_POST['category']}','{$_POST['url']}','{$_POST['description']}','{$fileName}','{$user['username']}')";
             if(mysql_query($query)){
-                //$output="<div class=\"alert alert-success\">
-                //        Club Creation successful!
-                //        </div>";
-                //echo $output;
-                echo "<script>alert(\"Club Created\");</script>";
+                $status = 1;
             }
         }
     }
@@ -32,6 +29,26 @@
     <div class="wrapper-content">
 	<div class="container">
 	    <h1 class="page-header">Add a Club</h1>
+            <?php
+                if(isset($_POST['addClub'])){
+                    if($status == 1){
+                        echo "<div class=\"col-lg-6\">
+                            <div class=\"alert alert-success\">
+			    <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                            Club created.
+                            </div>
+                            </div>";
+                    }
+                    elseif($status == 0){
+                        echo "<div class=\"col-lg-6\">
+                            <div class=\"alert alert-danger\">
+			    <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+                            Club creation failed.
+                            </div>
+                            </div>";
+                    }
+                }
+            ?>
 	    <form name="inp" class="form-horizontal" method="post" action="addClub.php" enctype="multipart/form-data">
 		<div class="form-group">
 		    <label for="clubName" class="col-lg-2 control-label">Name of Club</label>
