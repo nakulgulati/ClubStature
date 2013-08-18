@@ -28,6 +28,17 @@
 	$_SESSION['selectedClub'] = $_POST['clubSelect'];
 	$club = mysql_fetch_array($editClubSet);
     }
+    
+    //generating suggestions for typeahead
+  
+    //list of usernames
+    $userList = "[";
+    $resultSet = getData("users","username","college",$user['college']);
+    
+    while($row = mysql_fetch_array($resultSet)){
+    $userList .="'{$row['username']}',";
+    }
+    $userList .="]";
 ?>
 <?php
     if(isset($_POST['updateDetails'])){
@@ -42,32 +53,30 @@
     }
     
     if(isset($_POST['deleteAccount'])){
-	
 	$errors = deleteAccount($_SESSION['username'],$_POST['pass']);
 	//show message
 	//redirect
     }
-    
-    function updateClub($clubName,$creator,$newClubName,$newCategory,$newUrl,$newDesc){
-	global $connection;
-	$updates = 0;
-	
-	$userClubSet = getData("clubs","*","clubName",$_SESSION['selectedClub']);
-	$club = mysql_fetch_array($userClubSet);
-	
-	if(($newClubName!=$club['clubName']) || ($newCategory!=$club['category']) || ($newUrl!=$club['url']) || ($newDesc!=$club['description'])){
-	    $updates++;
+       
+    if(isset($_POST['updateClub'])){
+	$_SESSION['status'] = updateClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['newClubName'],$_POST['newCategory'],$_POST['newUrl'],$_POST['newDesc']);
+	if($_SESSION['status']){
+	    redirect_to("user.php?option=editClubs");
 	}
-	
-	if($updates!=0){
-	    $query = "UPDATE clubs SET clubName = '{$newClubName}', category = '{$newCategory}', url = '{$newUrl}', description = '{$newDesc}';";
-	    mysql_query($query,$connection);
-	}
-	return $updates;
     }
     
-    if(isset($_POST['updateClub'])){
-	$update = updateClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['newClubName'],$_POST['newCategory'],$_POST['newUrl'],$_POST['newDesc']);
+    if(isset($_POST['deleteClub'])){
+	$_SESSION['status'] = deleteClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['pass']);
+	if($_SESSION['status']){
+	    redirect_to("user.php?option=editClubs");
+	}
+    }
+    
+    if(isset($_POST['transferClub'])){
+	$_SESSION['status'] = transferClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['newCreator'],$_POST['pass']);
+	if($_SESSION['status']){
+	    redirect_to("user.php?option=editClubs");
+	}
     }
 ?>
 
@@ -103,6 +112,7 @@
 					    </div>";
 					$_SESSION['status']=0;
 				    }
+				    unset($_SESSION['status']);
 				}
 				
 				
@@ -179,6 +189,7 @@
 					$output	.= "</div>";
 					echo $output;
 				    }
+				    unset($_SESSION['status']);
 				}
 				$output="<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=changePass\">
 				       <div class=\"form-group\">
@@ -228,6 +239,7 @@
 					$output.= "</div>";
 					echo $output;
 				    }
+				    unset($_SESSION['status']);
 				}
 				
 				$output="<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=deleteAccount\">
@@ -244,76 +256,167 @@
 			    }
 			    elseif($_GET['option']=="joinClubs"){
 				echo "<h3>Join Clubs</h3>";
-				$output="";
+				$output="";				
 			    }
 			    elseif($_GET['option']=="editClubs"){
-				echo "<h3>Edit Club Details</h3>";
-				
 				if(isset($_POST['transfer'])){
-				    echo "transfer";				    
+				    if(isset($_POST['clubSelect'])){
+					echo "<h3>Transfer Club Ownership</h3>";
+				    
+					$output="<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
+						<div class=\"form-group\">
+						<label for=\"newCreator\" class=\"col-lg-2 control-label\">New Owner</label>
+						<div class=\"col-lg-6\">
+						<input type=\"text\" class=\"form-control creator typeahead\" id=\"newCreator\" name=\"newCreator\" placeholder=\"New Owner\">
+						</div>
+						</div>
+						<div class=\"form-group\">
+						<label for=\"pass\" class=\"col-lg-2 control-label\">Confirm Password</label>
+						<div class=\"col-lg-6\">
+						<input type=\"password\" class=\"form-control\" id=\"pass\" name=\"pass\" placeholder=\"Your Password\">
+						<br>
+						<button type=\"submit\" name=\"transferClub\" class=\"btn btn-warning\">Transfer Club</button>
+						</div>
+						</div>
+						</form>";
+					echo $output;
+				    }
+				    else{
+				    redirect_to("user.php?option=editClubs");
+				    }
+				}
+				elseif(isset($_POST['delete'])){
+				    if(isset($_POST['clubSelect'])){
+		    			echo "<h3>Delete Club</h3>";
+				    
+					$output="<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
+					   <div class=\"form-group\">
+					   <label for=\"pass\" class=\"col-lg-2 control-label\">Confirm Password</label>
+					   <div class=\"col-lg-6\">
+					   <input type=\"password\" class=\"form-control\" id=\"pass\" name=\"pass\" placeholder=\"Your Password\">
+					   <br>
+					   <button type=\"submit\" name=\"deleteClub\" class=\"btn btn-danger\">Delete Club</button>
+					   </div>
+					   </div>
+					   </form>";
+					echo $output;		
+				    }
+				    else{
+				    redirect_to("user.php?option=editClubs");
+				    }
 				}
 				elseif(isset($_POST['edit'])){
-								    
-				    $output="<div class=\"col-lg-4\" id=\"newImg\">
-					    <img src=\"img/no-image.gif\">
-					    </div>
-					    <div class=\"col-lg-8\" id=\"updateForm\">
-					    <form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
-					    <div class=\"form-group\">
-					    <label for=\"newClubName\" class=\"col-lg-2 control-label\">Club Name</label>
-					    <div class=\"col-lg-9\">
-					    <input type=\"text\" class=\"form-control\" id=\"newClubName\" name=\"newClubName\" placeholder=\"Club Name\" value=\"{$club['clubName']}\">
-					    </div>
-					    </div>";
-					    //category
-					    
-				    $output.="<div class=\"form-group\">
-					    <label for=\"newCategory\" class=\"col-lg-2 control-label\">Category</label>
-					    <div class=\"col-lg-9\">
-					    <select class=\"form-control\" id=\"newCategory\" name=\"newCategory\">";
-					    
-				    while($category=mysql_fetch_array($categorySet)){
-					$output.="<option";
-					if($club['category']==$category['category']){
-					    $output.=" selected=\"selected\"";
+				    if(isset($_POST['clubSelect'])){
+					$output="<h3>Edit Club Details</h3>
+						<div class=\"col-lg-4\" id=\"newImg\">
+						<img src=\"img/no-image.gif\">
+						</div>
+						<div class=\"col-lg-8\" id=\"updateForm\">
+						<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
+						<div class=\"form-group\">
+						<label for=\"newClubName\" class=\"col-lg-2 control-label\">Club Name</label>
+						<div class=\"col-lg-9\">
+						<input type=\"text\" class=\"form-control\" id=\"newClubName\" name=\"newClubName\" placeholder=\"Club Name\" value=\"{$club['clubName']}\">
+						</div>
+						</div>";
+						//category
+						
+					$output.="<div class=\"form-group\">
+						<label for=\"newCategory\" class=\"col-lg-2 control-label\">Category</label>
+						<div class=\"col-lg-9\">
+						<select class=\"form-control\" id=\"newCategory\" name=\"newCategory\">";
+						
+					while($category=mysql_fetch_array($categorySet)){
+					    $output.="<option";
+					    if($club['category']==$category['category']){
+						$output.=" selected=\"selected\"";
+					    }
+					    $output.=">{$category['category']}</option>";
 					}
-					$output.=">{$category['category']}</option>";
+				    
+					$output.="</select>
+						</div>
+						</div>
+						<div class=\"form-group\">
+						<label for=\"newUrl\" class=\"col-lg-2 control-label\">Url</label>
+						<div class=\"col-lg-9\">
+						<input type=\"text\" class=\"form-control\" id=\"newUrl\" name=\"newUrl\" placeholder=\"Club Url/Facebook Page\" value=\"{$club['url']}\">
+						</div>
+						</div>";
+						
+					$output.="<div class=\"form-group\">
+						<label for=\"newDesc\" class=\"col-lg-2 control-label\">Description</label>
+						<div class=\"col-lg-9\">
+						<textarea class=\"form-control\" name=\"newDesc\" placeholder=\"Club Description\" required>{$club['description']}</textarea>
+						</div>
+						</div>";
+						
+					
+					$output.="<div class=\"form-group\">
+						<div class=\"col-lg-9 col-offset-2\">
+						<button type=\"submit\" name=\"updateClub\" class=\"btn btn-default\">Update</button>
+						</div>
+						</div>
+						</form>
+						</div>";
+					
+					echo $output;    				        
 				    }
-				
-				    $output.="</select>
-					    </div>
-					    </div>
-					    <div class=\"form-group\">
-					    <label for=\"newUrl\" class=\"col-lg-2 control-label\">Url</label>
-					    <div class=\"col-lg-9\">
-					    <input type=\"text\" class=\"form-control\" id=\"newUrl\" name=\"newUrl\" placeholder=\"Club Url/Facebook Page\" value=\"{$club['url']}\">
-					    </div>
-					    </div>";
-					    
-				    $output.="<div class=\"form-group\">
-					    <label for=\"newDesc\" class=\"col-lg-2 control-label\">Description</label>
-					    <div class=\"col-lg-9\">
-					    <textarea class=\"form-control\" name=\"newDesc\" placeholder=\"Club Description\" required>{$club['description']}</textarea>
-					    </div>
-					    </div>";
-					    
-				    
-				    $output.="<div class=\"form-group\">
-					    <div class=\"col-lg-9 col-offset-2\">
-					    <button type=\"submit\" name=\"updateClub\" class=\"btn btn-default\">Update</button>
-					    </div>
-					    </div>
-					    </form>
-					    </div>";
-				    
-				    echo $output;
+				    else{
+				    redirect_to("user.php?option=editClubs");
+				    }
 				}
 				else{
-				    $output="<form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
-				       <div class=\"form-group\">
-				       <label for=\"clubSelect\" class=\"col-lg-2 control-label\">Select a Club</label>
-				       <div class=\"col-lg-6\">
-				       <select class=\"form-control\" id=\"clubSelect\" name=\"clubSelect\">";
+				    			    
+				    if(isset($_SESSION['status'])){
+					if($_SESSION['status']==-1){
+					    //deleted club
+					    $output="<div class=\"alert alert-success\">
+						<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+						Club deleted successfully.
+						</div>";
+					    echo $output;
+					}
+					elseif($_SESSION['status']==-2){
+					    //wrong pass
+					    $output="<div class=\"alert alert-danger\">
+						<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+						Please enter correct password.
+						</div>";
+					    echo $output;
+					}
+					elseif($_SESSION['status']==0){
+					    //No changes made
+					    $output="<div class=\"alert alert-warning\">
+						<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+						No changes made.
+						</div>";
+					    echo $output;
+					}
+					elseif($_SESSION['status']==1){
+					    //Club info updated
+					    $output="<div class=\"alert alert-success\">
+						<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+						Club info updated.
+						</div>";
+					    echo $output;
+					}
+					elseif($_SESSION['status']==2){
+					    //Club transfered
+					    $output="<div class=\"alert alert-success\">
+						<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+						The club has been transfered.
+						</div>";
+					    echo $output;
+					}				
+					unset($_SESSION['status']);
+				    }
+				    $output="<h3>Select Club to Proceed</h3>
+					    <form class=\"form-horizontal\" method=\"post\" action=\"user.php?option=editClubs\">
+					    <div class=\"form-group\">
+					    <label for=\"clubSelect\" class=\"col-lg-2 control-label\">Select a Club</label>
+					    <div class=\"col-lg-6\">
+					    <select class=\"form-control\" id=\"clubSelect\" name=\"clubSelect\">";
 					
 				    while($userClub=mysql_fetch_array($userClubSet)){
 					$output.="<option>{$userClub['clubName']}</option>";
@@ -323,17 +426,12 @@
 					    <br>
 					    <button type=\"submit\" name=\"edit\" class=\"btn btn-primary\">Edit CLub</button>
 					    <button type=\"submit\" name=\"transfer\" class=\"btn btn-warning\">Transfer Club</button>
+					    <button type=\"submit\" name=\"delete\" class=\"btn btn-danger\">Delete Club</button>
 					    </div>
 					    </div>
 					    </form>";
 				    echo $output;    
-				}
-				
-				
-				
-			    }
-			    elseif($_GET['option']=="deleteClubs"){
-				echo "<h3>Delete Clubs</h3>";
+				}	
 			    }
 			}
 		    ?>
@@ -345,3 +443,9 @@
 
 
 <?php include("includes/footer.php"); ?>
+
+<script>
+    $('.creator').typeahead({
+        local: <?php echo $userList; ?>
+    });
+</script>

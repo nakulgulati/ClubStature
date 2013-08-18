@@ -667,4 +667,57 @@
 	}
     }
     
+    function updateClub($clubName,$creator,$newClubName,$newCategory,$newUrl,$newDesc){
+	global $connection;
+	$updates = 0;
+	
+	$userClubSet = getData("clubs","*","clubName",$_SESSION['selectedClub']);
+	$club = mysql_fetch_array($userClubSet);
+	
+	if(($newClubName!=$club['clubName']) || ($newCategory!=$club['category']) || ($newUrl!=$club['url']) || ($newDesc!=$club['description'])){
+	    $updates++;
+	}
+	
+	if($updates!=0){
+	    $query = "UPDATE clubs SET clubName = '{$newClubName}', category = '{$newCategory}', url = '{$newUrl}', description = '{$newDesc}' WHERE creator = '{$creator}' && clubName = '{$clubName}'";
+	    mysql_query($query,$connection);
+	}
+	return $updates;
+    }
+    
+    function deleteClub($clubName,$creator,$pass){
+	global $connection;
+	$status = 0;
+	$userDetails = getData("users","*","username",$_SESSION['username']);
+	$user = mysql_fetch_array($userDetails);
+	
+	if(sha1($pass) == $user['hashedPass'] ){
+	    $query="DELETE FROM clubs WHERE creator='{$creator}' && clubName='{$clubName}'";
+	    mysql_query($query,$connection);
+	    $status = -1;
+	}
+	else{
+	    $status = -2;
+	}
+	return $status;
+	
+    }
+    
+    function transferClub($clubName,$creator,$newCreator,$pass){
+	global $connection;
+	$status = 0;
+	$userDetails = getData("users","*","username",$_SESSION['username']);
+	$user = mysql_fetch_array($userDetails);
+	
+	if(sha1($pass) == $user['hashedPass'] ){
+	    $query="UPDATE clubs SET creator = '{$newCreator}' WHERE creator='{$creator}' && clubName='{$clubName}'";
+	    mysql_query($query,$connection);
+	    $status = 2;
+	}
+	else{
+	    $status = -2;
+	}
+	return $status;
+    }
+    
 ?>
