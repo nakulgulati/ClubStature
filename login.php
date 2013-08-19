@@ -76,7 +76,7 @@ if(isset($_POST['submit'])){
 				<input type="password" id="password" class="form-control" name="password" placeholder="******" required>
 				<br>
 				<button type="submit" name="submit" class="btn btn-success">Sign in</button>
-				<a href="forgotPassword.php" class="btn btn-primary">Forgot Password?</a>
+				<a href="forgotPassword.php?section=genCode" class="btn btn-primary">Forgot Password?</a>
 			    </div>
 			</div>
 		    </form>

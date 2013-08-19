@@ -335,7 +335,8 @@
         }
         
         function sendMail($userId, $status, $bodyContent = ""){
-
+        require_once("Mail.php");
+        
         $host     = "ssl://smtp.gmail.com";
         $port     = "465";
         $username = "clubstature@gmail.com";  //<> give errors
@@ -402,13 +403,6 @@
         ));
 
         $mail = $smtp->send($to, $headers, $body);
-
-        if (PEAR::isError($mail)) {
-        echo("<p>" . $mail->getMessage() . "</p>");
-        } 
-        else {
-        echo("<p>Message successfully sent!</p>");
-        }
     }
       
     function uploadFile($fileName,$clubName){
