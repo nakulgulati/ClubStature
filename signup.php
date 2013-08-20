@@ -45,39 +45,39 @@ function prepSignUp()
 	    return false;
 	}
     }
-if(isset($_POST['submit'])){
-    //Form submitted
-    global $connection;
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = sha1($_POST['password']);
-    $college="";
-    
-    if(isset($_POST['tick']))
-    {
-	$college=$_POST['newCollege'];
-	$query="SELECT * FROM colleges WHERE name='{$college}'";
-	$res=mysql_query($query,$connection);
-	if(mysql_num_rows($res)==0)
+    if(isset($_POST['submit'])){
+	//Form submitted
+	global $connection;
+	$username = $_POST['username'];
+	$email = $_POST['email'];
+	$password = sha1($_POST['password']);
+	$college="";
+	
+	if(isset($_POST['tick']))
 	{
-	    addCollege($college);
+	    $college=$_POST['newCollege'];
+	    $query="SELECT * FROM colleges WHERE name='{$college}'";
+	    $res=mysql_query($query,$connection);
+	    if(mysql_num_rows($res)==0)
+	    {
+		addCollege($college);
+	    }
 	}
-    }
-    else
-    {
-	$college=$_POST['college'];
-    }
-    
-    $errors = addUser($username,$college,$password,$email);   
+	else
+	{
+	    $college=$_POST['college'];
+	}
 	
-    
-    if($errors['status']==1){  //if there were no errors
-	$userDetails = getData("users","*","username",$username);
-	$user = mysql_fetch_array($userDetails);
+	$errors = addUser($username,$college,$password,$email);   
+	    
 	
-	//sendMail($user['id'],"create");
-	
-    }
+	if($errors['status']==1){  //if there were no errors
+	    $userDetails = getData("users","*","username",$username);
+	    $user = mysql_fetch_array($userDetails);
+	    
+	    sendMail($user['id'],"create");
+	    
+	}
     
 }
 
@@ -174,7 +174,7 @@ if(isset($_POST['submit'])){
 				$output="<div class=\"alert alert-success\">
 					{$errors[0]}
 					</div>";
-				//$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL=login.php\">";
+				$output .= "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2;URL=login.php\">";
 				echo $output;
 			    }
 			    elseif(($errors['status']==0) && (count($errors)>1)){

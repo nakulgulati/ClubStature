@@ -15,8 +15,7 @@
 if(isset($_POST['ratingSubmit'])){
     if(loggedIn()){
         //rate processing
-        $st = calculateRating($_GET['clubID'],$clubDetails['clubName'],$_SESSION['userId'],$_SESSION['username'],$_POST['rigor'],$_POST['cohesiveness'],$_POST['scheduleFriendliness']);
-        echo $st;
+        $st = calculateRating($_GET['clubID'],$clubDetails['clubName'],$_SESSION['uID'],$_POST['rigor'],$_POST['cohesiveness'],$_POST['scheduleFriendliness']);
         redirect_to("{$_SERVER['REQUEST_URI']}");
     }
     else{
@@ -34,10 +33,10 @@ if(isset($_POST['submit'])){
     $today = getdate();
     $timestamp = $today['hours'].":".$today['minutes']." ".$today['mday']."/".$today['mon']."/".$today['year'];
     
-    $userDetails = getUserInfo($_SESSION['userId']);
-    $username = $userDetails['username'];
+    $userSet = getData("users","*","uID",$_SESSION['uID']);
+    $user = mysql_fetch_array($userSet);
     
-    $commentQuery = "INSERT INTO `comments`(`timeStamp`, `clubID`, `username`, `comment`) VALUES ('{$timestamp}','{$_GET['clubID']}','{$username}','{$comment}')";
+    $commentQuery = "INSERT INTO `comments`(`timeStamp`, `clubID`, `uID`, `comment`) VALUES ('{$timestamp}','{$_GET['clubID']}','{$uID}','{$comment}')";
     $result = mysql_query($commentQuery,$connection);
     }
     else{

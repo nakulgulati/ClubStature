@@ -48,9 +48,10 @@
             
             if(loggedIn()){
                 //Display user welcome message
-                $userDetails = getUserInfo($_SESSION['userId']);
+                $userSet = getData("users","*","uID",$_SESSION['uID']);
+                $user = mysql_fetch_array($userSet);
                 $output .= "<div class=\"btn-group pull-right\">
-                            <p class=\"navbar-text greeting\" >Greetings,</p><p class=\"navbar-text user dopdown-toggle\" data-toggle=\"dropdown\"> {$userDetails['username']}</p>
+                            <p class=\"navbar-text user dopdown-toggle\" data-toggle=\"dropdown\"><img src=\"{$user['avatar']}\"width=\"50\"> {$user['displayName']}</p>
                             <ul class=\"dropdown-menu\">
                             <li><a href=\"addClub.php\"><span class=\"glyphicon glyphicon-pencil\"></span> Add Club</a></li>
                             <li><a href=\"user.php?option=profile\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
@@ -61,8 +62,7 @@
             }
             else{
                 $output .= "<div class=\"pull-right\">
-                            <a class=\"btn btn-success navbar-btn\" href=\"login.php\">Login</a>
-                            <a class=\"btn btn-info navbar-btn\" href=\"signup.php\">Sign Up</a>
+                            <a class=\"btn zocial facebook\" href=\"loginFinal.php?provider=Facebook\">Login</a>
                             </div>";
             }            
             $output .= "</div>
@@ -159,7 +159,7 @@
         confirmQuery($commentSet);
         while($comment = mysql_fetch_array($commentSet)){
             $output="<tr><td><div class=\"review\">
-                    <b class=\"pull-right\">{$comment['username']}</b><br>
+                    <b class=\"pull-right\">{$comment['uID']}</b><br>
                     <p><small class=\"pull-right\">-{$comment['timeStamp']}</small></p><br>
                     <p>
                     {$comment['comment']}                   
@@ -186,16 +186,16 @@
       return $resultSet;
    }
    
-   function calculateRating($clubId,$clubName,$userId,$username,$rigor,$cohesiveness,$scheduleFriendliness){
+   function calculateRating($clubId,$clubName,$uID,$rigor,$cohesiveness,$scheduleFriendliness){
         global $connection;
         $status = 0;
         
-        if(!isCombinationUnique("rating","clubId","username",$clubId,$username)){
+        if(!isCombinationUnique("rating","clubId","uID",$clubId,$uID)){
             $status = 0;
             return $status;
         }
         
-        $query="INSERT INTO `rating`(`clubId`, `clubName`, `userId`, `username`, `rigor`, `cohesiveness`, `scheduleFriendliness`) VALUES ({$clubId},'{$clubName}',{$userId},'{$username}',{$rigor},{$cohesiveness},{$scheduleFriendliness});";
+        $query="INSERT INTO `rating`(`clubId`, `clubName`, `uID`, `rigor`, `cohesiveness`, `scheduleFriendliness`) VALUES ({$clubId},'{$clubName}',{$uID},{$rigor},{$cohesiveness},{$scheduleFriendliness});";
         if(mysql_query($query,$connection)){
             
             $query="SELECT AVG(rigor) AS ravg FROM rating WHERE clubId={$clubId}";
@@ -439,24 +439,24 @@
 	}
     }
     
-    function updateInfo($username,$newName,$newEmail,$newCollege){
+    function updateInfo($uID,$newName,$newEmail,$newCollege){
 	global $connection;
 	
-	$userDetails = getData("users","*","username",$username);
+	$userDetails = getData("users","*","uID",$uID);
 	$user = mysql_fetch_array($userDetails);
 	
 	
-	if($user['name']==$newName && $user['email']==$newEmail && $user['college']==$newCollege){
+	if($user['displayName']==$newName && $user['email']==$newEmail && $user['college']==$newCollege){
 	    return 0;
 	}
 	else{
 	    $query = "UPDATE users SET ";
 	    
-	    if(($user['name']!=$newName) && ($user['email']==$newEmail) && ($user['college']==$newCollege)){
-		$query.="name = '{$newName}' ";
+	    if(($user['displayName']!=$newName) && ($user['email']==$newEmail) && ($user['college']==$newCollege)){
+		$query.="displayName = '{$newName}' ";
 	    }
-	    elseif($user['name']!=$newName){
-		$query.="name = '{$newName}', ";
+	    elseif($user['displayName']!=$newName){
+		$query.="displayName = '{$newName}', ";
 	    }
 	    
 	    if(($user['email']!=$newEmail) && ($user['college']!=$newCollege)){
@@ -470,7 +470,7 @@
 		$query.="college = '{$newCollege}' ";
 	    }
 	
-	    $query.="WHERE username = '{$username}'";
+	    $query.="WHERE uID = '{$uID}'";
 	    
 	    if(mysql_query($query,$connection)){
 		return 1;

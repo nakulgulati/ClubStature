@@ -3,9 +3,20 @@
 <?php require_once("includes/functions.php"); ?>
 <?php include("includes/header.php"); ?>
 
-<link href="assets/social-buttons/css/zocial.css" rel='stylesheet' type='text/css'>
+
 
 <?php
+    if(!isset($_GET['provider'])){
+    
+    if(strpos($_SERVER['HTTP_REFERER'],"signup.php")){
+	$_SESSION['url'] = "index.php";
+    }
+    else{
+	$_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+    }
+    }	
+
+
     $config   = dirname(__FILE__) . '/hybridauth/config.php';
     require_once( "hybridauth/Hybrid/Auth.php" );
     
@@ -38,8 +49,18 @@
         }
     }
     
-    function createSocialUser($provider,$uID){
-        
+    function createSocialUser($provider,$uID,$name,$email,$avatar){
+        global $connection;
+	
+	$query = "INSERT INTO `users`(`provider`, `uID`, `displayName`, `email`, `avatar`) VALUES ('{$provider}','{$uID}','{$name}','{$email}','{$avatar}');";
+	mysql_query($query,$connection);
+    }
+    
+    function updateAvatar($uID,$avatar){
+	global $connection;
+	
+	$query = "UPDATE `users` SET avatar = '{$avatar}' WHERE uID = {$uID};";
+	mysql_query($query,$connection);
     }
     
     if(isset($_POST['submit'])){
@@ -50,7 +71,10 @@
             
             $_SESSION['uID'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+	    $_SESSION['provider'] = NULL;
         }
+	else{
+	}
     }
     elseif(isset($_GET['provider'])){
         $provider_name = $_GET['provider'];
@@ -67,20 +91,27 @@
         }
         catch( Exception $e ){
         }
-        
-        $userExists = socialUserExists($provider_name,$userProfile->identifier);
-        if($userExists){
-            $userSet = getData("users","*","uID",$userProfile->identifier);
-            $user = mysql_fetch_array($userSet);
-            
-            $_SESSION['uID'] = $user['uID'];
-            $_SESSION['provider'] = $provider_name;
-        }
-        else{
-            
-        }
+	global $userProfile;
+	    $userExists = socialUserExists($provider_name,$userProfile->identifier);
+	    if($userExists){
+		
+		updateAvatar($userProfile->identifier,$userProfile->photoURL);
+		$userSet = getData("users","*","uID",$userProfile->identifier);
+		$user = mysql_fetch_array($userSet);
+		
+		$_SESSION['uID'] = $user['uID'];
+		$_SESSION['provider'] = $provider_name;
+		
+		redirect_to($_SESSION['url']);
+
+	    }
+	    else{
+		createSocialUser($provider_name,$userProfile->identifier,$userProfile->displayName,$userProfile->email,$userProfile->photoURL);
+		$_SESSION['uID'] = $userProfile->identifier;
+		$_SESSION['provider'] = $provider_name;
+		redirect_to($_SESSION['url']);
+	    }
     }
-    
 ?>
 
 
@@ -92,7 +123,7 @@
     ?>
     <div class="wrapper-content">
 	<div class="container">
-            <a class="btn zocial facebook" href="newLogin.php?provider=facebook">Login with facebook</a>
+            <a class="btn zocial facebook" href="newLogin.php?provider=Facebook">Login with facebook</a>
              <div class = "row">
 		<div class = "well col-offset-3 col-lg-6">
 		    <!--form area-->

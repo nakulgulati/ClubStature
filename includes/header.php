@@ -35,6 +35,7 @@
 	    <link rel="stylesheet" type="text/css" href="css/typeahead.js-bootstrap.css">
 		<link href='http://fonts.googleapis.com/css?family=Racing+Sans+One' rel='stylesheet' type='text/css'>
 			<link href='http://fonts.googleapis.com/css?family=Joti+One' rel='stylesheet' type='text/css'>
+				<link href="assets/social-buttons/css/zocial.css" rel='stylesheet' type='text/css'>
 	    
     </head>	
     <body>

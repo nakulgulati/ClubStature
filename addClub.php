@@ -4,13 +4,14 @@
 <?php include("includes/header.php"); ?>
 
 <?php
-    $user = getUserInfo($_SESSION['userId']);
+    $userSet = getData("users","*","uID",$_SESSION['uID']);
+    $user = mysql_fetch_array($userSet);
     if(isset($_POST['addClub'])){
         $status = 0;
         $fileName = uploadFile($_FILES["file"]["name"],$_POST['clubName']);
         if(isCombinationUnique("clubs","college","clubName",$user['college'],$_POST['clubName'])){
             $query="INSERT INTO clubs(clubName,college,category,url,description,image,creator)   
-            VALUES('{$_POST['clubName']}','{$user['college']}','{$_POST['category']}','{$_POST['url']}','{$_POST['description']}','{$fileName}','{$user['username']}')";
+            VALUES('{$_POST['clubName']}','{$user['college']}','{$_POST['category']}','{$_POST['url']}','{$_POST['description']}','{$fileName}','{$user['uID']}')";
             if(mysql_query($query)){
                 $status = 1;
             }
@@ -78,7 +79,7 @@
 		    <div class="col-lg-6">
 			<?php
 			    global $connection;
-			    $query = "SELECT * FROM users WHERE username='{$_SESSION['username']}'";
+			    $query = "SELECT * FROM users WHERE uID='{$_SESSION['uID']}'";
 			    $resultset = mysql_query($query, $connection);
 			    $row=mysql_fetch_array($resultset);
 			    $output = "<input type=\"text\" class=\"form-control\" name =\"college\" value=\"{$user['college']}\" disabled>";

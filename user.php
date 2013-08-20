@@ -11,7 +11,7 @@
 
 <?php
     //getting user details
-    $userDetails = getData("users","*","username",$_SESSION['username']);
+    $userDetails = getData("users","*","uID",$_SESSION['uID']);
     $user = mysql_fetch_array($userDetails);
     
     //getting list of colleges
@@ -21,7 +21,7 @@
     $categorySet = getData("categoryname","category");
     
     //getting list of user made clubs
-    $userClubSet = getData("clubs","*","creator",$_SESSION['username']);
+    $userClubSet = getData("clubs","*","creator",$_SESSION['uID']);
     
     if(isset($_POST['transfer']) || isset($_POST['edit'])){
 	$editClubSet = getData("clubs","*","clubName",$_POST['clubSelect']);
@@ -33,16 +33,16 @@
   
     //list of usernames
     $userList = "[";
-    $resultSet = getData("users","username","college",$user['college']);
+    $resultSet = getData("users","uID","college",$user['college']);
     
     while($row = mysql_fetch_array($resultSet)){
-    $userList .="'{$row['username']}',";
+    $userList .="'{$row['uID']}',";
     }
     $userList .="]";
 ?>
 <?php
     if(isset($_POST['updateDetails'])){
-	$_SESSION['status'] = updateInfo($_SESSION['username'],$_POST['newName'],$_POST['newEmail'],$_POST['newCollege']);
+	$_SESSION['status'] = updateInfo($_SESSION['uID'],$_POST['newName'],$_POST['newEmail'],$_POST['newCollege']);
 	if($_SESSION['status']){
 	    redirect_to("user.php?option=profile");
 	}
@@ -83,8 +83,8 @@
 <div class="wrapper">
     <?php
     //Prints nav bar
-      $nav = printNav(false);
-      echo $nav;
+      //$nav = printNav(false);
+      //echo $nav;
     ?>
     <div class="wrapper-content">
 	<div class="container">
@@ -117,8 +117,7 @@
 				
 				
 				echo "<table>
-				    <tr><td>Username:</td><td>{$user['username']}</td></tr>
-				    <tr><td>Name:</td><td>{$user['name']}</td></tr>
+				    <tr><td>Name:</td><td>{$user['displayName']}</td></tr>
 				    <tr><td>Email:</td><td>{$user['email']}</td></tr>
 				    <tr><td>College:</td><td>{$user['college']}</td></tr>
 				    </table>";
@@ -130,7 +129,7 @@
 					<div class=\"form-group\">
 					<label for=\"name\" class=\"col-lg-2 control-label\">Name</label>
 					<div class=\"col-lg-6\">
-					<input type=\"text\" class=\"form-control\" id=\"name\" name=\"newName\" placeholder=\"Your Name\" value=\"{$user['name']}\">
+					<input type=\"text\" class=\"form-control\" id=\"name\" name=\"newName\" placeholder=\"Your Name\" value=\"{$user['displayName']}\">
 					</div>
 					</div>";
 				$output.="<div class=\"form-group\">
