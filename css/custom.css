@@ -55,7 +55,7 @@ body{
 }
 
 .logo{
-	max-width: 200px;
+	max-width: 150px;
 	margin-top: 10px;
 	margin-left: 20px;
 }
@@ -64,7 +64,7 @@ body{
 	background-image: url('../img/texture.png');
 	background-repeat: repeat-x;
 	min-height: 190px;
-	margin-top: 82px;
+	margin-top: 64px;
 }
 
 .welcomeText{
@@ -312,4 +312,16 @@ abbr:hover{
 
 #updateForm{
 	display: inline-block;
+}
+
+.login{
+	margin-top: 15px;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover{
+	color: #999;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+	color: #fff;
 }

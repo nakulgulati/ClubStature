@@ -62,7 +62,7 @@
             }
             else{
                 $output .= "<div class=\"pull-right\">
-                            <a class=\"btn zocial facebook\" href=\"loginFinal.php?provider=Facebook\">Login</a>
+                            <a class=\"login btn zocial facebook\" href=\"loginFinal.php?provider=Facebook\">Login</a>
                             </div>";
             }            
             $output .= "</div>
