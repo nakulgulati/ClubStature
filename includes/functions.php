@@ -355,9 +355,9 @@
         if($status == "forgot"){  //if you forgot your password
             
             $body .= "Hello {$userInfo['username']},
-                    \n  You've forgotten your password.  We've reset it for you. It is now {$bodyContent}.
-                    \n  That is all.   
-                    \n   -ClubStature";
+                    \n  We have reset your password for you. It is now {$bodyContent}.
+                    \n  You may change this password at your convenience.   
+                    \n \n \t  -ClubStature";
 
             $subject = "Password Reset";
         }
@@ -366,9 +366,8 @@
 
             $body .= "Hello {$userInfo['username']},
                 \n Your password has successfully been changed according to your arbitrary whims. 
-                \n Your password has been changed according to your arbitrary whims. 
-                \n We would like to send you your new password, but unfortunately, we don't know it ourselves. 
-                \n Good day! 
+                \n If you did not request this change, please reply to this email.
+                \n 
                 \n \t    -ClubStature";
 
             $subject = "Password Change Successful";
@@ -390,8 +389,6 @@
         'From'    => $from,
         'To'      => $to,
         'Subject' => $subject
-        //$headers .= "MIME-Version: 1.0\r\n";
-        //Content-Type => text/html; charset=ISO-8859-1\r\n;
         );
         $smtp = Mail::factory('smtp', 
          array(
@@ -437,7 +434,7 @@
 			return $newName;
     		}
 	}
-    }
+}
     
     function updateInfo($username,$newName,$newEmail,$newCollege){
 	global $connection;
