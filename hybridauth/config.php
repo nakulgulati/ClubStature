@@ -13,7 +13,7 @@
 
 return 
 	array(
-		"base_url" => "http://localhost/public_html/Development/RateMyClub/hybridauth/", 
+		"base_url" => "http://clubstature.com/hybridauth/", 
 
 		"providers" => array ( 
 			// openid providers
