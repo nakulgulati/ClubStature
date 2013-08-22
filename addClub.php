@@ -4,6 +4,12 @@
 <?php include("includes/header.php"); ?>
 
 <?php
+    if(!loggedIn()){
+        redirect_to("login.php?provider=Facebook");
+    }
+?>
+
+<?php
     $userSet = getData("users","*","uID",$_SESSION['uID']);
     $user = mysql_fetch_array($userSet);
     if(isset($_POST['addClub'])){

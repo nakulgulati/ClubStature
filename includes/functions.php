@@ -56,13 +56,13 @@
                             <li><a href=\"addClub.php\"><span class=\"glyphicon glyphicon-pencil\"></span> Add Club</a></li>
                             <li><a href=\"user.php?option=profile\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
+                            <li><a href=\"logout_all.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
                             </ul>
                             </div>";
             }
             else{
                 $output .= "<div class=\"pull-right\">
-                            <a class=\"login btn zocial facebook\" href=\"loginFinal.php?provider=Facebook\">Login</a>
+                            <a class=\"login btn zocial facebook\" href=\"login.php?provider=Facebook\">Login</a>
                             </div>";
             }            
             $output .= "</div>
@@ -712,6 +712,47 @@
 	    $status = -2;
 	}
 	return $status;
+    }
+    
+    function socialUserExists($provider,$uID){
+        global $connection;
+        
+        $query = "SELECT * FROM  `users` WHERE  `provider` =  '{$provider}' &&  `uID` =  '{$uID}'";
+        $resultSet = mysql_query($query,$connection);
+        
+        if(mysql_num_rows($resultSet)==1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    function createSocialUser($provider,$uID,$name,$email,$avatar){
+        global $connection;
+	
+	$query = "INSERT INTO `users`(`provider`, `uID`, `displayName`, `email`, `avatar`) VALUES ('{$provider}','{$uID}','{$name}','{$email}','{$avatar}');";
+	mysql_query($query,$connection);
+    }
+    
+    function updateAvatar($uID,$avatar){
+	global $connection;
+	
+	$query = "UPDATE `users` SET avatar = '{$avatar}' WHERE uID = {$uID};";
+	mysql_query($query,$connection);
+    }
+    
+    function setReturnPath($sessionID,$returnURL){
+	global $connection;
+	
+	$query = "INSERT INTO `returnPath`(`sessionID`, `returnURL`) VALUES ('{$sessionID}', '{$returnURL}')";
+        confirmQuery(mysql_query($query,$connection));
+    }
+    
+    function deleteReturnPath($sessionID){
+        global $connection;
+        $query="DELETE FROM `returnPath` WHERE `sessionID`='{$sessionID}'";
+        confirmQuery(mysql_query($query,$connection));
     }
     
 ?>
