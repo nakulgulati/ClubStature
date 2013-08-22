@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
                      $img = $clubDetails['image'];
                  }
              ?>
-             <div class="imgHolder"><img id="clubImg" src="img/clubImages/<?php echo $img; ?>"></div>
+             <div class="imgHolder"><img id="clubImg" src="assets/clubImages/<?php echo $img; ?>"></div>
              <div id="info">
                  <ul id="clubInfo">
                      <li><h2><?php echo $clubDetails['clubName']; ?></h2></li>

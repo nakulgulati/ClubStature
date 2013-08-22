@@ -7,6 +7,8 @@
 
     $config   = dirname(__FILE__) . '/hybridauth/config.php';
     require_once( "hybridauth/Hybrid/Auth.php" );
+    
+    
 
     function socialUserExists($provider,$uID){
         global $connection;
@@ -38,10 +40,10 @@
     
     
     if(isset($_GET['provider'])){
-        if($_GET['provider'] == "Facebook"){
-            $url = $_SERVER['HTTP_REFERER'];
-        }
-        global $url;
+	if($_GET['provider']="Facebook"){
+	    $url = $_SERVER['HTTP_REFERER'];    
+	}
+	
         $provider_name = $_GET['provider'];
         
         try{
@@ -66,15 +68,17 @@
             
             $_SESSION['uID'] = $user['uID'];
             $_SESSION['provider'] = $provider_name;
-            
-            redirect_to($url);
+	    
+	    echo $url;
+            redirect_to("index.php");
 
         }
         else{
             createSocialUser($provider_name,$userProfile->identifier,$userProfile->displayName,$userProfile->email,$userProfile->photoURL);
             $_SESSION['uID'] = $userProfile->identifier;
             $_SESSION['provider'] = $provider_name;
-            redirect_to($url);
+	    echo $url;
+	    redirect_to("index.php");
         }
     }
 

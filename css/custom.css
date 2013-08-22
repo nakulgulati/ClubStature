@@ -61,7 +61,7 @@ body{
 }
 
 .banner{
-	background-image: url('../img/texture.png');
+	background-image: url('../assets/images/texture.png');
 	background-repeat: repeat-x;
 	min-height: 190px;
 	margin-top: 64px;
@@ -217,7 +217,7 @@ h3.user{
 }
 
 #otherR{
-	background: url('../img/r.png');
+	background: url('../assets/images/r.png');
 	width: 75px;
 	height: 75px;
 	display: inline-block;
@@ -230,7 +230,7 @@ h3.user{
 }
 
 #otherC{
-	background: url('../img/c.png');
+	background: url('../assets/images/c.png');
 	width: 75px;
 	height: 75px;
 	display: inline-block;
@@ -243,7 +243,7 @@ h3.user{
 }
 
 #otherSF{
-	background: url('../img/sf.png');
+	background: url('../assets/images/sf.png');
 	width: 75px;
 	height: 75px;
 	display: inline-block;

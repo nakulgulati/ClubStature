@@ -1,7 +1,7 @@
                 <div class="footer">
                     <div class="container">
                         <span class="text-muted credit">Got questions or feedback? Send them to clubstature@gmail.com.</span>
-                        <span class="text-muted credit pull-right">Follow us on <a href="https://www.facebook.com/clubstature"><img src="img/assets/fb.png"></a>                  </span> 
+                        <span class="text-muted credit pull-right">Follow us on <a href="https://www.facebook.com/clubstature"><img src="assets/images/fb.png"></a>                  </span> 
                     </div>
                 </div>
                 

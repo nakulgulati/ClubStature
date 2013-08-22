@@ -27,8 +27,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
     
 	<!--stylesheets-->
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">

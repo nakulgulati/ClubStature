@@ -26,7 +26,7 @@
     function printNav($public = true){
         $output =   "<div class=\"container\">
                     <div class=\"navbar navbar-inverse navbar-fixed-top\">
-                    <a href=\"index.php\"><img class=\"logo\" src=\"img/logo.png\"></a>    
+                    <a href=\"index.php\"><img class=\"logo\" src=\"assets/images/logo.png\"></a>    
                     <div class=\"container navContent\">
                     <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".nav-collapse\">
                     <span class=\"icon-bar\"></span>
