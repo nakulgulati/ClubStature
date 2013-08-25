@@ -83,8 +83,8 @@
 <div class="wrapper">
     <?php
     //Prints nav bar
-      //$nav = printNav(false);
-      //echo $nav;
+      $nav = printNav(false);
+      echo $nav;
     ?>
     <div class="wrapper-content">
 	<div class="container">
