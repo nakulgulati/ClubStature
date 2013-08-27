@@ -5,6 +5,8 @@
     $param = array("next" => $_SERVER['HTTP_REFERER']);
     $logoutUrl = $facebook->getLogoutUrl($param);
     
+    deleteReturnPath(session_id());
+    
     session_start(); //Finding session start
     
     // 2. Unset all the session variables
@@ -16,6 +18,7 @@
     }
 
     session_destroy(); //Destroy the session
+    
     
     redirect_to($logoutUrl);
 
