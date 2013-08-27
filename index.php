@@ -96,7 +96,6 @@
                     <h4><strong>Most Searched Clubs</strong></h4>
                     <?php printTopList("hits"); ?>
                 </div>
-                <a href="fbLogin.php">Fb Login</a>
             </div>
         </div>
     </div>

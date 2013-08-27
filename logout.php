@@ -1,35 +1,22 @@
+<?php require_once("includes/connection.php"); ?>
+<?php require_once("includes/functions.php"); ?>
+
 <?php
-	// config and whatnot
-    $config   = dirname(__FILE__) . '/hybridauth/config.php';
-    require_once( "hybridauth/Hybrid/Auth.php" );
-
-	try{
-		$hybridauth = new Hybrid_Auth( $config );
- 
-		$provider = $_GET["provider"];       // selected provider name 
-
-		// call back the requested provider adapter instance 
-		$adapter = $hybridauth->getAdapter( $provider );
-
-		// logout the user from $provider
-		$adapter->logout(); 
-
-		// return to login page
-		$hybridauth->redirect( "login.php" );
-                logout($_SERVER['HTTP_REFERER']);
+    $param = array("next" => $_SERVER['HTTP_REFERER']);
+    $logoutUrl = $facebook->getLogoutUrl($param);
+    
+    session_start(); //Finding session start
+    
+    // 2. Unset all the session variables
+    $_SESSION = array(); // Reset all the session variables
+    
+    if(isset($_COOKIE[session_name()])) {
+        //Destroy the session cookie
+            setcookie(session_name(), '', time()-42000, '/');
     }
-	catch( Exception $e ){
-		// Display the recived error, 
-		// to know more please refer to Exceptions handling section on the userguide
-		switch( $e->getCode() ){ 
-			case 0 : echo "Unspecified error."; break;
-			case 1 : echo "Hybriauth configuration error."; break;
-			case 2 : echo "Provider not properly configured."; break;
-			case 3 : echo "Unknown or disabled provider."; break;
-			case 4 : echo "Missing provider application credentials."; break; 
-		} 
 
-		echo "<br /><br /><b>Original error message:</b> " . $e->getMessage();
+    session_destroy(); //Destroy the session
+    
+    redirect_to($logoutUrl);
 
-		echo "<hr /><h3>Trace</h3> <pre>" . $e->getTraceAsString() . "</pre>"; 
-	}
+?>

@@ -50,7 +50,7 @@
     ?>
     <div class="wrapper-content">
         <div class="container">
-            <h1 class="page-header">Search Clubs</h1>
+            <legend><h3><b>Search Clubs</b></h3></legend>
             <form method="get" class="form-inline" action="search.php">
                 <div class="col-lg-3" id="clubSearch">
                     <input class="form-control typeahead club" type="text" id="searchClub" name="searchClub" placeholder="Enter club name to search"/>

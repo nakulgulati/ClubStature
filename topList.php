@@ -20,7 +20,7 @@
     ?>
     <div class="wrapper-content">
         <div class="container">
-            <h1 class="page-header">Top Lists</h1>
+            <legend><h3><b>Top Lists</b></h3></legend>
             <form class="form-inline">
                 <div class="col-lg-4">
                     <?php
@@ -43,7 +43,7 @@
                 <div class="col-lg-6">
                     <div class="col-lg-6 col-offset-3">
                         <div id="oR" class="well">
-                            <h2>Overall Rating</h2>
+                            <h4>Overall Rating</h4>
                             <p>
                             <?php 
                                 $collfilter;
@@ -57,7 +57,7 @@
                 <div class="col-lg-6">
                     <div class="col-lg-6 col-offset-3">
                         <div id="r" class="well">
-                            <h2>Rigor</h2>
+                            <h4>Rigor</h4>
                             <p>
                             <?php 
                                 $collfilter;
@@ -73,7 +73,7 @@
                 <div class="col-lg-6">
                     <div class="col-lg-6 col-offset-3">            
                         <div id="c" class="well">
-                            <h2>Cohesiveness</h2>
+                            <h4>Cohesiveness</h4>
                             <p>
                             <?php 
                                 $collfilter;
@@ -87,7 +87,7 @@
                 <div class="col-lg-6">
                     <div class="col-lg-6 col-offset-3">
                         <div id="sF" class="well">
-                            <h2>Schedule Friendliness</h2>
+                            <h4>Schedule Friendliness</h4>
                             <p>
                             <?php 
                                 $collfilter;
