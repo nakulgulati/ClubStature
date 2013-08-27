@@ -56,13 +56,13 @@
                             <li><a href=\"addClub.php\"><span class=\"glyphicon glyphicon-pencil\"></span> Add Club</a></li>
                             <li><a href=\"user.php?option=profile\"><span class=\"glyphicon glyphicon-user\"></span> Settings</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"logout_all.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
+                            <li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-off\"></span> Log Out</a></li>
                             </ul>
                             </div>";
             }
             else{
                 $output .= "<div class=\"pull-right\">
-                            <a class=\"login btn zocial facebook\" href=\"login.php?provider=Facebook\">Login</a>
+                            <a class=\"login btn zocial facebook\" href=\"login.php\">Login</a>
                             </div>";
             }            
             $output .= "</div>
@@ -521,7 +521,7 @@
 	$output = "<ul class=\"nav nav-pills nav-stacked userNavPills\">";
 	
 	$resultSet = getData("userNav","*","heading","1");
-	$output.="<legend>Information</legend>";
+	$output.="<legend>User Settings</legend>";
 	
 	while($row = mysql_fetch_array($resultSet)){
 	    $output.="<li";
@@ -533,7 +533,6 @@
 	}
 	
 	$resultSet = getData("userNav","*","heading","2");
-	$output.="<legend>Change Account Settings</legend>";
 	
 	while($row = mysql_fetch_array($resultSet)){
 	    $output.="<li";

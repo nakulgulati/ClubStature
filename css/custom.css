@@ -325,3 +325,11 @@ abbr:hover{
 .navbar-inverse .navbar-nav>li>a{
 	color: #fff;
 }
+
+.credit{
+	text-decoration: none;
+}
+
+.credit:hover{
+	text-decoration: none;
+}

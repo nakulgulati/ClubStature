@@ -96,7 +96,6 @@
                     <h4><strong>Most Searched Clubs</strong></h4>
                     <?php printTopList("hits"); ?>
                 </div>
-                <a href="clubList.php">Club List</a>
             </div>
         </div>
     </div>

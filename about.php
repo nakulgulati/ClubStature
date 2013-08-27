@@ -18,8 +18,8 @@
     <div class="wrapper-content">
         <div class="container">
             <!--content-->
-            <h1>What is Club Stature</h1>
-            
+            <legend><h3><b>What is Club Stature</b></h3></legend>
+           
             <p>
                 Do you want to just sail through student life or live the experience! Here at clubstature, we help you choose the activities that suit your taste and inclination. We will help you lift your stature.<br>
 
