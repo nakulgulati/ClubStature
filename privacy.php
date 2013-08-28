@@ -14,7 +14,7 @@
             <legend><h3><b>Privacy Policy</b></h3></legend>
 
             <h5><b>WHO WE ARE AND WHAT THIS IS</b></h5>
-            Club Stature is a web-based application that helps individuals navigate their institute?s extracurricular opportunities.
+            Club Stature is an online forum that helps individuals navigate their institute?s extracurricular opportunities.
             We take the private nature of your personal information very seriously, and are committed to protecting it. To do that, we've set up procedures to ensure that your information is handled responsibly and in accordance with applicable data protection and privacy laws. We're grateful for your trust, and we'll act that way.
             This privacy policy describes what information we collect when you visit Club Stature, how we use that information, and how you can access, update, and control it.
             
