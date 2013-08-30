@@ -116,7 +116,7 @@ if(isset($_POST['submit'])){
                                  <option>4</option>
                                  <option>5</option>
                                  </select>
-                                 <label><a class=\"help\" data-original-title=\"Do you feel like you're working together?\">Cohesiveness</a></label>
+                                 <label><a class=\"help\" data-original-title=\"Do you feel like you're working together?\">Unity</a></label>
                                  <select class=\"form-control\" id=\"cohesiveness\" name=\"cohesiveness\">
                                  <option>0</option>
                                  <option>1</option>
@@ -125,7 +125,7 @@ if(isset($_POST['submit'])){
                                  <option>4</option>
                                  <option>5</option>
                                  </select>
-                                 <label><a class=\"help\" data-original-title=\"How heavy is yor time commitment? Is the group flexible?\">Schedule Friendliness</a></label>
+                                 <label><a class=\"help\" data-original-title=\"How manageable is your time commitment?\">Workload</a></label>
                                  <select class=\"form-control\" id=\"scheduleFriendliness\" name=\"scheduleFriendliness\">
                                  <option>0</option>
                                  <option>1</option>
