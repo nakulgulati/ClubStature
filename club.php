@@ -76,12 +76,12 @@ if(isset($_POST['submit'])){
      
                  <div id="otherSF">
                      <!--schedule friendliness-->
-                     <abbr title="Schedule Friendliness" class="initialism"><p class="scoreOther"><?php echo $clubDetails['scheduleFriendliness']; ?></p></abbr>
+                     <abbr title="Workload" class="initialism"><p class="scoreOther"><?php echo $clubDetails['scheduleFriendliness']; ?></p></abbr>
                  </div>
                  
                  <div id="otherC">
                      <!--cohesiveness-->
-                     <abbr title="Cohesiveness" class="initialism"><p class="scoreOther"><?php echo $clubDetails['cohesiveness']; ?></p></abbr>
+                     <abbr title="Unity" class="initialism"><p class="scoreOther"><?php echo $clubDetails['cohesiveness']; ?></p></abbr>
                  </div>
                  
                  <div id="otherR">
@@ -137,7 +137,7 @@ if(isset($_POST['submit'])){
                                  </div>";
                      echo $rating;
                  }else{
-                     echo "<span class=\"help-block\">You must me logged in to submit your rating!</span>";
+                     echo "<center> <span class=\"help-block\">You must be logged in to submit your rating!</span> </center>";
                  }
              ?>
              </form>

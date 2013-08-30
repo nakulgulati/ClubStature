@@ -21,13 +21,13 @@
             <legend><h3><b>What is Club Stature</b></h3></legend>
            
             <p>
-                Do you want to just sail through student life or live the experience! Here at clubstature, we help you choose the activities that suit your taste and inclination. We will help you lift your stature.<br>
-
-                Our premise is simple:  You can get reviews on almost anything you want, be it restaurants, professors, phones and such. But where do you find reviews for extracurricular activities?<br> 
-                
-                This is where we come in.  We've provided a forum for you to browse, rate, and review your favorite high school/college organizations. If you aren't sure what you want to join, you can filter clubs by category, institute, number of hits and top rated.<br>  
-                
-                We hope you use this website to help yourselves and your peers to find the clubs that are the right fit for you.  Happy hunting!
+                Do you want to just sail through student life or live the experience? Here at clubstature, we help you choose the activities that suit your taste and inclination. We will help you lift your stature.<br>
+                <br>
+                We would like to ask you a simple question: How can you assess your fit for an activity without a plethora of opinions? Where can you find these opinions without bugging the right people?<br> 
+                <br>
+                This is where we come in.  We've provided a forum for you to browse, rate, and review your favorite high school or college organizations. If you aren't sure what you want to join, you can filter clubs by category, institute, number of hits and top-rated groups.<br>  
+                <br>
+                We hope you use this website to help yourselves and your friends <strong> get involved. </strong> <br> <br> Happy hunting!
             </p>
             
             <br>
