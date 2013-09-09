@@ -334,7 +334,7 @@
             }
         }
         
-        function sendMail($userId, $status, $bodyContent = ""){
+        function sendMail($userId, $status, $passReset = ""){
         require_once("Mail.php");
         
         $host     = "ssl://smtp.gmail.com";
@@ -352,34 +352,17 @@
 
         $body = "";
         $body = file_get_contents('./emailUpperHalf.html');
-        if($status == "forgot"){  //if you forgot your password
-            
-            $body .= "Hello {$userInfo['username']},
-                    \n  You've forgotten your password.  We've reset it for you. It is now {$bodyContent}.
-                    \n  That is all.   
-                    \n   -ClubStature";
-
-            $subject = "Password Reset";
-        }
-        elseif($status == "change"){ //if you wanna change your password
-          
-
-            $body .= "Hello {$userInfo['username']},
-                \n Your password has successfully been changed according to your arbitrary whims. 
-                \n Your password has been changed according to your arbitrary whims. 
-                \n We would like to send you your new password, but unfortunately, we don't know it ourselves. 
-                \n Good day! 
-                \n \t    -ClubStature";
-
-            $subject = "Password Change Successful";
-        }
-        elseif ($status == "create"){ //if you created an account
+        if ($status == "create"){ //if you created an account
    
             $body .= "Hello {$userInfo['username']},
             \n Thank you for creating an account with us!
             \n \n \t    -ClubStature";
 
             $subject = "Account creation ";
+        }
+        
+        elseif ($status == "deleteAccount"){
+        	body.=""// this should be $_POST feedback reason.  Ask the user to supply full name and reason in the body...
         }
 
         $body .= file_get_contents('./emailLowerHalf.html');
@@ -390,8 +373,6 @@
         'From'    => $from,
         'To'      => $to,
         'Subject' => $subject
-        //$headers .= "MIME-Version: 1.0\r\n";
-        //Content-Type => text/html; charset=ISO-8859-1\r\n;
         );
         $smtp = Mail::factory('smtp', 
          array(
