@@ -48,9 +48,9 @@
 	}
     }
     
-    if(isset($_POST['changePass'])){
+  /*  if(isset($_POST['changePass'])){
 	$errors = changePassword($_SESSION['username'],$_POST['oldPass'],$_POST['newPass'],$_POST['verifyNewPass']);
-    }
+    }  */
     
     if(isset($_POST['deleteAccount'])){
 	$errors = deleteAccount($_SESSION['username'],$_POST['pass']);
@@ -102,7 +102,7 @@
 		    <?php
 			if(isset($_GET['option'])){
 			    if($_GET['option']=="profile"){
-				echo "<h3>Account Information</h3>";
+				echo "<h2><u><b>Account Information</b></u></h2>";
 				
 				if(isset($_SESSION['status'])){
 				    if($_SESSION['status']==1){

@@ -362,7 +362,7 @@
         }
         
         elseif ($status == "deleteAccount"){
-        	body.=""// this should be $_POST feedback reason.  Ask the user to supply full name and reason in the body...
+        	$body.="";// this should be $_POST feedback reason.  Ask the user to supply full name and reason in the body...
         }
 
         $body .= file_get_contents('./emailLowerHalf.html');
