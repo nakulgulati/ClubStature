@@ -52,11 +52,11 @@
 	$errors = changePassword($_SESSION['username'],$_POST['oldPass'],$_POST['newPass'],$_POST['verifyNewPass']);
     }  */
     
-    if(isset($_POST['deleteAccount'])){
+ /*   if(isset($_POST['deleteAccount'])){
 	$errors = deleteAccount($_SESSION['username'],$_POST['pass']);
 	//show message
 	//redirect
-    }
+    }  */
        
     if(isset($_POST['updateClub'])){
 	$_SESSION['status'] = updateClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['newClubName'],$_POST['newCategory'],$_POST['newUrl'],$_POST['newDesc']);
@@ -115,13 +115,13 @@
 				    unset($_SESSION['status']);
 				}
 				
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				echo "<table>
 				    <tr><td>Name:</td><td>{$user['displayName']}</td></tr>
 				    <tr><td>Email:</td><td>{$user['email']}</td></tr>
 				    <tr><td>College:</td><td>{$user['college']}</td></tr>
 				    </table>";
-				
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////				
 			    }
 			    elseif($_GET['option']=="editProfile"){
 				echo "<h3>Edit Account Details</h3>";
@@ -164,7 +164,8 @@
 				
 				echo $output;
 			    }
-			    elseif($_GET['option']=="changePass"){
+
+			  /*  elseif($_GET['option']=="changePass"){
 				
 				echo "<h3>Change Password</h3>";
 				
@@ -216,8 +217,9 @@
 					</div>
 					</form>";
 				echo $output;
-			    }
-			    elseif($_GET['option']=="deleteAccount"){
+			    }  */
+
+			  /*  elseif($_GET['option']=="deleteAccount"){
 				
 				echo "<h3>Delete Account</h3>";
 				
@@ -252,7 +254,8 @@
 				       </div>
 				       </form>";
 				echo $output;
-			    }
+			    }  */
+			    
 			    elseif($_GET['option']=="joinClubs"){
 				echo "<h3>Join Clubs</h3>";
 				$output="";				
