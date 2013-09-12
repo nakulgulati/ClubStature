@@ -73,19 +73,31 @@
     }
     
     if(isset($_POST['transferClub'])){
-	$_SESSION['status'] = transferClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['newCreator'],$_POST['pass']);
-	if($_SESSION['status']){
-	    redirect_to("user.php?option=editClubs");
-	}
+		$_SESSION['status'] = transferClub($_SESSION['selectedClub'],$_SESSION['username'],$_POST['newCreator'],$_POST['pass']);
+		if($_SESSION['status']){
+	    	redirect_to("user.php?option=editClubs");
+		}
     }
 ?>
-
 <div class="wrapper">
     <?php
     //Prints nav bar
       $nav = printNav(false);
       echo $nav;
     ?>
+<head>
+    <style>
+	table, td, th
+	{
+	border:3px solid purple;
+	}
+	td
+	{
+	padding:15px;
+	text-align:center;
+	}
+	</style>
+</head>
     <div class="wrapper-content">
 	<div class="container">
 	    <div class="row">
